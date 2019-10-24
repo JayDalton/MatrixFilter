@@ -74,6 +74,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -94,6 +95,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -102,7 +104,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FilterDialog.cpp" />
+    <ClCompile Include="Application\Application.cpp" />
+    <ClCompile Include="Application\ApplicationConfig.cpp" />
+    <ClCompile Include="Application\DataLayer.cpp" />
+    <ClCompile Include="Dialog\FileSelect\FileSelectModel.cpp" />
+    <ClCompile Include="Dialog\FileSelect\FileSelectTab.cpp" />
+    <ClCompile Include="Dialog\FilterDialog.cpp" />
+    <ClCompile Include="Dialog\MatrixDataPlot\MatrixDataPlot.cpp" />
+    <ClCompile Include="Dialog\MatrixDataPlot\QCustomPlot\qcustomplot.cpp" />
+    <ClCompile Include="Dialog\MatrixDataView\MatrixDataTab.cpp" />
+    <ClCompile Include="Dialog\MatrixDataView\MatrixPropertyModel.cpp" />
+    <ClCompile Include="Dialog\MatrixDataView\MatrixValueDataModel.cpp" />
+    <ClCompile Include="Dialog\MatrixImageView\MatrixFrameView.cpp" />
+    <ClCompile Include="Dialog\MatrixImageView\MatrixImageView.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -110,11 +124,23 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="FilterDialog.h" />
+    <QtMoc Include="Application\Application.h" />
+    <ClInclude Include="Application\ApplicationConfig.h" />
+    <QtMoc Include="Application\DataLayer.h" />
+    <QtMoc Include="Dialog\FilterDialog.h" />
+    <QtMoc Include="Dialog\FileSelect\FileSelectModel.h" />
+    <QtMoc Include="Dialog\FileSelect\FileSelectTab.h" />
+    <QtMoc Include="Dialog\MatrixDataPlot\QCustomPlot\qcustomplot.h" />
+    <QtMoc Include="Dialog\MatrixDataPlot\MatrixDataPlot.h" />
+    <QtMoc Include="Dialog\MatrixDataView\MatrixDataTab.h" />
+    <QtMoc Include="Dialog\MatrixDataView\MatrixPropertyModel.h" />
+    <QtMoc Include="Dialog\MatrixDataView\MatrixValueDataModel.h" />
+    <QtMoc Include="Dialog\MatrixImageView\MatrixFrameView.h" />
+    <QtMoc Include="Dialog\MatrixImageView\MatrixImageView.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="FilterDialog.ui" />
+    <CustomBuild Include="Dialog\FilterDialog.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="FilterDialog.qrc" />
@@ -126,6 +152,12 @@
     <ProjectReference Include="..\CommonFilter\CommonFilter.vcxproj">
       <Project>{d49181e4-baa4-4cc8-90be-246e77f06b9e}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="Dialog\FileSelect\FileSelectTab.ui" />
+    <QtUic Include="Dialog\MatrixDataPlot\MatrixDataPlot.ui" />
+    <QtUic Include="Dialog\MatrixDataView\MatrixDataTab.ui" />
+    <QtUic Include="Dialog\MatrixImageView\MatrixImageView.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

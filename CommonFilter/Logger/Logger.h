@@ -4,6 +4,24 @@
 #include <string_view>
 //#include <experimental/>
 
+// Logger
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/basic_file_sink.h> // support for basic file logging
+#include <spdlog/sinks/rotating_file_sink.h> // support for rotating file logging
+
+#define RAPIDJSON_HAS_STDSTRING 1
+#include <rapidjson/reader.h>
+#include <rapidjson/writer.h>
+#include <rapidjson/document.h>
+#include <rapidjson/encodings.h>
+#include <rapidjson/encodedstream.h>
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/prettywriter.h>
+#include <rapidjson/filereadstream.h>
+#include <rapidjson/filewritestream.h>
+#include <rapidjson/istreamwrapper.h>
+#include <rapidjson/ostreamwrapper.h>
+namespace json = rapidjson;
 
 using cstr = const char * const;
 

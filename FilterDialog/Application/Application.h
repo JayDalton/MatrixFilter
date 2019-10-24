@@ -1,0 +1,34 @@
+﻿#pragma once
+
+#include <optional>
+
+#include <QApplication>
+//#include "Dialog/FilterDialog.h"
+
+#include "ApplicationConfig.h"
+#include "DataLayer.h"
+
+using FileLogger = std::shared_ptr<spdlog::logger>;
+
+class Application : public QApplication
+{
+   Q_OBJECT
+
+public:
+   Application(int argc, char* argv[], std::string_view title);
+
+   void setConfig(const ApplicationConfig& config);
+
+   DataLayerSPtr getDataLayer() const;
+
+private:
+   void setupLogger();
+   void setupDialog();
+
+private:
+   //ApplicationConfig m_config;
+   DataLayerSPtr m_data{ nullptr };
+   //FilterDialogUPtr m_dialog{ nullptr };
+};
+
+// Codepage: UTF-8 (ÜüÖöÄäẞß)

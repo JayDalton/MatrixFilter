@@ -107,6 +107,11 @@
     <ClCompile Include="CommonFilter.cpp" />
     <ClCompile Include="Logger\Logger.cpp" />
     <ClCompile Include="Logger\MethodTimer.cpp" />
+    <ClCompile Include="Matrix\FileManager.cpp" />
+    <ClCompile Include="Matrix\ImageMatrix.cpp" />
+    <ClCompile Include="Matrix\MatrixFile.cpp" />
+    <ClCompile Include="Matrix\MatrixImage.cpp" />
+    <ClCompile Include="Matrix\MatrixManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -117,6 +122,11 @@
     <ClInclude Include="commonfilter_global.h" />
     <ClInclude Include="Logger\Logger.h" />
     <ClInclude Include="Logger\MethodTimer.h" />
+    <ClInclude Include="Matrix\FileManager.h" />
+    <ClInclude Include="Matrix\ImageMatrix.h" />
+    <ClInclude Include="Matrix\MatrixFile.h" />
+    <ClInclude Include="Matrix\MatrixImage.h" />
+    <ClInclude Include="Matrix\MatrixManager.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

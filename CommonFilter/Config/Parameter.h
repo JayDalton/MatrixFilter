@@ -1,6 +1,11 @@
 ﻿#pragma once
 
 #include <string>
+#include <variant>
+#include <filesystem>
+namespace fs = std::filesystem;
+
+#include "Logger/Logger.h"
 
 using Writer = json::PrettyWriter<json::StringBuffer>;
 

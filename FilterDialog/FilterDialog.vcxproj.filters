@@ -31,7 +31,43 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FilterDialog.cpp">
+    <ClCompile Include="Application\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\ApplicationConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\DataLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\FilterDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\FileSelect\FileSelectModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\FileSelect\FileSelectTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\MatrixDataPlot\QCustomPlot\qcustomplot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\MatrixDataPlot\MatrixDataPlot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\MatrixDataView\MatrixDataTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\MatrixDataView\MatrixPropertyModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\MatrixDataView\MatrixValueDataModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\MatrixImageView\MatrixFrameView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\MatrixImageView\MatrixImageView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,16 +75,47 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Application\ApplicationConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="FilterDialog.h">
+    <QtMoc Include="Application\Application.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <QtUic Include="FilterDialog.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
+    <QtMoc Include="Application\DataLayer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\FilterDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\FileSelect\FileSelectModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\FileSelect\FileSelectTab.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\MatrixDataPlot\QCustomPlot\qcustomplot.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\MatrixDataPlot\MatrixDataPlot.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\MatrixDataView\MatrixDataTab.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\MatrixDataView\MatrixPropertyModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\MatrixDataView\MatrixValueDataModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\MatrixImageView\MatrixFrameView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\MatrixImageView\MatrixImageView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="FilterDialog.qrc">
@@ -57,5 +124,24 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FilterDialog.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Dialog\FilterDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="Dialog\FileSelect\FileSelectTab.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Dialog\MatrixDataPlot\MatrixDataPlot.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Dialog\MatrixDataView\MatrixDataTab.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Dialog\MatrixImageView\MatrixImageView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>
