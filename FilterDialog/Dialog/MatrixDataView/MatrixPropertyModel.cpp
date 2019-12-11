@@ -1,6 +1,6 @@
 ﻿#include <stdafx.h>
 
-#include "Config/ValueVisitor.h"
+#include "Config/Visitor.h"
 #include "MatrixPropertyModel.h"
 
 

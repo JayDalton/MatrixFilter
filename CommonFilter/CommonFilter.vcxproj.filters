@@ -54,7 +54,16 @@
     <ClCompile Include="Config\Parameter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Config\ValueVisitor.cpp">
+    <ClCompile Include="Config\Parameter\StringParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Config\Parameter\DoubleParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Config\Parameter\IntegerParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Config\Visitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,7 +101,16 @@
     <ClInclude Include="Config\Parameter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Config\ValueVisitor.h">
+    <ClInclude Include="Config\Parameter\StringParameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\Parameter\DoubleParameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\Parameter\IntegerParameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\Visitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

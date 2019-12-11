@@ -6,14 +6,27 @@
 
 int main(int argc, char *argv[])
 {
-   Application application(argc, argv, "Matrix Filter");
+   fs::path filePath{ "filterdialog.cfg" };
+   if (!fs::exists(filePath))
+   {
+      spdlog::warn("Config does not exists!");
+   }
 
    ApplicationConfig config;
-   fs::path filePath{ "filterdialog.cfg" };
-   //if (config.loadJsonFile(filePath))
+   if (!config.load(filePath))
+   {
+      spdlog::warn("Config could not read!");
+   }
+
+   //ConfigurationEditor editor;
+   //editor.load(config);
+   //if (editor.exec())
    //{
-   //   application.setConfig(config);
+   //   config.load(editor.getConfig());
    //}
+
+   Application application(argc, argv, "Matrix Filter");
+   application.setConfig(config);
 
    //auto matrix = config.getDefaultImportMatrix();
    //auto folder = config.getDefaultMatrixFolder();

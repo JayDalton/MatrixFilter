@@ -47,13 +47,13 @@ void ApplicationConfig::setDefaultImportMatrix(const std::string& file)
    //setParameter(DEFAULT_MATRIX_IMPORT, file);
 }
 
-std::string ApplicationConfig::getDefaultMatrixFolder() const
+std::string ApplicationConfig::getDefaultImportFolder() const
 {
    //return getStringParameter(DEFAULT_MATRIX_FOLDER);
    return {};
 }
 
-void ApplicationConfig::setDefaultMatrixFolder(std::string_view file)
+void ApplicationConfig::setDefaultImportFolder(std::string_view file)
 {
 }
 

@@ -107,7 +107,9 @@
     <ClCompile Include="CommonFilter.cpp" />
     <ClCompile Include="Config\Configuration.cpp" />
     <ClCompile Include="Config\Parameter.cpp" />
-    <ClCompile Include="Config\ValueVisitor.cpp" />
+    <ClCompile Include="Config\Visitor.cpp" />
+    <ClCompile Include="Config\Parameter\DoubleParameter.cpp" />
+    <ClCompile Include="Config\Parameter\IntegerParameter.cpp" />
     <ClCompile Include="Logger\Logger.cpp" />
     <ClCompile Include="Logger\MethodTimer.cpp" />
     <ClCompile Include="Matrix\FileManager.cpp" />
@@ -119,13 +121,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Config\Parameter\StringParameter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFilter.h" />
     <ClInclude Include="commonfilter_global.h" />
     <ClInclude Include="Config\Configuration.h" />
     <ClInclude Include="Config\Parameter.h" />
-    <ClInclude Include="Config\ValueVisitor.h" />
+    <ClInclude Include="Config\Visitor.h" />
+    <ClInclude Include="Config\Parameter\DoubleParameter.h" />
+    <ClInclude Include="Config\Parameter\IntegerParameter.h" />
     <ClInclude Include="Logger\Logger.h" />
     <ClInclude Include="Logger\MethodTimer.h" />
     <ClInclude Include="Matrix\FileManager.h" />
@@ -134,6 +139,7 @@
     <ClInclude Include="Matrix\MatrixImage.h" />
     <ClInclude Include="Matrix\MatrixManager.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Config\Parameter\StringParameter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
