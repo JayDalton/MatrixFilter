@@ -1,4 +1,4 @@
-﻿#include "precompheader.h"
+﻿#include "stdafx.h"
 
 #include "Config/Parameter.h"
 #include "Config/ValueVisitor.h"

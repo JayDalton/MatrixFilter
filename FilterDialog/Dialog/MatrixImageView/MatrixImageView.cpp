@@ -5,6 +5,8 @@
 
 #include "ui_MatrixImageView.h"
 
+#include <QKeyEvent>
+
 struct MatrixImageView::Impl 
 {
    explicit Impl(MatrixImageView* par, DataLayerSPtr data) 
@@ -55,7 +57,7 @@ void MatrixImageView::keyReleaseEvent(QKeyEvent* event)
       return m->ui.frameView->setScaleValue(1.05);
 
    default:
-      spdlog::debug("key press not valid: {}", event->key());
+      //spdlog::debug("key press not valid: {}", event->key());
       break;
    }
 }

@@ -32,12 +32,12 @@ int main(int argc, char *argv[])
    //FilterDialog()
 
 
-   return application.exec();
 
    //QApplication a(argc, argv);
-   // FilterDialog w;
-   // w.show();
+    FilterDialog w(nullptr);
+    w.show();
    // return a.exec();
+   return application.exec();
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

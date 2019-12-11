@@ -126,11 +126,6 @@
     <ResourceCompile Include="FilterDialog.rc" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Dialog\FilterDialog.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
     <QtUic Include="Dialog\FileSelect\FileSelectTab.ui">
       <Filter>Form Files</Filter>
     </QtUic>
@@ -141,6 +136,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Dialog\MatrixImageView\MatrixImageView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Dialog\FilterDialog.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

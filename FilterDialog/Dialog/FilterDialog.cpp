@@ -1,7 +1,7 @@
 ﻿#include <stdafx.h>
 
 #include "FilterDialog.h"
-#include "Debug/uic/ui_FilterDialog.h"
+#include "Generated/ui_FilterDialog.h"
 
 #include "QTabWidget"
 
