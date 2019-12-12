@@ -70,6 +70,9 @@
     <ClCompile Include="Dialog\MatrixImageView\MatrixImageView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Dialog\ConfigEditor\ConfigurationEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -116,6 +119,9 @@
     <QtMoc Include="Dialog\MatrixImageView\MatrixImageView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Dialog\ConfigEditor\ConfigurationEditor.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="FilterDialog.qrc">
@@ -139,6 +145,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Dialog\FilterDialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Dialog\ConfigEditor\ConfigurationEditor.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

@@ -75,7 +75,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -105,7 +105,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -125,6 +125,7 @@
     <ClCompile Include="Application\Application.cpp" />
     <ClCompile Include="Application\ApplicationConfig.cpp" />
     <ClCompile Include="Application\DataLayer.cpp" />
+    <ClCompile Include="Dialog\ConfigEditor\ConfigurationEditor.cpp" />
     <ClCompile Include="Dialog\FileSelect\FileSelectModel.cpp" />
     <ClCompile Include="Dialog\FileSelect\FileSelectTab.cpp" />
     <ClCompile Include="Dialog\FilterDialog.cpp" />
@@ -155,9 +156,11 @@
     <QtMoc Include="Dialog\MatrixDataView\MatrixValueDataModel.h" />
     <QtMoc Include="Dialog\MatrixImageView\MatrixFrameView.h" />
     <QtMoc Include="Dialog\MatrixImageView\MatrixImageView.h" />
+    <QtMoc Include="Dialog\ConfigEditor\ConfigurationEditor.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="Dialog\ConfigEditor\ConfigurationEditor.ui" />
     <QtUic Include="Dialog\FilterDialog.ui">
       <FileType>Document</FileType>
     </QtUic>

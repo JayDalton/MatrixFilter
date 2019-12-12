@@ -76,7 +76,7 @@ struct ReadHandler
 //   ParameterListing m_params;
 };
 
-bool Configuration::loadJsonFile(const fs::path& filePath)
+bool Configuration::load(const fs::path& filePath)
 {
    if (!fs::exists(filePath))
    {
@@ -129,7 +129,7 @@ bool Configuration::loadJsonFile(const fs::path& filePath)
    return false;
 }
 
-bool Configuration::saveJsonFile(const fs::path& filePath) const
+bool Configuration::save(const fs::path& filePath) const
 {
    json::StringBuffer buffer;
    json::PrettyWriter<json::StringBuffer> writer(buffer);

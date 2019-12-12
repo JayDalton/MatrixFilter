@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 
+#include "Dialog/ConfigEditor/ConfigurationEditor.h"
 #include "Application/Application.h"
 
 #include "Dialog/FilterDialog.h"
@@ -16,14 +17,14 @@ int main(int argc, char *argv[])
    if (!config.load(filePath))
    {
       spdlog::warn("Config could not read!");
+      ConfigurationEditor editor;
+      //editor.load(config);
+      if (editor.exec() == QDialog::Accepted)
+      {
+         //config.load(editor.getConfig());
+         //config.save(filePath);
+      }
    }
-
-   //ConfigurationEditor editor;
-   //editor.load(config);
-   //if (editor.exec())
-   //{
-   //   config.load(editor.getConfig());
-   //}
 
    Application application(argc, argv, "Matrix Filter");
    application.setConfig(config);
