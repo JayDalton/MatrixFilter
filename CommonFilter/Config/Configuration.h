@@ -26,6 +26,16 @@ struct Configuration
    //bool load(const std::string& filePath);
    //bool save(const fs::path& filePath) const;
 
+   Configuration(const Configuration& other);
+   Configuration& operator=(const Configuration& other);
+   //Configuration& operator=(Configuration other)
+   //{
+   //   std::cout << "copy assignment of A\n";
+   //   std::swap(map, other.map);
+   //   //std::swap(s1, other.s1);
+   //   return *this;
+   //}
+
 protected:
    Configuration() = default;
 

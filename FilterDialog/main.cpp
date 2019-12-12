@@ -7,6 +7,8 @@
 
 int main(int argc, char *argv[])
 {
+   Application application(argc, argv, "Matrix Filter");
+
    fs::path filePath{ "filterdialog.cfg" };
    if (!fs::exists(filePath))
    {
@@ -17,8 +19,7 @@ int main(int argc, char *argv[])
    if (!config.load(filePath))
    {
       spdlog::warn("Config could not read!");
-      ConfigurationEditor editor;
-      //editor.load(config);
+      ConfigurationEditor editor(nullptr, config);
       if (editor.exec() == QDialog::Accepted)
       {
          //config.load(editor.getConfig());
@@ -26,31 +27,13 @@ int main(int argc, char *argv[])
       }
    }
 
-   Application application(argc, argv, "Matrix Filter");
    application.setConfig(config);
+   auto data = application.getDataLayer();
+   
+   FilterDialog dialog(data);
+   dialog.setConfig(config);
+   dialog.show();
 
-   //auto matrix = config.getDefaultImportMatrix();
-   //auto folder = config.getDefaultMatrixFolder();
-   //auto filelist = config.getFolderFilelist();
-
-   //if (config.saveJsonFile(filePath))
-   //{
-   //   qDebug() << "";
-   //}
-   //else {
-   //   qDebug() << "";
-   //}
-
-   //FilterDialogUPtr m_dialog{ nullptr };
-
-   //FilterDialog()
-
-
-
-   //QApplication a(argc, argv);
-    FilterDialog w(nullptr);
-    w.show();
-   // return a.exec();
    return application.exec();
 }
 

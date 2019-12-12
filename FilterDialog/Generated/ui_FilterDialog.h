@@ -27,7 +27,7 @@ public:
     {
         if (FilterDialogClass->objectName().isEmpty())
             FilterDialogClass->setObjectName(QString::fromUtf8("FilterDialogClass"));
-        FilterDialogClass->resize(585, 387);
+        FilterDialogClass->resize(655, 506);
         gridLayout = new QGridLayout(FilterDialogClass);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
@@ -35,15 +35,11 @@ public:
         gridLayout->setContentsMargins(0, 0, 0, 0);
         tabWidget = new QTabWidget(FilterDialogClass);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        tabWidget->setTabShape(QTabWidget::Rounded);
 
         gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
 
 
         retranslateUi(FilterDialogClass);
-
-        tabWidget->setCurrentIndex(-1);
-
 
         QMetaObject::connectSlotsByName(FilterDialogClass);
     } // setupUi

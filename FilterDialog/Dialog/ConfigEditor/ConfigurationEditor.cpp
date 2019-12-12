@@ -1,8 +1,8 @@
 ﻿#include "stdafx.h"
 #include "ConfigurationEditor.h"
 
-ConfigurationEditor::ConfigurationEditor(QWidget *parent)
-    : QDialog(parent, Qt::Window | Qt::WindowCloseButtonHint)
+ConfigurationEditor::ConfigurationEditor(QWidget* parent, const Configuration& config)
+   : QDialog(parent, Qt::Window | Qt::WindowCloseButtonHint), m_config(config)
 {
     m_ui.setupUi(this);
 

@@ -76,6 +76,18 @@ struct ReadHandler
 //   ParameterListing m_params;
 };
 
+
+Configuration::Configuration(const Configuration& other)
+{
+   spdlog::info("");
+}
+
+Configuration& Configuration::operator=(const Configuration& other)
+{
+   spdlog::info("");
+   return *this;
+}
+
 bool Configuration::load(const fs::path& filePath)
 {
    if (!fs::exists(filePath))

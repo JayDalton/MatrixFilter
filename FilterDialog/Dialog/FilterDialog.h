@@ -4,6 +4,7 @@
 
 #include <QWidget>
 #include <QMainWindow>
+#include <Config\Configuration.h>
 
 class FilterDialog : public QMainWindow
 {
@@ -15,6 +16,8 @@ public:
    ~FilterDialog();
    //FilterDialog(FilterDialog&& rhs);
    //FilterDialog& operator=(FilterDialog&&);
+
+   void setConfig(const Configuration& config);
 
 protected:
    void closeEvent(QCloseEvent* event) override;

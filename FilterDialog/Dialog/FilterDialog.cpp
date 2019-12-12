@@ -24,8 +24,6 @@ struct FilterDialog::Impl
    DataLayerSPtr data{ nullptr };
 
    Ui::FilterDialogClass ui;
-
-private:
 };
 
 //////////////////////////////////////////////////////////////////
@@ -45,6 +43,10 @@ FilterDialog::FilterDialog(DataLayerSPtr data)
 FilterDialog::~FilterDialog() = default;
 //FilterDialog::FilterDialog(FilterDialog&& rhs) = default;
 //FilterDialog& FilterDialog::operator=(FilterDialog&&) = default;
+
+void FilterDialog::setConfig(const Configuration& config)
+{
+}
 
 void FilterDialog::closeEvent(QCloseEvent* event)
 {
@@ -85,6 +87,12 @@ void FilterDialog::setupTabWidgets()
    auto con = connect(m->tabFileSelect, &FileSelectTab::displayMatrixData, 
       this, [=]() { m->ui.tabWidget->setCurrentWidget(m->tabMatrixView); }
    );
+
+   int index = m->ui.tabWidget->indexOf(m->tabFileSelect);
+   m->ui.tabWidget->setCurrentIndex(index);
+
+   m->ui.tabWidget->setCurrentWidget(m->tabFileSelect);
+
 }
 
 

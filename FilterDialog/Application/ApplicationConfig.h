@@ -16,9 +16,9 @@ struct ApplicationConfig : public Configuration
    void setFolderFilelist(const std::vector<std::string>& list);
 
 private:
-   static inline const char* DEFAULT_MATRIX_IMPORT{"matrixImport"};
-   static inline const char* DEFAULT_MATRIX_FOLDER{"matrixFolder"};
-   static inline const char* DEFAULT_LOGFILE_FOLDER{"loggingFolder"};
+   static inline const char* DEFAULT_IMPORT_MATRIX{"ImportMatrix"};
+   static inline const char* DEFAULT_IMPORT_FOLDER{"ImportFolder"};
+   static inline const char* DEFAULT_LOGFILE_FOLDER{"LogFileFolder"};
    static inline const char* MATRIX_FOLDER_FILELIST{"folderFileFist"};
 };
 

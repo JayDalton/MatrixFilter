@@ -26,6 +26,11 @@ void Application::setConfig(const ApplicationConfig& config)
    //m_config = config;
 }
 
+DataLayerSPtr Application::getDataLayer() const
+{
+   return m_data;
+}
+
 void Application::setupLogger()
 {
    fs::path path("logfiles/dialog.log");
