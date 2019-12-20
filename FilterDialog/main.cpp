@@ -9,6 +9,9 @@ int main(int argc, char *argv[])
 {
    Application application(argc, argv, "Matrix Filter");
 
+   const auto args = application.arguments().join(", ");
+   spdlog::info("Application startet with args: {}", args.toStdString());
+
    fs::path filePath{ "filterdialog.cfg" };
    if (!fs::exists(filePath))
    {
@@ -22,8 +25,8 @@ int main(int argc, char *argv[])
       ConfigurationEditor editor(nullptr, config);
       if (editor.exec() == QDialog::Accepted)
       {
-         //config.load(editor.getConfig());
-         //config.save(filePath);
+         config.load(editor.getConfig());
+         config.save(filePath);
       }
    }
 

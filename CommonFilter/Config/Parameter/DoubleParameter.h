@@ -14,10 +14,13 @@ struct DoubleParameter
 
    ~DoubleParameter();
 
+   const std::string& getIdent() const;
+   const std::string& getLabel() const;
+
+   double getDefault() const;
    double getCurrent() const;
    void setCurrent(double value);
 
-   double getDefault() const;
    double getMinimum() const;
    double getMaximum() const;
 

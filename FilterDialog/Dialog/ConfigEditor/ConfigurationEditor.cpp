@@ -12,6 +12,11 @@ ConfigurationEditor::ConfigurationEditor(QWidget* parent, const Configuration& c
 
 ConfigurationEditor::~ConfigurationEditor() = default;
 
+std::string ConfigurationEditor::getConfig() const
+{
+   return m_config.toJson();
+}
+
 
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

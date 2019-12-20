@@ -23,6 +23,8 @@ struct Configuration
    bool load(const fs::path& filePath);
    bool save(const fs::path& filePath) const;
 
+   std::string toJson() const;
+
    //bool load(const std::string& filePath);
    //bool save(const fs::path& filePath) const;
 
@@ -36,10 +38,8 @@ struct Configuration
    //   return *this;
    //}
 
-protected:
-   Configuration() = default;
+   explicit Configuration(std::string_view ident, std::string_view label);
 
-   bool registerParameter(BaseParameter parameter);
    bool registerParameter(StringParameter parameter);
    bool registerParameter(IntegerParameter parameter);
    bool registerParameter(DoubleParameter parameter);
@@ -58,7 +58,7 @@ protected:
    //const fs::path& getPathParameter(const std::string& ident) const;
 
 private:
-   std::unordered_map<std::string, VariantParameter> map;
+   std::unordered_map<std::string, VariantParameter> m_map;
 };
 
 ///////////////////////////////////////////////////////////////////////////

@@ -4,9 +4,21 @@
 
 #include "Config/Visitor.h"
 
-ParameterBase::ParameterBase()
-{
-}
+//ParameterBase::ParameterBase()
+//{
+//}
+
+//const std::string& ParameterBase::getIdent() const
+//{
+//   return m_ident;
+//}
+//
+//const std::string& ParameterBase::getLabel() const
+//{
+//   return m_label;
+//}
+
+
 
 //void BaseParameter::Serialize(Writer& writer) const
 //{

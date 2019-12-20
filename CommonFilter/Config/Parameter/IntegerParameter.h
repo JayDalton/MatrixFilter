@@ -11,16 +11,19 @@ struct IntegerParameter
       std::string_view ident,
       std::string_view label,
       signed default,
-      signed maximun = 100,
-      signed minimum = 0
+      signed maximun = std::numeric_limits<signed>::max(),
+      signed minimum = std::numeric_limits<signed>::min()
    );
 
    ~IntegerParameter();
 
+   const std::string& getIdent() const;
+   const std::string& getLabel() const;
+
+   signed getDefault() const;
    signed getCurrent() const;
    void setCurrent(signed value);
 
-   signed getDefault() const;
    signed getMinimum() const;
    signed getMaximum() const;
 

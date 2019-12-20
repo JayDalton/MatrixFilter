@@ -1,6 +1,9 @@
 ﻿#include "stdafx.h"
 
 #include "Configuration.h"
+#include <Config\Visitor.h>
+
+//#include <rapidjson/writer.h>
 
 struct ReadHandler 
 {
@@ -76,6 +79,12 @@ struct ReadHandler
 //   ParameterListing m_params;
 };
 
+
+Configuration::Configuration(std::string_view ident, std::string_view label)
+   : m_ident(ident), m_label(label)
+{
+
+}
 
 Configuration::Configuration(const Configuration& other)
 {
@@ -171,6 +180,46 @@ bool Configuration::save(const fs::path& filePath) const
       return true;
    }
 
+   return false;
+}
+
+std::string Configuration::toJson() const
+{
+   json::StringBuffer stream;
+   json::Writer<json::StringBuffer> writer(stream);
+
+   Visitor writeValue = {
+      [&writer](const DoubleParameter& value) { writer.Double(value.getCurrent()); },
+      [&writer](const StringParameter& value) { writer.String(value.getCurrent()); },
+      [&writer](const IntegerParameter& value) { writer.Int(value.getCurrent()); },
+   };
+
+   writer.StartObject();
+   for (const auto& [key, value] : m_map)
+   {
+      writer.Key("hello");
+      std::visit(writeValue, value);
+   }
+   writer.EndObject();
+
+   return std::string(stream.GetString());
+}
+
+bool Configuration::registerParameter(StringParameter parameter)
+{
+   //m_map.emplace( parameter.getIdent(), parameter );
+   //m_map.insert({ parameter.getIdent(), parameter });
+   //m_map.insert_or_assign(parameter.getIdent(), parameter);
+   return false;
+}
+
+bool Configuration::registerParameter(IntegerParameter parameter)
+{
+   return false;
+}
+
+bool Configuration::registerParameter(DoubleParameter parameter)
+{
    return false;
 }
 

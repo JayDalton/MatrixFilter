@@ -4,6 +4,7 @@
 #include "Generated/ui_FilterDialog.h"
 
 #include "QTabWidget"
+#include "QKeyEvent"
 
 #include "FileSelect/FileSelectTab.h"
 #include "MatrixDataView/MatrixDataTab.h"
@@ -38,6 +39,8 @@ FilterDialog::FilterDialog(DataLayerSPtr data)
    restoreSettings();
    setupDataLayers();
    setupTabWidgets();
+
+   installEventFilter(this);
 }
 
 FilterDialog::~FilterDialog() = default;
@@ -46,6 +49,19 @@ FilterDialog::~FilterDialog() = default;
 
 void FilterDialog::setConfig(const Configuration& config)
 {
+}
+
+bool FilterDialog::eventFilter(QObject* object, QEvent* event)
+{
+   if (event->type() == QEvent::KeyPress) 
+   {
+      QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+      if (keyEvent->key() == Qt::Key_Escape) {
+         QCoreApplication::exit();
+         return true;
+      }
+   }
+   return false;
 }
 
 void FilterDialog::closeEvent(QCloseEvent* event)
@@ -78,21 +94,20 @@ void FilterDialog::setupTabWidgets()
    m->tabMatrixView = new MatrixImageView{ m->data, this };
    m->ui.tabWidget->addTab(m->tabMatrixView, "Matrix View");
 
-   m->tabMatrixData = new MatrixDataTab{ m->data, this };
-   m->ui.tabWidget->addTab(m->tabMatrixData, "Matrix Data");
+   //m->tabMatrixData = new MatrixDataTab{ m->data, this };
+   //m->ui.tabWidget->addTab(m->tabMatrixData, "Matrix Data");
 
-   m->tabMatrixPlot = new MatrixDataPlot{ m->data, this };
-   m->ui.tabWidget->addTab(m->tabMatrixPlot, "Matrix Plot");
+   //m->tabMatrixPlot = new MatrixDataPlot{ m->data, this };
+   //m->ui.tabWidget->addTab(m->tabMatrixPlot, "Matrix Plot");
 
-   auto con = connect(m->tabFileSelect, &FileSelectTab::displayMatrixData, 
-      this, [=]() { m->ui.tabWidget->setCurrentWidget(m->tabMatrixView); }
-   );
+   //auto con = connect(m->tabFileSelect, &FileSelectTab::displayMatrixData, 
+   //   this, [=]() { m->ui.tabWidget->setCurrentWidget(m->tabMatrixView); }
+   //);
 
-   int index = m->ui.tabWidget->indexOf(m->tabFileSelect);
-   m->ui.tabWidget->setCurrentIndex(index);
+   //int index = m->ui.tabWidget->indexOf(m->tabFileSelect);
+   //m->ui.tabWidget->setCurrentIndex(index);
 
    m->ui.tabWidget->setCurrentWidget(m->tabFileSelect);
-
 }
 
 

@@ -11,7 +11,10 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTreeView>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -19,6 +22,8 @@ QT_BEGIN_NAMESPACE
 class Ui_ConfigurationEditor
 {
 public:
+    QGridLayout *gridLayout;
+    QTreeView *treeView;
     QPushButton *pushButtonSave;
     QPushButton *pushButtonCancle;
 
@@ -26,13 +31,26 @@ public:
     {
         if (ConfigurationEditor->objectName().isEmpty())
             ConfigurationEditor->setObjectName(QString::fromUtf8("ConfigurationEditor"));
-        ConfigurationEditor->resize(400, 300);
+        ConfigurationEditor->resize(442, 307);
+        gridLayout = new QGridLayout(ConfigurationEditor);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        treeView = new QTreeView(ConfigurationEditor);
+        treeView->setObjectName(QString::fromUtf8("treeView"));
+
+        gridLayout->addWidget(treeView, 0, 0, 1, 2);
+
         pushButtonSave = new QPushButton(ConfigurationEditor);
         pushButtonSave->setObjectName(QString::fromUtf8("pushButtonSave"));
-        pushButtonSave->setGeometry(QRect(50, 240, 93, 28));
+
+        gridLayout->addWidget(pushButtonSave, 1, 0, 1, 1);
+
         pushButtonCancle = new QPushButton(ConfigurationEditor);
         pushButtonCancle->setObjectName(QString::fromUtf8("pushButtonCancle"));
-        pushButtonCancle->setGeometry(QRect(210, 240, 93, 28));
+
+        gridLayout->addWidget(pushButtonCancle, 1, 1, 1, 1);
+
 
         retranslateUi(ConfigurationEditor);
 

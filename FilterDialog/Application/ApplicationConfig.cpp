@@ -5,25 +5,32 @@
 using namespace std::string_literals;
 
 ApplicationConfig::ApplicationConfig()
-   /*: Configuration{ std::string{""}, std::string{""} }*/
+   : Configuration{ "AppConfig", "Anwendungs Konfiguration" }
 {
-   //registerBaseParameter(BaseParameter{ 
-   //   DEFAULT_MATRIX_IMPORT, "Standard Matrix Datei", 
-   //   std::string{"current"}, 4096, 0
-   //   }
-   //);
+   registerParameter(StringParameter{DEFAULT_IMPORT_MATRIX, 
+      "Standard Matrix Datei", "current"
+      }
+   );
 
-   //registerBaseParameter(BaseParameter{ 
-   //   DEFAULT_MATRIX_FOLDER, "Standard Matrix Ordner", 
-   //   fs::path{"application.cfg"}, 4096, 0
-   //   }
-   //);
+   registerParameter(StringParameter{DEFAULT_IMPORT_FOLDER, 
+      "Standard Import Ordner", "application.cfg"
+      }
+   );
 
-   //registerBaseParameter(BaseParameter{ 
-   //   DEFAULT_LOGFILE_FOLDER, "Standard Logfile", 
-   //   fs::path{"logfiles/dialog.log"}, 4096, 0
-   //   }
-   //);
+   registerParameter(StringParameter{DEFAULT_LOGGER_FOLDER, 
+      "Standard Logfile", "logfiles/dialog.log"
+      }
+   );
+
+   registerParameter(IntegerParameter{DEFAULT_SIGNED_VALUE,
+      "Standard Integer Wert", 1'234, 1'000'000
+      }
+   );
+
+   registerParameter(DoubleParameter{DEFAULT_DOUBLE_VALUE,
+      "Standard Gleitkomma Wert", 1'234.0, 1'000'000.0
+      }
+   );
 
    //registerListParameter(ListParameter{
    //   MATRIX_FOLDER_FILELIST, "Standard Datei Liste", 
@@ -45,6 +52,24 @@ std::string ApplicationConfig::getDefaultImportMatrix() const
 void ApplicationConfig::setDefaultImportMatrix(const std::string& file)
 {
    //setParameter(DEFAULT_MATRIX_IMPORT, file);
+}
+
+signed ApplicationConfig::getDefaultSignedValue() const
+{
+   return 0;
+}
+
+void ApplicationConfig::setDefaultSignedValue(signed value)
+{
+}
+
+double ApplicationConfig::getDefaultDoubleValue() const
+{
+   return 0.0;
+}
+
+void ApplicationConfig::setDefaultDoubleValue(double value)
+{
 }
 
 std::string ApplicationConfig::getDefaultImportFolder() const

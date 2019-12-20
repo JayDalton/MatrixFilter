@@ -16,12 +16,12 @@ using VariantValue = std::variant<
 
 struct ParameterBase
 {
-   ParameterBase();
+   //ParameterBase();
 
-   const std::string& getIdent() const;
-   const std::string& getLabel() const;
+   //const std::string& getIdent() const;
+   //const std::string& getLabel() const;
 
-protected:
+//protected:
 
    std::string m_ident;
    std::string m_label;

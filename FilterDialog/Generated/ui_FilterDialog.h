@@ -11,7 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QWidget>
 
@@ -20,7 +20,7 @@ QT_BEGIN_NAMESPACE
 class Ui_FilterDialogClass
 {
 public:
-    QGridLayout *gridLayout;
+    QHBoxLayout *horizontalLayout;
     QTabWidget *tabWidget;
 
     void setupUi(QWidget *FilterDialogClass)
@@ -28,18 +28,22 @@ public:
         if (FilterDialogClass->objectName().isEmpty())
             FilterDialogClass->setObjectName(QString::fromUtf8("FilterDialogClass"));
         FilterDialogClass->resize(655, 506);
-        gridLayout = new QGridLayout(FilterDialogClass);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout = new QHBoxLayout(FilterDialogClass);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         tabWidget = new QTabWidget(FilterDialogClass);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        tabWidget->setUsesScrollButtons(false);
+        tabWidget->setMovable(false);
 
-        gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
+        horizontalLayout->addWidget(tabWidget);
 
 
         retranslateUi(FilterDialogClass);
+
+        tabWidget->setCurrentIndex(-1);
+
 
         QMetaObject::connectSlotsByName(FilterDialogClass);
     } // setupUi
