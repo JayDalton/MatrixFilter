@@ -207,7 +207,12 @@ std::string Configuration::toJson() const
 
 bool Configuration::registerParameter(StringParameter parameter)
 {
+   m_tmp.insert({ parameter.getIdent(), 1234 });
+   m_tmp.emplace( parameter.getIdent(), 1234 );
+
+   m_map.emplace( parameter.getIdent(), std::move(parameter) );
    //m_map.emplace( parameter.getIdent(), parameter );
+   //m_map[parameter.getIdent()] = std::move(parameter);
    //m_map.insert({ parameter.getIdent(), parameter });
    //m_map.insert_or_assign(parameter.getIdent(), parameter);
    return false;

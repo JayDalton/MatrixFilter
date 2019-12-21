@@ -58,6 +58,8 @@ struct Configuration
    //const fs::path& getPathParameter(const std::string& ident) const;
 
 private:
+   std::unordered_map<std::string, signed> m_tmp;
+
    std::unordered_map<std::string, VariantParameter> m_map;
 };
 

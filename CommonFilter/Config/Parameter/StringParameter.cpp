@@ -20,6 +20,8 @@ StringParameter::StringParameter(
 }
 
 StringParameter::~StringParameter() = default;
+StringParameter::StringParameter(StringParameter&& other) = default;
+StringParameter& StringParameter::operator=(StringParameter&& other) = default;
 
 const std::string& StringParameter::getIdent() const
 {
