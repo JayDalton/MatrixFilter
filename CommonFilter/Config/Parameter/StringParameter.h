@@ -15,8 +15,6 @@ struct StringParameter
    ~StringParameter();
    StringParameter(StringParameter&& other);
    StringParameter& operator=(StringParameter&& other);
-   //StringParameter(const StringParameter& other);
-   //StringParameter& operator=(const StringParameter& other);
 
    const std::string& getIdent() const;
    const std::string& getLabel() const;
@@ -28,6 +26,9 @@ struct StringParameter
 
    std::size_t getMinimum() const;
    std::size_t getMaximum() const;
+
+   //bool fromJson(Reader reader);
+   //void toJson(Writer writer) const;
 
 private:
    BaseParameter m;

@@ -17,6 +17,7 @@ ListParameter::ListParameter(
    //m->m_current = default;
    m->m_maximum = maximum;
    m->m_minimum = minimum;
+   m->m_values = default;
 }
 
 ListParameter::~ListParameter() = default;

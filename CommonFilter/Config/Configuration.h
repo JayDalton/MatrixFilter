@@ -26,6 +26,7 @@ struct Configuration
    bool save(const fs::path& filePath) const;
 
    std::string toJson() const;
+   void fromJson(const std::string& input);
 
    //bool load(const std::string& filePath);
    //bool save(const fs::path& filePath) const;

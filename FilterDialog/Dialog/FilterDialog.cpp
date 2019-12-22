@@ -34,7 +34,7 @@ FilterDialog::FilterDialog(DataLayerSPtr data)
 {
    m->ui.setupUi(this);
 
-   setWindowTitle(tr("Matrix Filter Dialog"));
+   //setWindowTitle(tr("Matrix Filter Dialog"));
 
    restoreSettings();
    setupDataLayers();
@@ -53,14 +53,19 @@ void FilterDialog::setConfig(const Configuration& config)
 
 bool FilterDialog::eventFilter(QObject* object, QEvent* event)
 {
-   if (event->type() == QEvent::KeyPress) 
+   if (event->type() != QEvent::KeyPress) 
    {
-      QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+      return false;
+   }
+
+   if (auto* keyEvent = static_cast<QKeyEvent*>(event))
+   {
       if (keyEvent->key() == Qt::Key_Escape) {
          QCoreApplication::exit();
          return true;
       }
    }
+
    return false;
 }
 
@@ -94,20 +99,20 @@ void FilterDialog::setupTabWidgets()
    m->tabMatrixView = new MatrixImageView{ m->data, this };
    m->ui.tabWidget->addTab(m->tabMatrixView, "Matrix View");
 
-   //m->tabMatrixData = new MatrixDataTab{ m->data, this };
-   //m->ui.tabWidget->addTab(m->tabMatrixData, "Matrix Data");
+   m->tabMatrixData = new MatrixDataTab{ m->data, this };
+   m->ui.tabWidget->addTab(m->tabMatrixData, "Matrix Data");
 
-   //m->tabMatrixPlot = new MatrixDataPlot{ m->data, this };
-   //m->ui.tabWidget->addTab(m->tabMatrixPlot, "Matrix Plot");
+   m->tabMatrixPlot = new MatrixDataPlot{ m->data, this };
+   m->ui.tabWidget->addTab(m->tabMatrixPlot, "Matrix Plot");
 
-   //auto con = connect(m->tabFileSelect, &FileSelectTab::displayMatrixData, 
-   //   this, [=]() { m->ui.tabWidget->setCurrentWidget(m->tabMatrixView); }
-   //);
+   auto con = connect(m->tabFileSelect, &FileSelectTab::displayMatrixData, 
+      this, [=]() { m->ui.tabWidget->setCurrentWidget(m->tabMatrixView); }
+   );
 
    //int index = m->ui.tabWidget->indexOf(m->tabFileSelect);
    //m->ui.tabWidget->setCurrentIndex(index);
 
-   m->ui.tabWidget->setCurrentWidget(m->tabFileSelect);
+   //m->ui.tabWidget->setCurrentWidget(m->tabFileSelect);
 }
 
 

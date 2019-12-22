@@ -2,11 +2,12 @@
 
 #include "Application/DataLayer.h"
 
+#include <QDialog>
 #include <QWidget>
 #include <QMainWindow>
 #include <Config\Configuration.h>
 
-class FilterDialog : public QMainWindow
+class FilterDialog : public QDialog
 {
     Q_OBJECT
 

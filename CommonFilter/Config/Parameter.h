@@ -15,10 +15,10 @@ using VariantValue = std::variant<
    //, std::vector<VariantValue>
 >;
 
-//struct Foo
-//{
-//   std::variant<int, float, std::vector<Foo>> _data;
-//};
+struct VariantStruct
+{
+   std::variant<int, float, std::vector<VariantStruct>> value;
+};
 //
 //int main()
 //{
@@ -34,6 +34,8 @@ struct ParameterBase
    VariantValue m_current;
    VariantValue m_maximum;
    VariantValue m_minimum;
+
+   std::vector<VariantValue> m_values;
 };
 
 using BaseParameter = std::unique_ptr<ParameterBase>;

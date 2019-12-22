@@ -10,8 +10,8 @@ class FileSelectTab : public QWidget
     Q_OBJECT
 
 public:
-    ~FileSelectTab() = default;
-    explicit FileSelectTab(DataLayerSPtr data, QWidget* parent);
+   explicit FileSelectTab(DataLayerSPtr data, QWidget* parent);
+   ~FileSelectTab() = default;
 
 signals:
    void displayMatrixData();
