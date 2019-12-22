@@ -35,12 +35,14 @@ const std::string& ListParameter::getLabel() const
 
 const std::vector<VariantValue>& ListParameter::getDefault() const
 {
-   return {};
+   static const std::vector<VariantValue> vec;
+   return vec;
 }
 
 const std::vector<VariantValue>& ListParameter::getCurrent() const
 {
-   return {};
+   static const std::vector<VariantValue> vec;
+   return vec;
 }
 
 void ListParameter::setCurrent(const std::vector<VariantValue>& value)
@@ -56,31 +58,6 @@ std::size_t ListParameter::getMaximum() const
 {
    return std::get<unsigned>(m->m_maximum);
 }
-
-//const std::string& StringParameter::getDefault() const
-//{
-//   return std::get<std::string>(m->m_default);
-//}
-//
-//const std::string& StringParameter::getCurrent() const
-//{
-//   return std::get<std::string>(m->m_current);
-//}
-//
-//void StringParameter::setCurrent(const std::string& value)
-//{
-//   std::get<std::string>(m->m_current) = value;
-//}
-//
-//std::size_t StringParameter::getMinimum() const
-//{
-//   return std::get<unsigned>(m->m_minimum);
-//}
-//
-//std::size_t StringParameter::getMaximum() const
-//{
-//   return std::get<unsigned>(m->m_default);
-//}
 
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

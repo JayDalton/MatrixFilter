@@ -15,15 +15,15 @@ using VariantValue = std::variant<
    //, std::vector<VariantValue>
 >;
 
-struct Foo
-{
-   std::variant<int, float, std::vector<Foo>> _data;
-};
-
-int main()
-{
-   Foo a{std::vector<Foo>{Foo{}, Foo{}}};
-}
+//struct Foo
+//{
+//   std::variant<int, float, std::vector<Foo>> _data;
+//};
+//
+//int main()
+//{
+//   Foo a{std::vector<Foo>{Foo{}, Foo{}}};
+//}
 
 struct ParameterBase
 {
