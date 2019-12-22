@@ -32,19 +32,19 @@ ApplicationConfig::ApplicationConfig()
       }
    );
 
-   //registerParameter(ListParameter{MATRIX_FOLDER_FILELIST, 
-   //   "Standard Datei Liste", 
-   //   {
-   //      "path/to/next/sub/folder/1"s,
-   //      "path/to/next/sub/folder/2"s,
-   //      "path/to/next/sub/folder/3"s,
-   //      "path/to/next/sub/folder/4"s,
-   //   }
-   //});
+   registerParameter(ListParameter{DEFAULT_SIGNED_FILELIST, 
+      "Standard Datei Liste", { 12, 23, 34, 45, 56 }, 200
+      });
 
-   //registerParameter(ListParameter{MATRIX_FOLDER_FILELIST, 
-   //   "Standard Datei Liste", { 12, 23, 34, 45, 56 }, 200, 0
-   //   });
+   registerParameter(ListParameter{DEFAULT_MATRIX_FILELIST, 
+      "Standard Datei Liste", 
+      {
+         "path/to/next/sub/folder/1"s,
+         "path/to/next/sub/folder/2"s,
+         "path/to/next/sub/folder/3"s,
+         "path/to/next/sub/folder/4"s,
+      }
+   });
 }
 
 std::string ApplicationConfig::getDefaultImportMatrix() const

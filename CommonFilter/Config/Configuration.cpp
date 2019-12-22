@@ -192,6 +192,7 @@ std::string Configuration::toJson() const
       [&writer](const DoubleParameter& value) { writer.Double(value.getCurrent()); },
       [&writer](const StringParameter& value) { writer.String(value.getCurrent()); },
       [&writer](const IntegerParameter& value) { writer.Int(value.getCurrent()); },
+      [&writer](const ListParameter& value) { /*writer.Int(value.getCurrent())*/; },
    };
 
    writer.StartObject();
@@ -218,6 +219,12 @@ bool Configuration::registerParameter(IntegerParameter&& parameter)
 bool Configuration::registerParameter(DoubleParameter&& parameter)
 {
    return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
+}
+
+bool Configuration::registerParameter(ListParameter&& parameter)
+{
+   return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
+   return false;
 }
 
 const IntegerParameter& Configuration::getIntegerParameter(const std::string& ident) const

@@ -110,6 +110,7 @@
     <ClCompile Include="Config\Visitor.cpp" />
     <ClCompile Include="Config\Parameter\DoubleParameter.cpp" />
     <ClCompile Include="Config\Parameter\IntegerParameter.cpp" />
+    <ClCompile Include="Config\Parameter\ListParameter.cpp" />
     <ClCompile Include="Logger\Logger.cpp" />
     <ClCompile Include="Logger\MethodTimer.cpp" />
     <ClCompile Include="Matrix\FileManager.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="Config\Visitor.h" />
     <ClInclude Include="Config\Parameter\DoubleParameter.h" />
     <ClInclude Include="Config\Parameter\IntegerParameter.h" />
+    <ClInclude Include="Config\Parameter\ListParameter.h" />
     <ClInclude Include="Logger\Logger.h" />
     <ClInclude Include="Logger\MethodTimer.h" />
     <ClInclude Include="Matrix\FileManager.h" />

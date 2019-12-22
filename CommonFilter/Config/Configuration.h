@@ -8,11 +8,13 @@
 #include "Config/Parameter/StringParameter.h"
 #include "Config/Parameter/IntegerParameter.h"
 #include "Config/Parameter/DoubleParameter.h"
+#include "Config/Parameter/ListParameter.h"
 
 /////////////////////////////////////////////////////////////////////////////
 
 using VariantParameter = std::variant<
-   StringParameter, IntegerParameter, DoubleParameter
+   StringParameter, IntegerParameter, 
+   DoubleParameter, ListParameter
 >;
 
 struct Configuration
@@ -43,8 +45,7 @@ struct Configuration
    bool registerParameter(StringParameter&& parameter);
    bool registerParameter(IntegerParameter&& parameter);
    bool registerParameter(DoubleParameter&& parameter);
-
-   //void registerParameter(ListParameter&& parameter);
+   bool registerParameter(ListParameter&& parameter);
 
    const IntegerParameter& getIntegerParameter(const std::string& ident) const;
    const StringParameter& getStringParameter(const std::string& ident) const;

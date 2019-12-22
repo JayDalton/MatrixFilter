@@ -26,7 +26,8 @@ private:
    static inline const std::string DEFAULT_IMPORT_FOLDER{"ImportFolder"};
    static inline const std::string DEFAULT_LOGGER_FOLDER{"LogFileFolder"};
 
-   static inline const std::string MATRIX_FOLDER_FILELIST{"folderFileFist"};
+   static inline const std::string DEFAULT_MATRIX_FILELIST{"MatrixFileList"};
+   static inline const std::string DEFAULT_SIGNED_FILELIST{"DefaultSignedList"};
 
    static inline const std::string DEFAULT_SIGNED_VALUE{ "SignedValue" };
    static inline const std::string DEFAULT_DOUBLE_VALUE{ "DoubleValue" };
