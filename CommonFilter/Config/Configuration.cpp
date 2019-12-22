@@ -205,62 +205,51 @@ std::string Configuration::toJson() const
    return std::string(stream.GetString());
 }
 
-bool Configuration::registerParameter(StringParameter parameter)
+bool Configuration::registerParameter(StringParameter&& parameter)
 {
-   m_tmp.insert({ parameter.getIdent(), 1234 });
-   m_tmp.emplace( parameter.getIdent(), 1234 );
-
-   m_map.emplace( parameter.getIdent(), std::move(parameter) );
-   //m_map.emplace( parameter.getIdent(), parameter );
-   //m_map[parameter.getIdent()] = std::move(parameter);
-   //m_map.insert({ parameter.getIdent(), parameter });
-   //m_map.insert_or_assign(parameter.getIdent(), parameter);
-   return false;
+   return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
 }
 
-bool Configuration::registerParameter(IntegerParameter parameter)
+bool Configuration::registerParameter(IntegerParameter&& parameter)
 {
-   return false;
+   return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
 }
 
-bool Configuration::registerParameter(DoubleParameter parameter)
+bool Configuration::registerParameter(DoubleParameter&& parameter)
 {
-   return false;
+   return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
 }
 
-//void Configuration::registerBaseParameter(const BaseParameter& parameter)
-//{
-//   m_paramMap.insert_or_assign(parameter.m_ident, parameter);
-//}
-//
-//void Configuration::registerListParameter(const ListParameter& parameter)
-//{
-//   m_paramMap.insert_or_assign(parameter.m_ident, parameter);
-//}
-//
-//const ParameterVariant& Configuration::getParameter(const std::string& ident) const
-//{
-//   if (m_paramMap.contains(ident))
-//   {
-//      return m_paramMap.at(ident);
-//   }
-//
-//   assert(false);
-//   return m_paramMap.at(0);
-//}
-//
-//const BaseParameter& Configuration::getBaseParameter(const std::string& ident) const
-//{
-//   const ParameterVariant& param = getParameter(ident);
-//   if (std::holds_alternative<BaseParameter>(param))
-//   {
-//      return std::get<BaseParameter>(param);
-//   }
-//
-//   assert(false);
-//   return std::get<BaseParameter>(param);
-//}
-//
+const IntegerParameter& Configuration::getIntegerParameter(const std::string& ident) const
+{
+   return std::get<IntegerParameter>(m_map.at(ident));
+}
+
+const StringParameter& Configuration::getStringParameter(const std::string& ident) const
+{
+   return std::get<StringParameter>(m_map.at(ident));
+}
+
+const DoubleParameter& Configuration::getDoubleParameter(const std::string& ident) const
+{
+   return std::get<DoubleParameter>(m_map.at(ident));
+}
+
+IntegerParameter& Configuration::editIntegerParameter(const std::string& ident)
+{
+   return std::get<IntegerParameter>(m_map.at(ident));
+}
+
+StringParameter& Configuration::editStringParameter(const std::string& ident)
+{
+   return std::get<StringParameter>(m_map.at(ident));
+}
+
+DoubleParameter& Configuration::editDoubleParameter(const std::string& ident)
+{
+   return std::get<DoubleParameter>(m_map.at(ident));
+}
+
 //const ListParameter& Configuration::getListParameter(const std::string& ident) const
 //{
 //   const ParameterVariant& param = getParameter(ident);
@@ -273,43 +262,6 @@ bool Configuration::registerParameter(DoubleParameter parameter)
 //   return std::get<ListParameter>(param);
 //}
 
-//bool Configuration::setParameter(const std::string& ident, BaseParameter::ValueType value)
-//{
-//   //auto found = std::find_if(m_params.begin(), m_params.end(), 
-//   //   [&ident](const auto& param) { return param.m_ident == ident; }
-//   //);
-//
-//   //if (found != m_params.end())
-//   //{
-//   //   //found->m_current = value;
-//   //   return true;
-//   //}
-//
-//   //if (m_paramMap.contains(ident))
-//   //{
-//   //   m_paramMap.at(ident) /*= value*/;
-//   //}
-//
-//   assert(false);
-//   return false;
-//}
-//
-//bool Configuration::setParameter(const std::string& ident, const std::string& value)
-//{
-//   //auto found = std::find_if(m_params.begin(), m_params.end(), 
-//   //   [&ident](const auto& param) { return param.m_ident == ident; }
-//   //);
-//
-//   //if (found != m_params.end())
-//   //{
-//   //   //found->m_current.emplace<std::string>(value);
-//   //   return true;
-//   //}
-//
-//   assert(false);
-//   return false;
-//}
-//
 //const std::string& Configuration::getStringParameter(const std::string& ident) const
 //{
 //   const BaseParameter& param = getBaseParameter(ident);

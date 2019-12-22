@@ -20,6 +20,8 @@ IntegerParameter::IntegerParameter(
 }
 
 IntegerParameter::~IntegerParameter() = default;
+IntegerParameter::IntegerParameter(IntegerParameter&& other) = default;
+IntegerParameter& IntegerParameter::operator=(IntegerParameter&& other) = default;
 
 const std::string& IntegerParameter::getIdent() const
 {

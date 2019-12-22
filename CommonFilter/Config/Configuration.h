@@ -40,26 +40,21 @@ struct Configuration
 
    explicit Configuration(std::string_view ident, std::string_view label);
 
-   bool registerParameter(StringParameter parameter);
-   bool registerParameter(IntegerParameter parameter);
-   bool registerParameter(DoubleParameter parameter);
+   bool registerParameter(StringParameter&& parameter);
+   bool registerParameter(IntegerParameter&& parameter);
+   bool registerParameter(DoubleParameter&& parameter);
 
-   //void registerBaseParameter(const BaseParameter& parameter);
-   //void registerListParameter(const ListParameter& parameter);
+   //void registerParameter(ListParameter&& parameter);
 
-   //const ParameterVariant& getParameter(const std::string& ident) const;
-   //const BaseParameter& getBaseParameter(const std::string& ident) const;
-   //const ListParameter& getListParameter(const std::string& ident) const;
+   const IntegerParameter& getIntegerParameter(const std::string& ident) const;
+   const StringParameter& getStringParameter(const std::string& ident) const;
+   const DoubleParameter& getDoubleParameter(const std::string& ident) const;
 
-   //bool setParameter(const std::string& ident, BaseParameter::ValueType value);
-   //bool setParameter(const std::string& ident, const std::string& value);
-
-   //const std::string& getStringParameter(const std::string& ident) const;
-   //const fs::path& getPathParameter(const std::string& ident) const;
+   IntegerParameter& editIntegerParameter(const std::string& ident);
+   StringParameter& editStringParameter(const std::string& ident);
+   DoubleParameter& editDoubleParameter(const std::string& ident);
 
 private:
-   std::unordered_map<std::string, signed> m_tmp;
-
    std::unordered_map<std::string, VariantParameter> m_map;
 };
 

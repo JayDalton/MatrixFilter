@@ -32,8 +32,8 @@ ApplicationConfig::ApplicationConfig()
       }
    );
 
-   //registerListParameter(ListParameter{
-   //   MATRIX_FOLDER_FILELIST, "Standard Datei Liste", 
+   //registerParameter(ListParameter{MATRIX_FOLDER_FILELIST, 
+   //   "Standard Datei Liste", 
    //   {
    //      "path/to/next/sub/folder/1"s,
    //      "path/to/next/sub/folder/2"s,
@@ -41,45 +41,50 @@ ApplicationConfig::ApplicationConfig()
    //      "path/to/next/sub/folder/4"s,
    //   }
    //});
+
+   //registerParameter(ListParameter{MATRIX_FOLDER_FILELIST, 
+   //   "Standard Datei Liste", { 12, 23, 34, 45, 56 }, 200, 0
+   //   });
 }
 
 std::string ApplicationConfig::getDefaultImportMatrix() const
 {
-   //return getStringParameter(DEFAULT_MATRIX_IMPORT);
-   return {};
+   return getStringParameter(DEFAULT_IMPORT_MATRIX).getCurrent();
 }
 
 void ApplicationConfig::setDefaultImportMatrix(const std::string& file)
 {
-   //setParameter(DEFAULT_MATRIX_IMPORT, file);
+   editStringParameter(DEFAULT_IMPORT_MATRIX).setCurrent(file);
 }
 
 signed ApplicationConfig::getDefaultSignedValue() const
 {
-   return 0;
+   return getIntegerParameter(DEFAULT_SIGNED_VALUE).getCurrent();
 }
 
 void ApplicationConfig::setDefaultSignedValue(signed value)
 {
+   editIntegerParameter(DEFAULT_SIGNED_VALUE).setCurrent(value);
 }
 
 double ApplicationConfig::getDefaultDoubleValue() const
 {
-   return 0.0;
+   return getDoubleParameter(DEFAULT_DOUBLE_VALUE).getCurrent();
 }
 
 void ApplicationConfig::setDefaultDoubleValue(double value)
 {
+   getStringParameter(DEFAULT_IMPORT_FOLDER).getCurrent();
 }
 
 std::string ApplicationConfig::getDefaultImportFolder() const
 {
-   //return getStringParameter(DEFAULT_MATRIX_FOLDER);
-   return {};
+   return getStringParameter(DEFAULT_IMPORT_FOLDER).getCurrent();
 }
 
-void ApplicationConfig::setDefaultImportFolder(std::string_view file)
+void ApplicationConfig::setDefaultImportFolder(std::string_view folder)
 {
+   editStringParameter(DEFAULT_IMPORT_FOLDER).setCurrent(folder.data());
 }
 
 std::vector<std::string> ApplicationConfig::getFolderFilelist() const

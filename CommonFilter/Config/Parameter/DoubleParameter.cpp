@@ -20,6 +20,8 @@ DoubleParameter::DoubleParameter(
 }
 
 DoubleParameter::~DoubleParameter() = default;
+DoubleParameter::DoubleParameter(DoubleParameter&& other) = default;
+DoubleParameter& DoubleParameter::operator=(DoubleParameter&& other) = default;
 
 const std::string& DoubleParameter::getIdent() const
 {

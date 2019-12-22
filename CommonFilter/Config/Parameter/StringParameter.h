@@ -13,10 +13,8 @@ struct StringParameter
    );
 
    ~StringParameter();
-
    StringParameter(StringParameter&& other);
    StringParameter& operator=(StringParameter&& other);
-
    //StringParameter(const StringParameter& other);
    //StringParameter& operator=(const StringParameter& other);
 
