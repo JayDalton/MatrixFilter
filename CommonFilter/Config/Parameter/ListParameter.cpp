@@ -24,6 +24,17 @@ ListParameter::~ListParameter() = default;
 ListParameter::ListParameter(ListParameter&& other) = default;
 ListParameter& ListParameter::operator=(ListParameter&& other) = default;
 
+ListParameter::ListParameter(const ListParameter& other)
+{
+   m = std::make_unique<ParameterBase>(*other.m);
+}
+
+ListParameter& ListParameter::operator=(ListParameter other)
+{
+   std::swap(m, other.m);
+   return *this;
+}
+
 const std::string& ListParameter::getIdent() const
 {
    return m->m_ident;

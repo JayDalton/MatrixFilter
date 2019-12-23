@@ -15,6 +15,8 @@ struct ListParameter
    ~ListParameter();
    ListParameter(ListParameter&& other);
    ListParameter& operator=(ListParameter&& other);
+   ListParameter(const ListParameter& other);
+   ListParameter& operator=(ListParameter other);
 
    const std::string& getIdent() const;
    const std::string& getLabel() const;

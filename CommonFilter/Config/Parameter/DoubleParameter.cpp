@@ -23,6 +23,17 @@ DoubleParameter::~DoubleParameter() = default;
 DoubleParameter::DoubleParameter(DoubleParameter&& other) = default;
 DoubleParameter& DoubleParameter::operator=(DoubleParameter&& other) = default;
 
+DoubleParameter::DoubleParameter(const DoubleParameter& other)
+{
+   m = std::make_unique<ParameterBase>(*other.m);
+}
+
+DoubleParameter& DoubleParameter::operator=(DoubleParameter other)
+{
+   std::swap(m, other.m);
+   return *this;
+}
+
 const std::string& DoubleParameter::getIdent() const
 {
    return m->m_ident;

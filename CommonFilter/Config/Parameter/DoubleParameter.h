@@ -15,6 +15,8 @@ struct DoubleParameter
    ~DoubleParameter();
    DoubleParameter(DoubleParameter&& other);
    DoubleParameter& operator=(DoubleParameter&& other);
+   DoubleParameter(const DoubleParameter& other);
+   DoubleParameter& operator=(DoubleParameter other);
 
    const std::string& getIdent() const;
    const std::string& getLabel() const;

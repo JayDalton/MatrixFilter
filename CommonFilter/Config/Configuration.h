@@ -30,14 +30,14 @@ struct Configuration
    std::string toJson() const;
    bool fromJson(const std::string& input);
 
-   bool load(JsonReader reader);
-   bool save(JsonWriter writer) const;
+   bool load(JsonReader& reader);
+   bool save(JsonWriter& writer) const;
 
    void createCopy() const;
 
    // copy and swap idiom ?
    Configuration(const Configuration& other);
-   Configuration& operator=(const Configuration& other);
+   Configuration& operator=(Configuration other);
    //Configuration& operator=(Configuration other)
    //{
    //   std::cout << "copy assignment of A\n";

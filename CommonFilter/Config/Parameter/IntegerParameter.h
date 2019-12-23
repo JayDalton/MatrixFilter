@@ -18,6 +18,8 @@ struct IntegerParameter
    ~IntegerParameter();
    IntegerParameter(IntegerParameter&& other);
    IntegerParameter& operator=(IntegerParameter&& other);
+   IntegerParameter(const IntegerParameter& other);
+   IntegerParameter& operator=(IntegerParameter other);
 
    const std::string& getIdent() const;
    const std::string& getLabel() const;

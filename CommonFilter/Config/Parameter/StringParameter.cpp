@@ -23,6 +23,17 @@ StringParameter::~StringParameter() = default;
 StringParameter::StringParameter(StringParameter&& other) = default;
 StringParameter& StringParameter::operator=(StringParameter&& other) = default;
 
+StringParameter::StringParameter(const StringParameter& other)
+{
+   m = std::make_unique<ParameterBase>(*other.m);
+}
+
+StringParameter& StringParameter::operator=(StringParameter other)
+{
+   std::swap(m, other.m);
+   return *this;
+}
+
 const std::string& StringParameter::getIdent() const
 {
    return m->m_ident;

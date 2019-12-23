@@ -23,6 +23,17 @@ IntegerParameter::~IntegerParameter() = default;
 IntegerParameter::IntegerParameter(IntegerParameter&& other) = default;
 IntegerParameter& IntegerParameter::operator=(IntegerParameter&& other) = default;
 
+IntegerParameter::IntegerParameter(const IntegerParameter& other)
+{
+   m = std::make_unique<ParameterBase>(*other.m);
+}
+
+IntegerParameter& IntegerParameter::operator=(IntegerParameter other)
+{
+   std::swap(m, other.m);
+   return *this;
+}
+
 const std::string& IntegerParameter::getIdent() const
 {
    return m->m_ident;

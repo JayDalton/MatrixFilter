@@ -15,6 +15,10 @@ struct StringParameter
    ~StringParameter();
    StringParameter(StringParameter&& other);
    StringParameter& operator=(StringParameter&& other);
+   StringParameter(const StringParameter& other);
+   StringParameter& operator=(StringParameter other);
+
+   //[[nodiscard]] StringParameter createCopy() const;
 
    const std::string& getIdent() const;
    const std::string& getLabel() const;

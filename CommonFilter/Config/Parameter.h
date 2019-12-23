@@ -12,7 +12,6 @@ using Writer = json::PrettyWriter<json::StringBuffer>;
 using VariantValue = std::variant<
    bool, signed, unsigned, 
    double, std::string
-   //, std::vector<VariantValue>
 >;
 
 struct VariantStruct
@@ -36,6 +35,11 @@ struct ParameterBase
    VariantValue m_minimum;
 
    std::vector<VariantValue> m_values;
+
+   //ParameterBase(ParameterBase&& other);
+   //ParameterBase& operator=(ParameterBase&& other);
+   //ParameterBase(const ParameterBase& other);
+   //ParameterBase& operator=(ParameterBase other);
 };
 
 using BaseParameter = std::unique_ptr<ParameterBase>;
