@@ -206,6 +206,13 @@ std::string Configuration::toJson() const
    return std::string(stream.GetString());
 }
 
+bool Configuration::fromJson(const std::string& input)
+{
+   // JsonReader
+
+   return false;
+}
+
 bool Configuration::registerParameter(StringParameter&& parameter)
 {
    return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;

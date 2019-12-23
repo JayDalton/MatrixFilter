@@ -84,7 +84,7 @@ void FileSelectTab::openFile()
    dialog.setViewMode(QFileDialog::Detail);
 
    QStringList fileNames;
-   if (dialog.exec())
+   if (dialog.exec() == QDialog::Accepted)
    {
       fileNames = dialog.selectedFiles();
       const auto filePathList{ fileNames.toVector() };

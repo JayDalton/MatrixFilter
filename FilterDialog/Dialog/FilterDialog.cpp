@@ -30,17 +30,17 @@ struct FilterDialog::Impl
 //////////////////////////////////////////////////////////////////
 
 FilterDialog::FilterDialog(DataLayerSPtr data)
-   : m{ std::make_unique<Impl>(data) }
+   : QDialog(nullptr, Qt::Window), m{ std::make_unique<Impl>(data) }
 {
    m->ui.setupUi(this);
-
-   //setWindowTitle(tr("Matrix Filter Dialog"));
 
    restoreSettings();
    setupDataLayers();
    setupTabWidgets();
 
    installEventFilter(this);
+
+   setWindowTitle(tr("Matrix Filter Dialog"));
 }
 
 FilterDialog::~FilterDialog() = default;
@@ -94,25 +94,20 @@ void FilterDialog::setupDataLayers()
 void FilterDialog::setupTabWidgets()
 {
    m->tabFileSelect = new FileSelectTab{ m->data, this };
-   m->ui.tabWidget->addTab(m->tabFileSelect, "File Select");
+   m->ui.tabWidget->addTab(m->tabFileSelect, tr("File Select"));
 
    m->tabMatrixView = new MatrixImageView{ m->data, this };
-   m->ui.tabWidget->addTab(m->tabMatrixView, "Matrix View");
+   m->ui.tabWidget->addTab(m->tabMatrixView, tr("Matrix View"));
 
    m->tabMatrixData = new MatrixDataTab{ m->data, this };
-   m->ui.tabWidget->addTab(m->tabMatrixData, "Matrix Data");
+   m->ui.tabWidget->addTab(m->tabMatrixData, tr("Matrix Data"));
 
    m->tabMatrixPlot = new MatrixDataPlot{ m->data, this };
-   m->ui.tabWidget->addTab(m->tabMatrixPlot, "Matrix Plot");
+   m->ui.tabWidget->addTab(m->tabMatrixPlot, tr("Matrix Plot"));
 
    auto con = connect(m->tabFileSelect, &FileSelectTab::displayMatrixData, 
       this, [=]() { m->ui.tabWidget->setCurrentWidget(m->tabMatrixView); }
    );
-
-   //int index = m->ui.tabWidget->indexOf(m->tabFileSelect);
-   //m->ui.tabWidget->setCurrentIndex(index);
-
-   //m->ui.tabWidget->setCurrentWidget(m->tabFileSelect);
 }
 
 

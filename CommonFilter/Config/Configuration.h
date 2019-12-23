@@ -4,7 +4,9 @@
 #include <string_view>
 #include <unordered_map>
 
-#include "Config/Parameter.h"
+#include "Serialize/JsonReader.h"
+#include "Serialize/JsonWriter.h"
+
 #include "Config/Parameter/StringParameter.h"
 #include "Config/Parameter/IntegerParameter.h"
 #include "Config/Parameter/DoubleParameter.h"
@@ -26,11 +28,12 @@ struct Configuration
    bool save(const fs::path& filePath) const;
 
    std::string toJson() const;
-   void fromJson(const std::string& input);
+   bool fromJson(const std::string& input);
 
-   //bool load(const std::string& filePath);
-   //bool save(const fs::path& filePath) const;
+   bool load(JsonReader reader);
+   bool save(JsonWriter writer) const;
 
+   // copy and swap idiom ?
    Configuration(const Configuration& other);
    Configuration& operator=(const Configuration& other);
    //Configuration& operator=(Configuration other)

@@ -6,15 +6,17 @@ ConfigurationEditor::ConfigurationEditor(QWidget* parent, const Configuration& c
 {
     m_ui.setupUi(this);
 
+    setWindowTitle(tr("Configuration Editor"));
+
     connect(m_ui.pushButtonSave, &QPushButton::clicked, this, [&]() { accept(); });
     connect(m_ui.pushButtonCancle, &QPushButton::clicked, this, [&]() { reject(); });
 }
 
 ConfigurationEditor::~ConfigurationEditor() = default;
 
-std::string ConfigurationEditor::getConfig() const
+const Configuration& ConfigurationEditor::getConfig() const
 {
-   return m_config.toJson();
+   return m_config;
 }
 
 

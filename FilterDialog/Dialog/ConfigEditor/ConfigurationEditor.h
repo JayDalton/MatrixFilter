@@ -14,7 +14,7 @@ public:
    ConfigurationEditor(QWidget* parent, const Configuration& config);
    ~ConfigurationEditor();
 
-   std::string getConfig() const;
+   const Configuration& getConfig() const;
 
 private:
    Ui::ConfigurationEditor m_ui;
