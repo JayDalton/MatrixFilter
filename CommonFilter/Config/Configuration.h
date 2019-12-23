@@ -33,6 +33,8 @@ struct Configuration
    bool load(JsonReader reader);
    bool save(JsonWriter writer) const;
 
+   void createCopy() const;
+
    // copy and swap idiom ?
    Configuration(const Configuration& other);
    Configuration& operator=(const Configuration& other);
@@ -45,6 +47,9 @@ struct Configuration
    //}
 
    explicit Configuration(std::string_view ident, std::string_view label);
+
+   std::size_t getParameterCount() const;
+   std::vector<std::string> getParameterNames() const;
 
    bool registerParameter(StringParameter&& parameter);
    bool registerParameter(IntegerParameter&& parameter);

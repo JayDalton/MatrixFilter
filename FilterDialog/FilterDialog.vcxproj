@@ -125,6 +125,7 @@
     <ClCompile Include="Application\Application.cpp" />
     <ClCompile Include="Application\ApplicationConfig.cpp" />
     <ClCompile Include="Application\DataLayer.cpp" />
+    <ClCompile Include="Dialog\ConfigEditor\ConfigurationModel.cpp" />
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationEditor.cpp" />
     <ClCompile Include="Dialog\FileSelect\FileSelectModel.cpp" />
     <ClCompile Include="Dialog\FileSelect\FileSelectTab.cpp" />
@@ -157,6 +158,7 @@
     <QtMoc Include="Dialog\MatrixImageView\MatrixFrameView.h" />
     <QtMoc Include="Dialog\MatrixImageView\MatrixImageView.h" />
     <QtMoc Include="Dialog\ConfigEditor\ConfigurationEditor.h" />
+    <QtMoc Include="Dialog\ConfigEditor\ConfigurationModel.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

@@ -86,6 +86,21 @@ Configuration::Configuration(std::string_view ident, std::string_view label)
 
 }
 
+std::size_t Configuration::getParameterCount() const
+{
+   return m_map.size();
+}
+
+std::vector<std::string> Configuration::getParameterNames() const
+{
+   std::vector<std::string> names(m_map.size());
+   std::transform(m_map.cbegin(), m_map.cend(), names.begin(), 
+      [](const auto& pair) { return pair.first; }
+   );
+   
+   return names;
+}
+
 Configuration::Configuration(const Configuration& other)
 {
    spdlog::info("");
