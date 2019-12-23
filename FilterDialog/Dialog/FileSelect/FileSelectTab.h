@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include <QFileSystemModel>
 
 #include "Application/DataLayer.h"
 #include <Dialog\FileSelect\FileSelectModel.h>
@@ -24,14 +25,18 @@ private:
    void setupActions();
    void setupMenus();
 
-   void openFile();
+   void selectDirectory();
    void loadFile();
    void saveFile();
+
+private:
+   void setCurrentDir(const QString& path);
 
 private:
    struct Impl;
    std::unique_ptr<Impl> m;
 
-   FileSelectModelPtr m_fileSelectModel{ nullptr };
-   FileSelectProxyPtr m_fileSelectProxy{ nullptr };
+   QFileSystemModel m_fileModel;
+   //FileSelectModelPtr m_fileSelectModel{ nullptr };
+   //FileSelectProxyPtr m_fileSelectProxy{ nullptr };
 };

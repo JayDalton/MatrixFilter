@@ -24,8 +24,8 @@ class Ui_ConfigurationEditor
 public:
     QGridLayout *gridLayout;
     QTreeView *treeView;
-    QPushButton *pushButtonSave;
     QPushButton *pushButtonCancle;
+    QPushButton *pushButtonSave;
 
     void setupUi(QWidget *ConfigurationEditor)
     {
@@ -41,15 +41,15 @@ public:
 
         gridLayout->addWidget(treeView, 0, 0, 1, 2);
 
-        pushButtonSave = new QPushButton(ConfigurationEditor);
-        pushButtonSave->setObjectName(QString::fromUtf8("pushButtonSave"));
-
-        gridLayout->addWidget(pushButtonSave, 1, 0, 1, 1);
-
         pushButtonCancle = new QPushButton(ConfigurationEditor);
         pushButtonCancle->setObjectName(QString::fromUtf8("pushButtonCancle"));
 
-        gridLayout->addWidget(pushButtonCancle, 1, 1, 1, 1);
+        gridLayout->addWidget(pushButtonCancle, 1, 0, 1, 1);
+
+        pushButtonSave = new QPushButton(ConfigurationEditor);
+        pushButtonSave->setObjectName(QString::fromUtf8("pushButtonSave"));
+
+        gridLayout->addWidget(pushButtonSave, 1, 1, 1, 1);
 
 
         retranslateUi(ConfigurationEditor);
@@ -60,8 +60,8 @@ public:
     void retranslateUi(QWidget *ConfigurationEditor)
     {
         ConfigurationEditor->setWindowTitle(QCoreApplication::translate("ConfigurationEditor", "ConfigurationEditor", nullptr));
-        pushButtonSave->setText(QCoreApplication::translate("ConfigurationEditor", "Sichern", nullptr));
         pushButtonCancle->setText(QCoreApplication::translate("ConfigurationEditor", "Abbrechen", nullptr));
+        pushButtonSave->setText(QCoreApplication::translate("ConfigurationEditor", "Sichern", nullptr));
     } // retranslateUi
 
 };

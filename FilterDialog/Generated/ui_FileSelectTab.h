@@ -45,6 +45,7 @@ public:
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         lineEdit = new QLineEdit(FileSelectTab);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        lineEdit->setReadOnly(true);
 
         horizontalLayout->addWidget(lineEdit);
 
@@ -75,7 +76,7 @@ public:
     void retranslateUi(QWidget *FileSelectTab)
     {
         FileSelectTab->setWindowTitle(QCoreApplication::translate("FileSelectTab", "FileSelectTab", nullptr));
-        openButton->setText(QCoreApplication::translate("FileSelectTab", "Hinzuf\303\274gen", nullptr));
+        openButton->setText(QCoreApplication::translate("FileSelectTab", "Verzeichnis...", nullptr));
         loadButton->setText(QCoreApplication::translate("FileSelectTab", "Laden", nullptr));
     } // retranslateUi
 

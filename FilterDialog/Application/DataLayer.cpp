@@ -1,5 +1,7 @@
 ﻿#include <stdafx.h>
 
+#include <QApplication>
+
 #include "Application/DataLayer.h"
 #include "Matrix/MatrixFile.h"
 

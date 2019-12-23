@@ -103,7 +103,6 @@ std::vector<std::string> Configuration::getParameterNames() const
 
 Configuration::Configuration(const Configuration& other)
 {
-   spdlog::info("");
    m_ident = other.m_ident;
    m_label = other.m_label;
    m_map.reserve(other.m_map.size());
@@ -115,7 +114,6 @@ Configuration::Configuration(const Configuration& other)
 
 Configuration& Configuration::operator=(Configuration other)
 {
-   spdlog::info("");
    std::swap(m_ident, other.m_ident);
    std::swap(m_label, other.m_label);
    std::swap(m_map, other.m_map);

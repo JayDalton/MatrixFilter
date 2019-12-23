@@ -17,12 +17,16 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="openButton">
        <property name="text">
-        <string>Hinzufügen</string>
+        <string>Verzeichnis...</string>
        </property>
       </widget>
      </item>

@@ -41,20 +41,24 @@ FileSelectTab::FileSelectTab(DataLayerSPtr data, QWidget* parent)
 
 void FileSelectTab::setupUIElements()
 {
-   auto con1 = connect(m->ui.openButton, &QPushButton::clicked, this, [&]() { openFile(); });
+   auto con1 = connect(m->ui.openButton, &QPushButton::clicked, this, [&]() { selectDirectory(); });
    auto con2 = connect(m->ui.loadButton, &QPushButton::clicked, this, [&]() { loadFile(); });
 
+   m_fileModel.setRootPath(QDir::currentPath());
+   m_fileModel.setFilter(QDir::AllDirs | QDir::AllEntries | QDir::NoDotAndDotDot);
+   m_fileModel.setNameFilterDisables(false);
+   m_fileModel.setNameFilters({"*.pgm"});
+   m_fileModel.setReadOnly(true);
+   
+   m->ui.treeView->setModel(&m_fileModel);
    m->ui.treeView->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
    m->ui.treeView->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
-   
-   m_fileSelectModel = std::make_unique<FileSelectModel>();
-   m_fileSelectProxy = std::make_unique<FileSelectProxy>();
-   m_fileSelectProxy->setSourceModel(m_fileSelectModel.get());
-   m->ui.treeView->setModel(m_fileSelectProxy.get());
+   m->ui.treeView->setSortingEnabled(true);
+   m->ui.treeView->setAnimated(false);
+   m->ui.treeView->setIndentation(20);
+   m->ui.treeView->setColumnWidth(0, 200); // geschätzt
 
-   //m->ui.treeView.chan
-
-   //auto con3 = connect(m->ui.treeView, &QTreeView::dataChanged, this, []() {});
+   setCurrentDir("c:/develop/dicom/raster/"); // save in config
 }
 
 void FileSelectTab::setupActions()
@@ -62,7 +66,7 @@ void FileSelectTab::setupActions()
    m->m_openFile = std::make_unique<QAction>(tr("&Öffnen"));
    m->m_openFile->setShortcuts(QKeySequence::Open);
    m->m_openFile->setStatusTip(tr("Create a new file"));
-   connect(m->m_openFile.get(), &QAction::triggered, this, &FileSelectTab::openFile);
+   connect(m->m_openFile.get(), &QAction::triggered, this, &FileSelectTab::selectDirectory);
 
    m->m_saveFile = std::make_unique<QAction>(tr("&Sichern"));
    m->m_saveFile->setShortcuts(QKeySequence::Save);
@@ -76,33 +80,17 @@ void FileSelectTab::setupMenus()
 
 }
 
-void FileSelectTab::openFile()
+void FileSelectTab::selectDirectory()
 {
    QFileDialog dialog{ this };
-   dialog.setFileMode(QFileDialog::FileMode::ExistingFiles);
-   dialog.setNameFilter(tr("Portable Graymap (*.pgm)"));
    dialog.setViewMode(QFileDialog::Detail);
+   dialog.setFileMode(QFileDialog::Directory);
+   dialog.setOption(QFileDialog::ShowDirsOnly);
 
-   QStringList fileNames;
    if (dialog.exec() == QDialog::Accepted)
    {
-      fileNames = dialog.selectedFiles();
-      const auto filePathList{ fileNames.toVector() };
-
-      StringVector fileList(fileNames.size());
-      std::transform(filePathList.cbegin(), filePathList.cend(), fileList.begin(), 
-         [](const QString& path) { return path.toStdString(); }
-      );
-
-      if (m->data->readMatrixFileInfo(fileList))
-      {
-         const auto repo{ m->data->getFileRepository() };
-         m_fileSelectModel->reloadFileModel(repo);
-         if (!repo.empty())
-         {
-            m->ui.treeView->setCurrentIndex(QModelIndex());
-         }
-      }
+      setCurrentDir(dialog.selectedFiles().first());
+      
    }
 }
 
@@ -115,8 +103,8 @@ void FileSelectTab::loadFile()
    }
 
    auto index = selectionModel->currentIndex();
-   auto file = m_fileSelectModel->getMatrixFile(index);
-   m->data->loadMatrixFile(file);
+   auto file = m_fileModel.data(index).toString();
+   //m->data->loadMatrixFile(file);
 
    emit displayMatrixData();
 
@@ -125,6 +113,13 @@ void FileSelectTab::loadFile()
 
 void FileSelectTab::saveFile()
 {
+}
+
+void FileSelectTab::setCurrentDir(const QString& path)
+{
+   auto index = m_fileModel.index(path);
+   m->ui.treeView->setRootIndex(index);
+   m->ui.lineEdit->setText(path);
 }
 
 void FileSelectTab::contextMenuEvent(QContextMenuEvent* event)
