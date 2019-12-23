@@ -4,7 +4,7 @@
 #include <QFileSystemModel>
 
 #include "Application/DataLayer.h"
-#include <Dialog\FileSelect\FileSelectModel.h>
+#include "Dialog\FileSelect\FileSelectModel.h"
 
 class FileSelectTab : public QWidget
 {
@@ -23,20 +23,14 @@ protected:
 private:
    void setupUIElements();
    void setupActions();
-   void setupMenus();
 
+   void setCurrentDir(const QString& path);
    void selectDirectory();
    void loadFile();
    void saveFile();
-
-private:
-   void setCurrentDir(const QString& path);
+   void openFile(const QModelIndex& index);
 
 private:
    struct Impl;
    std::unique_ptr<Impl> m;
-
-   QFileSystemModel m_fileModel;
-   //FileSelectModelPtr m_fileSelectModel{ nullptr };
-   //FileSelectProxyPtr m_fileSelectProxy{ nullptr };
 };

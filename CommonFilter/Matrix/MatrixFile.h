@@ -13,6 +13,7 @@ struct MatrixFileInfo
    enum class Type { None, Graymap, Count };
 
    explicit MatrixFileInfo(std::string_view filePath);
+   //explicit MatrixFileInfo(const std::string& filePath);
 
    const fs::path& getPath() const;
 

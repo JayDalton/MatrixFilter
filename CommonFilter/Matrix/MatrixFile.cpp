@@ -7,6 +7,11 @@ MatrixFileInfo::MatrixFileInfo(std::string_view filePath)
 {
 }
 
+//MatrixFileInfo::MatrixFileInfo(const std::string& filePath)
+//   : m_path(filePath)
+//{
+//}
+
 const fs::path& MatrixFileInfo::getPath() const
 {
    return m_path;
