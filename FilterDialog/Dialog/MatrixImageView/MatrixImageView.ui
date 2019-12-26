@@ -15,22 +15,15 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="2" column="1">
-    <widget class="QGroupBox" name="GroupBox2">
+    <widget class="QGroupBox" name="suaceGroupBox">
      <property name="title">
       <string>SUACE</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
      </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QGroupBox" name="GroupBox1">
-     <property name="title">
-      <string>CLAHE</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
+     <property name="checked">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
@@ -41,8 +34,40 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="0" rowspan="3">
+   <item row="1" column="1">
+    <widget class="QGroupBox" name="claheGroupBox">
+     <property name="title">
+      <string>CLAHE</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="0" rowspan="4">
     <widget class="MatrixFrameView" name="frameView">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>

@@ -16,7 +16,10 @@ protected:
    void keyReleaseEvent(QKeyEvent* event) override;
 
 private:
-   void setupFilterParameter();
+   void setupUIElements();
+   void applyFilterSetting();
+   void loadFilterSettings();
+   void saveFilterSettings() const;
 
 private:
    struct Impl;

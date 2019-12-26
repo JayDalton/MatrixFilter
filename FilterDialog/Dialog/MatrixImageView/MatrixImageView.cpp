@@ -3,6 +3,8 @@
 #include "MatrixImageView.h"
 #include "MatrixFrameView.h"
 
+#include "Logger/Logger.h"
+
 #include "ui_MatrixImageView.h"
 
 #include <QKeyEvent>
@@ -23,6 +25,8 @@ MatrixImageView::MatrixImageView(DataLayerSPtr data, QWidget* parent)
    : QWidget(parent), m(std::make_unique<Impl>(this, data))
 {
    m->ui.setupUi(this);
+
+   setupUIElements();
 
    setFocusPolicy(Qt::StrongFocus);
 
@@ -63,5 +67,41 @@ void MatrixImageView::keyReleaseEvent(QKeyEvent* event)
    }
 }
 
+void MatrixImageView::setupUIElements()
+{
+   connect(m->ui.checkHistoEqualize, &QCheckBox::toggled, 
+      this, [&](bool) { applyFilterSetting(); });
+
+   connect(m->ui.claheGroupBox, &QGroupBox::toggled, 
+      this, [&](bool) { applyFilterSetting(); });
+
+   connect(m->ui.suaceGroupBox, &QGroupBox::toggled, 
+      this, [&](bool) { applyFilterSetting(); });
+}
+
+void MatrixImageView::applyFilterSetting()
+{
+   spdlog::debug("");
+}
+
+void MatrixImageView::loadFilterSettings()
+{
+   auto filter = m->data->getImageViewSettings();
+
+   m->ui.checkHistoEqualize->setChecked(filter.m_histoEqualize);
+   m->ui.claheGroupBox->setChecked(filter.m_claheEnabled);
+   m->ui.suaceGroupBox->setChecked(filter.m_suaceEnabled);
+}
+
+void MatrixImageView::saveFilterSettings() const
+{
+   FilterSettings filter;
+
+   filter.m_histoEqualize = m->ui.checkHistoEqualize->isChecked();
+   filter.m_claheEnabled = m->ui.claheGroupBox->isChecked();
+   filter.m_suaceEnabled = m->ui.suaceGroupBox->isChecked();
+
+   m->data->setImageViewSettings(filter);
+}
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

@@ -15,16 +15,16 @@ int main(int argc, char *argv[])
    fs::path filePath{ "matrixfilter.cfg" };
 
    ApplicationConfig config;
-   if (!config.load(filePath))
-   {
-      spdlog::warn("Config could not read!");
-      ConfigurationEditor editor(nullptr, config);
-      if (editor.exec() == QDialog::Accepted)
-      {
-         config.fromJson(editor.getConfig().toJson());
-         config.save(filePath);
-      }
-   }
+   //if (!config.load(filePath))
+   //{
+   //   spdlog::warn("Config could not read!");
+   //   ConfigurationEditor editor(nullptr, config);
+   //   if (editor.exec() == QDialog::Accepted)
+   //   {
+   //      config.fromJson(editor.getConfig().toJson());
+   //      config.save(filePath);
+   //   }
+   //}
 
    application.setConfig(config);
    auto data = application.getDataLayer();

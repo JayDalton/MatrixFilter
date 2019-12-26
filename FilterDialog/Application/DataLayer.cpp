@@ -49,4 +49,13 @@ const MatrixFileRepository& DataLayer::getFileRepository() const
    return m_fileManger.getFileList();
 }
 
+FilterSettings DataLayer::getImageViewSettings() const
+{
+   return FilterSettings();
+}
+
+void DataLayer::setImageViewSettings(FilterSettings setting)
+{
+}
+
 // Codepage: UTF-8 (ÜüÖöÄäẞß)
