@@ -82,11 +82,13 @@ void MatrixImageView::setupUIElements()
 void MatrixImageView::applyFilterSetting()
 {
    spdlog::debug("");
+   const auto filter = readFilterSettings();
+   m->data->applyImageFilterParameter(filter);
 }
 
 void MatrixImageView::loadFilterSettings()
 {
-   auto filter = m->data->getImageViewSettings();
+   auto filter = m->data->loadImageViewSettings();
 
    m->ui.checkHistoEqualize->setChecked(filter.m_histoEqualize);
    m->ui.claheGroupBox->setChecked(filter.m_claheEnabled);
@@ -101,7 +103,12 @@ void MatrixImageView::saveFilterSettings() const
    filter.m_claheEnabled = m->ui.claheGroupBox->isChecked();
    filter.m_suaceEnabled = m->ui.suaceGroupBox->isChecked();
 
-   m->data->setImageViewSettings(filter);
+   m->data->saveImageViewSettings(filter);
+}
+
+FilterSettings MatrixImageView::readFilterSettings() const
+{
+   return FilterSettings();
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

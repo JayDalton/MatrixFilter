@@ -9,14 +9,7 @@
 
 #include <Matrix\MatrixManager.h>
 #include <Matrix\FileManager.h>
-
-// wohin damit?
-struct FilterSettings
-{
-   bool m_histoEqualize{ false };
-   bool m_claheEnabled{ false };
-   bool m_suaceEnabled{ false };
-};
+#include <Matrix\FilterManager.h>
 
 class DataLayer : public QObject
 {
@@ -37,9 +30,9 @@ public:
 
    const MatrixFileRepository& getFileRepository() const;
 
-   void applyImageFilterParameter();
-   FilterSettings getImageViewSettings() const;
-   void setImageViewSettings(FilterSettings setting);
+   FilterSettings loadImageViewSettings() const;
+   void saveImageViewSettings(FilterSettings setting);
+   void applyImageFilterParameter(FilterSettings setting);
 
    void getSourceMatrixView();
    void getMagnitudeMatrixView();
@@ -50,7 +43,8 @@ signals:
 
 private:
    FileManager m_fileManger;
-   MatrixManager m_matrixManger;
+   MatrixManager m_matrixManager;
+   FilterManager m_filterManager;
 };
 
 using DataLayerUPtr = std::unique_ptr<DataLayer>;

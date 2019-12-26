@@ -30,18 +30,18 @@ bool DataLayer::readMatrixFileInfo(std::string_view importFileName)
 
 void DataLayer::loadMatrixFile(MatrixFileInfo file)
 {
-   m_matrixManger.loadMatrixFromFile(file);
+   m_matrixManager.loadMatrixFromFile(file);
    emit currentMatrixChanged();
 }
 
 cv::Mat DataLayer::currentMatrix(MatrixLayer layer)
 {
-   return m_matrixManger.getSourceData(layer);
+   return m_matrixManager.getSourceData(layer);
 }
 
 MatrixPropertyList DataLayer::currentPropertyList(MatrixLayer layer)
 {
-   return m_matrixManger.getMatrixPropertyList(layer);
+   return m_matrixManager.getMatrixPropertyList(layer);
 }
 
 const MatrixFileRepository& DataLayer::getFileRepository() const
@@ -49,13 +49,20 @@ const MatrixFileRepository& DataLayer::getFileRepository() const
    return m_fileManger.getFileList();
 }
 
-FilterSettings DataLayer::getImageViewSettings() const
+FilterSettings DataLayer::loadImageViewSettings() const
 {
    return FilterSettings();
 }
 
-void DataLayer::setImageViewSettings(FilterSettings setting)
+void DataLayer::saveImageViewSettings(FilterSettings setting)
 {
+}
+
+void DataLayer::applyImageFilterParameter(FilterSettings setting)
+{
+   auto matrix = currentMatrix(MatrixLayer::Source);
+   m_filterManager.setFilterSettings(setting);
+   m_filterManager.applyFilter(matrix, matrix);
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

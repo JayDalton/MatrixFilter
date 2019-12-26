@@ -111,6 +111,7 @@
     <ClCompile Include="Config\Parameter\DoubleParameter.cpp" />
     <ClCompile Include="Config\Parameter\IntegerParameter.cpp" />
     <ClCompile Include="Config\Parameter\ListParameter.cpp" />
+    <ClCompile Include="Matrix\FilterManager.cpp" />
     <ClCompile Include="Serialize\JsonWriter.cpp" />
     <ClCompile Include="Serialize\JsonReader.cpp" />
     <ClCompile Include="Logger\Logger.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="Config\Parameter\DoubleParameter.h" />
     <ClInclude Include="Config\Parameter\IntegerParameter.h" />
     <ClInclude Include="Config\Parameter\ListParameter.h" />
+    <ClInclude Include="Matrix\FilterManager.h" />
     <ClInclude Include="Serialize\JsonWriter.h" />
     <ClInclude Include="Serialize\JsonReader.h" />
     <ClInclude Include="Logger\Logger.h" />

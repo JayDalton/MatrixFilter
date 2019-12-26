@@ -20,6 +20,7 @@ private:
    void applyFilterSetting();
    void loadFilterSettings();
    void saveFilterSettings() const;
+   FilterSettings readFilterSettings() const;
 
 private:
    struct Impl;
