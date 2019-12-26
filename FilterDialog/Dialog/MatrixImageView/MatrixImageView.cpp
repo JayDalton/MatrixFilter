@@ -108,7 +108,13 @@ void MatrixImageView::saveFilterSettings() const
 
 FilterSettings MatrixImageView::readFilterSettings() const
 {
-   return FilterSettings();
+   FilterSettings filter;
+
+   filter.m_histoEqualize = m->ui.checkHistoEqualize->isChecked();
+   filter.m_claheEnabled = m->ui.claheGroupBox->isChecked();
+   filter.m_suaceEnabled = m->ui.suaceGroupBox->isChecked();
+
+   return filter;
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)
