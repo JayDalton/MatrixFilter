@@ -14,7 +14,34 @@
    <string>MatrixImageView</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
+   <item row="2" column="1">
+    <widget class="QGroupBox" name="GroupBox2">
+     <property name="title">
+      <string>SUACE</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QGroupBox" name="GroupBox1">
+     <property name="title">
+      <string>CLAHE</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QCheckBox" name="checkHistoEqualize">
+     <property name="text">
+      <string>Histo Equalize</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" rowspan="3">
     <widget class="MatrixFrameView" name="frameView">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>

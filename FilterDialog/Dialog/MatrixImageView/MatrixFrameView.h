@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QImage>
 #include <QFrame>
@@ -47,3 +47,4 @@ private:
    bool m_mouseActive{ false };
 };
 
+// Codepage: UTF-8 (ÜüÖöÄäẞß)

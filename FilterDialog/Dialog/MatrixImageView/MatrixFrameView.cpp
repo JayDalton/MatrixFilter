@@ -1,4 +1,8 @@
-#include <stdafx.h>
+﻿#include <stdafx.h>
+
+#include <QDebug>
+#include <QPainter>
+#include <QMouseEvent>
 
 #include "MatrixFrameView.h"
 
@@ -78,7 +82,7 @@ void MatrixFrameView::paintEvent(QPaintEvent* event)
    painter.drawImage(QPoint(0,0), m_bitmapImage);
 }
 
-void MatrixFrameView::mousePressEvent(QMouseEvent *event)
+void MatrixFrameView::mousePressEvent(QMouseEvent* event)
 {
    if (event->button() == Qt::LeftButton) 
    {
@@ -87,7 +91,7 @@ void MatrixFrameView::mousePressEvent(QMouseEvent *event)
    }
 }
 
-void MatrixFrameView::mouseMoveEvent(QMouseEvent *event)
+void MatrixFrameView::mouseMoveEvent(QMouseEvent* event)
 {
    if ((event->buttons() & Qt::LeftButton) && m_mouseActive)
    {
@@ -95,7 +99,7 @@ void MatrixFrameView::mouseMoveEvent(QMouseEvent *event)
    }
 }
 
-void MatrixFrameView::mouseReleaseEvent(QMouseEvent *event)
+void MatrixFrameView::mouseReleaseEvent(QMouseEvent* event)
 {
    if (event->button() == Qt::LeftButton && m_mouseActive) 
    {
@@ -181,3 +185,4 @@ void MatrixFrameView::updateTransform()
    m_transform = createTransform();
 }
 
+// Codepage: UTF-8 (ÜüÖöÄäẞß)

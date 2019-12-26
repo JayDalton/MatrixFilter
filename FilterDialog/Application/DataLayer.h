@@ -29,6 +29,8 @@ public:
 
    const MatrixFileRepository& getFileRepository() const;
 
+   void applyImageFilterParameter();
+
    void getSourceMatrixView();
    void getMagnitudeMatrixView();
    void getResultMatrixView();

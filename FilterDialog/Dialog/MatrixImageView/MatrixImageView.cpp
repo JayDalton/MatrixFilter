@@ -19,8 +19,8 @@ private:
    MatrixImageView* parent{ nullptr };
 };
 
-MatrixImageView::MatrixImageView(DataLayerSPtr data, QWidget *parent)
-    : QWidget(parent), m(std::make_unique<Impl>(this, data))
+MatrixImageView::MatrixImageView(DataLayerSPtr data, QWidget* parent)
+   : QWidget(parent), m(std::make_unique<Impl>(this, data))
 {
    m->ui.setupUi(this);
 
@@ -29,7 +29,8 @@ MatrixImageView::MatrixImageView(DataLayerSPtr data, QWidget *parent)
    auto con = connect(data.get(), &DataLayer::currentMatrixChanged, 
       this, [=]()
       {
-         m->ui.frameView->setImageMatrix(m->data->currentMatrix(MatrixLayer::Source));
+         auto matrix = m->data->currentMatrix(MatrixLayer::Source);
+         m->ui.frameView->setImageMatrix(matrix);
       }
    );
 }

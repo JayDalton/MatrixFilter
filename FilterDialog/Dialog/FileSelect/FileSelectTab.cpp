@@ -85,7 +85,6 @@ void FileSelectTab::selectDirectory()
    if (dialog.exec() == QDialog::Accepted)
    {
       setCurrentDir(dialog.selectedFiles().first());
-      
    }
 }
 
