@@ -25,10 +25,9 @@ class Ui_FileSelectTab
 {
 public:
     QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout;
-    QLineEdit *lineEdit;
+    QHBoxLayout *directoryLayout;
     QPushButton *openButton;
-    QPushButton *loadButton;
+    QLineEdit *lineEditDirectory;
     QTreeView *treeView;
 
     void setupUi(QWidget *FileSelectTab)
@@ -40,33 +39,32 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        lineEdit = new QLineEdit(FileSelectTab);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setReadOnly(true);
-
-        horizontalLayout->addWidget(lineEdit);
-
+        directoryLayout = new QHBoxLayout();
+        directoryLayout->setSpacing(6);
+        directoryLayout->setObjectName(QString::fromUtf8("directoryLayout"));
         openButton = new QPushButton(FileSelectTab);
         openButton->setObjectName(QString::fromUtf8("openButton"));
+        openButton->setFocusPolicy(Qt::StrongFocus);
 
-        horizontalLayout->addWidget(openButton);
+        directoryLayout->addWidget(openButton);
 
-        loadButton = new QPushButton(FileSelectTab);
-        loadButton->setObjectName(QString::fromUtf8("loadButton"));
+        lineEditDirectory = new QLineEdit(FileSelectTab);
+        lineEditDirectory->setObjectName(QString::fromUtf8("lineEditDirectory"));
+        lineEditDirectory->setFocusPolicy(Qt::NoFocus);
+        lineEditDirectory->setReadOnly(true);
 
-        horizontalLayout->addWidget(loadButton);
+        directoryLayout->addWidget(lineEditDirectory);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        verticalLayout->addLayout(directoryLayout);
 
         treeView = new QTreeView(FileSelectTab);
         treeView->setObjectName(QString::fromUtf8("treeView"));
 
         verticalLayout->addWidget(treeView);
 
+        QWidget::setTabOrder(treeView, openButton);
+        QWidget::setTabOrder(openButton, lineEditDirectory);
 
         retranslateUi(FileSelectTab);
 
@@ -77,7 +75,6 @@ public:
     {
         FileSelectTab->setWindowTitle(QCoreApplication::translate("FileSelectTab", "FileSelectTab", nullptr));
         openButton->setText(QCoreApplication::translate("FileSelectTab", "Verzeichnis...", nullptr));
-        loadButton->setText(QCoreApplication::translate("FileSelectTab", "Laden", nullptr));
     } // retranslateUi
 
 };

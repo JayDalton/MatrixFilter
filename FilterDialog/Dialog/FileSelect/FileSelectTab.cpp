@@ -12,6 +12,8 @@
 #include <QtWidgets\qmessagebox.h>
 #include <Matrix/FileManager.h>
 
+#include <unordered_set>
+
 struct FileSelectTab::Impl
 {
    explicit Impl(FileSelectTab* parent, DataLayerSPtr data) 
@@ -19,6 +21,10 @@ struct FileSelectTab::Impl
 
    std::unique_ptr<QAction> m_openFile{nullptr};
    std::unique_ptr<QAction> m_saveFile{nullptr};
+
+   std::unordered_set<int> m_validKeys{
+      Qt::Key_Return, Qt::Key_Space
+   };
 
    QFileSystemModel fileModel;
    DataLayerSPtr data{ nullptr };
@@ -35,22 +41,18 @@ FileSelectTab::FileSelectTab(DataLayerSPtr data, QWidget* parent)
 {
    m->ui.setupUi(this);
    setupUIElements();
-   setupActions();
+   setupUIInteractions();
+   setupContextActions();
 }
 
 void FileSelectTab::setupUIElements()
 {
-   auto con1 = connect(m->ui.openButton, &QPushButton::clicked, this, [&]() { selectDirectory(); });
-   auto con2 = connect(m->ui.loadButton, &QPushButton::clicked, this, [&]() { loadFile(); });
-   auto con3 = connect(m->ui.treeView, &QTreeView::doubleClicked, 
-      this, [&](const QModelIndex& index) { openFile(index); });
-
    m->fileModel.setRootPath(QDir::currentPath());
    m->fileModel.setFilter(QDir::AllDirs | QDir::AllEntries | QDir::NoDotAndDotDot);
    m->fileModel.setNameFilterDisables(false);
    m->fileModel.setNameFilters({"*.pgm"});
    m->fileModel.setReadOnly(true);
-   
+
    m->ui.treeView->setModel(&m->fileModel);
    m->ui.treeView->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
    m->ui.treeView->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
@@ -62,7 +64,18 @@ void FileSelectTab::setupUIElements()
    setCurrentDir("c:/develop/dicom/raster/"); // save in config
 }
 
-void FileSelectTab::setupActions()
+void FileSelectTab::setupUIInteractions()
+{
+   m->ui.treeView->installEventFilter(this);
+
+   auto con1 = connect(m->ui.openButton, &QPushButton::clicked, 
+      this, [&]() { selectDirectory(); });
+   
+   auto con2 = connect(m->ui.treeView, &QTreeView::doubleClicked, 
+      this, [&](const QModelIndex& index) { openFile(index); });
+}
+
+void FileSelectTab::setupContextActions()
 {
    m->m_openFile = std::make_unique<QAction>(tr("&Öffnen"));
    m->m_openFile->setShortcuts(QKeySequence::Open);
@@ -88,18 +101,6 @@ void FileSelectTab::selectDirectory()
    }
 }
 
-void FileSelectTab::loadFile()
-{
-   auto* selectionModel = m->ui.treeView->selectionModel();
-   if (!selectionModel->hasSelection())
-   {
-      return;
-   }
-
-   openFile(selectionModel->currentIndex());
-   // switch dialog tab with file index
-}
-
 void FileSelectTab::saveFile()
 {
 }
@@ -118,7 +119,32 @@ void FileSelectTab::setCurrentDir(const QString& path)
 {
    auto index = m->fileModel.index(path);
    m->ui.treeView->setRootIndex(index);
-   m->ui.lineEdit->setText(path);
+   m->ui.lineEditDirectory->setText(path);
+}
+
+bool FileSelectTab::eventFilter(QObject* object, QEvent* event)
+{
+   if (event->type() != QEvent::KeyPress) 
+   {
+      return false;
+   }
+
+   if (auto* keyEvent = static_cast<QKeyEvent*>(event))
+   {
+      if (!m->m_validKeys.contains(keyEvent->key()))
+      {
+         return false;
+      }
+
+      if (object == m->ui.treeView)
+      {
+         auto selection = m->ui.treeView->selectionModel();
+         openFile(selection->currentIndex());
+         return true;
+      }
+   }
+
+   return false;
 }
 
 void FileSelectTab::contextMenuEvent(QContextMenuEvent* event)

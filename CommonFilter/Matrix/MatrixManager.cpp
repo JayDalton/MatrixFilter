@@ -21,6 +21,7 @@ void MatrixManager::loadMatrixFromFile(MatrixFileInfo fileInfo)
    m_fileInfo = fileInfo;
 
    m_source = importMatrixFile(fileInfo);
+   //m_source = normalizeMatrix(m_source);
 
    m_floating = transformToFloating(m_source);
 
@@ -71,7 +72,22 @@ MatrixPropertyList MatrixManager::getMatrixPropertyList(MatrixLayer layer) const
 
 cv::Mat MatrixManager::importMatrixFile(MatrixFileInfo info) const
 {
-   return cv::imread(info.getPath().string(), cv::IMREAD_GRAYSCALE | cv::IMREAD_ANYDEPTH);
+   const auto filePath{ info.getPath().string() };
+   return cv::imread(filePath, cv::IMREAD_GRAYSCALE | cv::IMREAD_ANYDEPTH);
+}
+
+cv::Mat MatrixManager::normalizeMatrix(const cv::Mat& source) const
+{
+   cv::Mat converted;
+   using Bounds = std::pair<double, double>;
+   const std::unordered_map<int, Bounds> table {
+      {CV_8UC1, {0, std::numeric_limits<unsigned char>::max()}},
+      {CV_16UC1, {0, std::numeric_limits<unsigned short>::max()}},
+   };
+
+   const auto& [lowerBound, upperBound] = table.at(source.type());
+   cv::normalize(source, converted, lowerBound, upperBound, cv::NORM_MINMAX);
+   return converted;
 }
 
 cv::Mat MatrixManager::transformToFloating(const cv::Mat& source) const

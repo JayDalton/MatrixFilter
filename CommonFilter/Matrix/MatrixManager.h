@@ -20,6 +20,7 @@ struct MatrixManager
 
 private:
    cv::Mat importMatrixFile(MatrixFileInfo info) const;
+   cv::Mat normalizeMatrix(const cv::Mat& source) const;
    cv::Mat transformToFloating(const cv::Mat& source) const;
    cv::Mat transformToInteger(const cv::Mat& source) const;
    cv::Mat transformToFourier(const cv::Mat& source) const;

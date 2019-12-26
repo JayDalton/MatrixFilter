@@ -15,25 +15,24 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLineEdit" name="lineEdit">
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
+    <layout class="QHBoxLayout" name="directoryLayout">
      <item>
       <widget class="QPushButton" name="openButton">
+       <property name="focusPolicy">
+        <enum>Qt::StrongFocus</enum>
+       </property>
        <property name="text">
         <string>Verzeichnis...</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="loadButton">
-       <property name="text">
-        <string>Laden</string>
+      <widget class="QLineEdit" name="lineEditDirectory">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -45,6 +44,11 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>treeView</tabstop>
+  <tabstop>openButton</tabstop>
+  <tabstop>lineEditDirectory</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

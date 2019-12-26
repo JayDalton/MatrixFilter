@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QWidget>
 #include <QFileSystemModel>
@@ -18,15 +18,16 @@ signals:
    void displayMatrixData();
 
 protected:
+   bool eventFilter(QObject* object, QEvent* event) override;
    void contextMenuEvent(QContextMenuEvent* event) override;
 
 private:
    void setupUIElements();
-   void setupActions();
+   void setupUIInteractions();
+   void setupContextActions();
 
    void setCurrentDir(const QString& path);
    void selectDirectory();
-   void loadFile();
    void saveFile();
    void openFile(const QModelIndex& index);
 
@@ -34,3 +35,5 @@ private:
    struct Impl;
    std::unique_ptr<Impl> m;
 };
+
+// Codepage: UTF-8 (ÜüÖöÄäẞß)
