@@ -32,7 +32,7 @@ public:
 
    FilterSettings loadImageViewSettings() const;
    void saveImageViewSettings(FilterSettings setting);
-   void applyImageFilterParameter(FilterSettings setting);
+   void applyImageViewerFilter(FilterSettings setting);
 
    void getSourceMatrixView();
    void getMagnitudeMatrixView();

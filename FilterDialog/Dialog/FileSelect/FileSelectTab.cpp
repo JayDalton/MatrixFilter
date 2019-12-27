@@ -77,15 +77,15 @@ void FileSelectTab::setupUIInteractions()
 
 void FileSelectTab::setupContextActions()
 {
-   m->m_openFile = std::make_unique<QAction>(tr("&Öffnen"));
+   m->m_openFile = std::make_unique<QAction>(tr("&Verzeichnis"));
    m->m_openFile->setShortcuts(QKeySequence::Open);
    m->m_openFile->setStatusTip(tr("Create a new file"));
    connect(m->m_openFile.get(), &QAction::triggered, this, &FileSelectTab::selectDirectory);
 
-   m->m_saveFile = std::make_unique<QAction>(tr("&Sichern"));
-   m->m_saveFile->setShortcuts(QKeySequence::Save);
-   m->m_saveFile->setStatusTip(tr("Save existing file"));
-   connect(m->m_saveFile.get(), &QAction::triggered, this, &FileSelectTab::saveFile);
+   //m->m_saveFile = std::make_unique<QAction>(tr("&Sichern"));
+   //m->m_saveFile->setShortcuts(QKeySequence::Save);
+   //m->m_saveFile->setStatusTip(tr("Save existing file"));
+   //connect(m->m_saveFile.get(), &QAction::triggered, this, &FileSelectTab::saveFile);
 }
 
 void FileSelectTab::selectDirectory()
@@ -99,10 +99,6 @@ void FileSelectTab::selectDirectory()
    {
       setCurrentDir(dialog.selectedFiles().first());
    }
-}
-
-void FileSelectTab::saveFile()
-{
 }
 
 void FileSelectTab::openFile(const QModelIndex& index)

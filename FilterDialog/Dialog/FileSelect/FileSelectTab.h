@@ -26,10 +26,9 @@ private:
    void setupUIInteractions();
    void setupContextActions();
 
+   void openFile(const QModelIndex& index);
    void setCurrentDir(const QString& path);
    void selectDirectory();
-   void saveFile();
-   void openFile(const QModelIndex& index);
 
 private:
    struct Impl;

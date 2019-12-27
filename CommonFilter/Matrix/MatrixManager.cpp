@@ -23,6 +23,9 @@ void MatrixManager::loadMatrixFromFile(MatrixFileInfo fileInfo)
    m_source = importMatrixFile(fileInfo);
    //m_source = normalizeMatrix(m_source);
 
+   m_viewer = transformToViewer(m_source);
+   //m_viewer = normalizeMatrix(m_viewer);
+
    m_floating = transformToFloating(m_source);
 
    m_fourier = transformToFourier(m_floating);
@@ -32,12 +35,14 @@ void MatrixManager::loadMatrixFromFile(MatrixFileInfo fileInfo)
    m_target = transformToInteger(m_fourier);
 }
 
-cv::Mat MatrixManager::getSourceData(MatrixLayer layer) const
+cv::Mat MatrixManager::getMatrixData(MatrixLayer layer) const
 {
    switch (layer)
    {
    case MatrixLayer::Source:
       return m_source;
+   case MatrixLayer::Viewer:
+      return m_viewer;
    case MatrixLayer::Floating:
       return m_floating;
    case MatrixLayer::Fourier:
@@ -49,6 +54,12 @@ cv::Mat MatrixManager::getSourceData(MatrixLayer layer) const
    default:
       return {};
    }
+}
+
+cv::Mat MatrixManager::getViewerSource()
+{
+   m_viewer = transformToViewer(m_source);
+   return m_viewer;
 }
 
 MatrixPropertyList MatrixManager::getMatrixPropertyList(MatrixLayer layer) const
@@ -87,6 +98,13 @@ cv::Mat MatrixManager::normalizeMatrix(const cv::Mat& source) const
 
    const auto& [lowerBound, upperBound] = table.at(source.type());
    cv::normalize(source, converted, lowerBound, upperBound, cv::NORM_MINMAX);
+   return converted;
+}
+
+cv::Mat MatrixManager::transformToViewer(const cv::Mat& source) const
+{
+   cv::Mat converted;
+   source.convertTo(converted, CV_8UC1, 1.0 / UCHAR_MAX);  // bytes
    return converted;
 }
 

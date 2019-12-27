@@ -138,7 +138,7 @@ void MatrixFrameView::setDisplayRect(const QRect& display)
 
 QImage MatrixFrameView::coverMatrixByImage(const cv::Mat& _matrix) const
 {
-   const QHash<int, QImage::Format> formats = {
+   const std::unordered_map<int, QImage::Format> formats = {
       {CV_8UC1, QImage::Format_Grayscale8},
       {CV_16UC1, QImage::Format_Grayscale16},
    };
@@ -152,7 +152,7 @@ QImage MatrixFrameView::coverMatrixByImage(const cv::Mat& _matrix) const
 
    return QImage(
       _matrix.data, _matrix.cols, _matrix.rows,
-      static_cast<int>(_matrix.step), formats[format]
+      static_cast<int>(_matrix.step), formats.at(format)
    );
 }
 

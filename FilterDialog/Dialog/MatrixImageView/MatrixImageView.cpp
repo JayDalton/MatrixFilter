@@ -33,7 +33,7 @@ MatrixImageView::MatrixImageView(DataLayerSPtr data, QWidget* parent)
    auto con = connect(data.get(), &DataLayer::currentMatrixChanged, 
       this, [=]()
       {
-         auto matrix = m->data->currentMatrix(MatrixLayer::Source);
+         auto matrix = m->data->currentMatrix(MatrixLayer::Viewer);
          m->ui.frameView->setImageMatrix(matrix);
       }
    );
@@ -81,9 +81,8 @@ void MatrixImageView::setupUIElements()
 
 void MatrixImageView::applyFilterSetting()
 {
-   spdlog::debug("");
    const auto filter = readFilterSettings();
-   m->data->applyImageFilterParameter(filter);
+   m->data->applyImageViewerFilter(filter);
 }
 
 void MatrixImageView::loadFilterSettings()

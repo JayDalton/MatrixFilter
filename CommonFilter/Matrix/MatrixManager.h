@@ -7,20 +7,22 @@
 #include "MatrixFile.h"
 #include "MatrixImage.h"
 
-enum class MatrixLayer { Source, Floating, Fourier, Magnitude, Target, Count };
+enum class MatrixLayer { Source, Viewer, Floating, Fourier, Magnitude, Target, Count };
 
 struct MatrixManager
 {
 
    void loadMatrixFromFile(MatrixFileInfo fileInfo);
 
-   cv::Mat getSourceData(MatrixLayer layer) const;
+   cv::Mat getMatrixData(MatrixLayer layer) const;
+   cv::Mat getViewerSource();
 
    MatrixPropertyList getMatrixPropertyList(MatrixLayer layer) const;
 
 private:
    cv::Mat importMatrixFile(MatrixFileInfo info) const;
    cv::Mat normalizeMatrix(const cv::Mat& source) const;
+   cv::Mat transformToViewer(const cv::Mat& source) const;
    cv::Mat transformToFloating(const cv::Mat& source) const;
    cv::Mat transformToInteger(const cv::Mat& source) const;
    cv::Mat transformToFourier(const cv::Mat& source) const;
@@ -38,6 +40,7 @@ private:
 
    MatrixFileInfo m_fileInfo{""};
    cv::Mat m_source;    // ImageMatrix
+   cv::Mat m_viewer;
    cv::Mat m_floating;
    cv::Mat m_fourier;
    cv::Mat m_magnitude;

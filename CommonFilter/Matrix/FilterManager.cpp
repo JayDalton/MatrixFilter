@@ -34,7 +34,6 @@ void FilterManager::applyHisto(const cv::Mat& source, cv::Mat& target)
 {
    auto depth = source.depth();
    auto chans = source.channels();
-   //cv::normalize();
    spdlog::debug("applying histogram equalize filter...{}", source.type());
    assert(source.type() == CV_8UC1);
    cv::equalizeHist(source, target);

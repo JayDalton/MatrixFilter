@@ -36,7 +36,7 @@ void DataLayer::loadMatrixFile(MatrixFileInfo file)
 
 cv::Mat DataLayer::currentMatrix(MatrixLayer layer)
 {
-   return m_matrixManager.getSourceData(layer);
+   return m_matrixManager.getMatrixData(layer);
 }
 
 MatrixPropertyList DataLayer::currentPropertyList(MatrixLayer layer)
@@ -58,11 +58,15 @@ void DataLayer::saveImageViewSettings(FilterSettings setting)
 {
 }
 
-void DataLayer::applyImageFilterParameter(FilterSettings setting)
+void DataLayer::applyImageViewerFilter(FilterSettings setting)
 {
-   auto matrix = currentMatrix(MatrixLayer::Source);
+   auto target = currentMatrix(MatrixLayer::Viewer);
+   //auto matrix = currentMatrix(MatrixLayer::Source);
+   auto source = m_matrixManager.getViewerSource();
+   target = source;
    m_filterManager.setFilterSettings(setting);
-   m_filterManager.applyFilter(matrix, matrix);
+   m_filterManager.applyFilter(source, target);
+   emit currentMatrixChanged();
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)
