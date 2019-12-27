@@ -61,9 +61,7 @@ void DataLayer::saveImageViewSettings(FilterSettings setting)
 void DataLayer::applyImageViewerFilter(FilterSettings setting)
 {
    auto target = currentMatrix(MatrixLayer::Viewer);
-   //auto matrix = currentMatrix(MatrixLayer::Source);
    auto source = m_matrixManager.getViewerSource();
-   target = source;
    m_filterManager.setFilterSettings(setting);
    m_filterManager.applyFilter(source, target);
    emit currentMatrixChanged();

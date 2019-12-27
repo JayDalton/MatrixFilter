@@ -14,6 +14,7 @@ void FilterManager::setFilterSettings(FilterSettings setting)
 
 void FilterManager::applyFilter(const cv::Mat& source, cv::Mat& target)
 {
+   target = source;
    if (m_setting.m_histoEqualize)
    {
       applyHisto(source, target);

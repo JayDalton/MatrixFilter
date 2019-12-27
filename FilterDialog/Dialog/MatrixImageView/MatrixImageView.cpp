@@ -35,6 +35,7 @@ MatrixImageView::MatrixImageView(DataLayerSPtr data, QWidget* parent)
       {
          auto matrix = m->data->currentMatrix(MatrixLayer::Viewer);
          m->ui.frameView->setImageMatrix(matrix);
+         m->ui.frameView->update();
       }
    );
 }
