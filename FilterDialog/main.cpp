@@ -8,23 +8,27 @@
 int main(int argc, char *argv[])
 {
    Application application(argc, argv, "Matrix Filter");
+   const auto appArguments = application.arguments();
 
-   const auto args = application.arguments().join(", ");
-   spdlog::info("Application startet with args: {}", args.toStdString());
+   const auto appStringify = appArguments.join(", ").toStdString();
+   spdlog::info("Application startet with args: {}", appStringify);
+   bool forceConfig = appArguments.contains("-c", Qt::CaseInsensitive);
 
    fs::path filePath{ "matrixfilter.cfg" };
 
    ApplicationConfig config;
-   //if (!config.load(filePath))
-   //{
-   //   spdlog::warn("Config could not read!");
-   //   ConfigurationEditor editor(nullptr, config);
-   //   if (editor.exec() == QDialog::Accepted)
-   //   {
-   //      config.fromJson(editor.getConfig().toJson());
-   //      config.save(filePath);
-   //   }
-   //}
+   JsonReader reader(filePath);
+   if (!config.load(filePath) || forceConfig)
+   {
+      spdlog::warn("Force using Config Editor!");
+      ConfigurationEditor editor(nullptr, config);
+      if (editor.exec() == QDialog::Accepted)
+      {
+         JsonWriter writer(filePath);
+         config.fromJson(editor.getConfig().toJson());
+         config.save(filePath);
+      }
+   }
 
    application.setConfig(config);
    auto data = application.getDataLayer();
