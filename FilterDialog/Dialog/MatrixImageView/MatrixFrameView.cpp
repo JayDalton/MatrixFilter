@@ -185,4 +185,10 @@ void MatrixFrameView::updateTransform()
    m_transform = createTransform();
 }
 
+void MatrixFrameView::updateTransformAndRepaint()
+{
+   updateTransform();
+   update(); // repaint
+}
+
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

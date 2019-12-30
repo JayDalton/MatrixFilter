@@ -10,6 +10,8 @@
 #include "../Logger/MethodTimer.h"
 #include <iostream>
 
+//#include <dcmtk/dcmdata/dcdatset.h> // dcm infos
+//#include <dcmtk/dcmimgle/dcmimage.h>
 
 void MatrixManager::loadMatrixFromFile(MatrixFileInfo fileInfo)
 {
@@ -83,6 +85,8 @@ MatrixPropertyList MatrixManager::getMatrixPropertyList(MatrixLayer layer) const
 
 cv::Mat MatrixManager::importMatrixFile(MatrixFileInfo info) const
 {
+   info.getFileType(); // pgm, dcm
+
    const auto filePath{ info.getPath().string() };
    return cv::imread(filePath, cv::IMREAD_GRAYSCALE | cv::IMREAD_ANYDEPTH);
 }

@@ -13,6 +13,7 @@ public:
     ~MatrixImageView();
 
 protected:
+   bool eventFilter(QObject* object, QEvent* event) override;
    void keyReleaseEvent(QKeyEvent* event) override;
 
 private:

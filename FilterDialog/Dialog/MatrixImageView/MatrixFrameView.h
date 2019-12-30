@@ -31,7 +31,9 @@ private:
    void setDisplayRect(const QRect& display);
    QImage coverMatrixByImage(const cv::Mat& _matrix) const;
    QTransform createTransform() const;
+
    void updateTransform();
+   void updateTransformAndRepaint();
 
    void scaleArea(double factor);
 

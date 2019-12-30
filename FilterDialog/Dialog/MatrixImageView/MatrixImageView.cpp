@@ -9,6 +9,8 @@
 
 #include <QKeyEvent>
 
+#include <unordered_set>
+
 struct MatrixImageView::Impl 
 {
    explicit Impl(MatrixImageView* par, DataLayerSPtr data) 
@@ -16,7 +18,11 @@ struct MatrixImageView::Impl
 
    Ui::MatrixImageView ui;
    DataLayerSPtr data{ nullptr };
-
+   std::unordered_set<int> m_validKeys{
+      Qt::Key_Left, Qt::Key_Right, Qt::Key_Up, Qt::Key_Down,
+      Qt::Key_Plus, Qt::Key_Minus
+   };
+ 
 private:
    MatrixImageView* parent{ nullptr };
 };
@@ -27,6 +33,8 @@ MatrixImageView::MatrixImageView(DataLayerSPtr data, QWidget* parent)
    m->ui.setupUi(this);
 
    setupUIElements();
+
+   installEventFilter(this);
 
    setFocusPolicy(Qt::StrongFocus);
 
@@ -41,6 +49,30 @@ MatrixImageView::MatrixImageView(DataLayerSPtr data, QWidget* parent)
 }
 
 MatrixImageView::~MatrixImageView() = default;
+
+bool MatrixImageView::eventFilter(QObject* object, QEvent* event)
+{
+   if (event->type() != QEvent::KeyPress) 
+   {
+      return false;
+   }
+
+   if (auto* keyEvent = static_cast<QKeyEvent*>(event))
+   {
+      if (!m->m_validKeys.contains(keyEvent->key()))
+      {
+         return false;
+      }
+
+      if (object == m->ui.frameView)
+      {
+         qDebug() << QString("frameView: %1").arg(keyEvent->key());
+         return true;
+      }
+   }
+
+   return false;
+}
 
 void MatrixImageView::keyReleaseEvent(QKeyEvent* event)
 {

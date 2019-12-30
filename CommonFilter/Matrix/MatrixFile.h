@@ -10,7 +10,7 @@ namespace fs = std::filesystem;
 
 struct MatrixFileInfo
 {
-   enum class Type { None, Graymap, Count };
+   enum class Type { None, Graymap, Dicom, Count };
 
    explicit MatrixFileInfo(std::string_view filePath);
    //explicit MatrixFileInfo(const std::string& filePath);
@@ -26,7 +26,7 @@ struct MatrixFileInfo
 
 private:
    fs::path m_path;
-   static inline const std::array<std::string, 1> m_validExtensions{".pgm"};
+   static inline const std::array m_validExtensions{".pgm", ".dcm"};
 };
 
 using MatrixFileUPtr = std::unique_ptr<MatrixFileInfo>;
