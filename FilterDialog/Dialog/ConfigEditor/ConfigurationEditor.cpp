@@ -1,4 +1,7 @@
 ﻿#include "stdafx.h"
+
+#include "Serialize/JsonWriter.h"
+
 #include "ConfigurationEditor.h"
 
 ConfigurationEditor::ConfigurationEditor(QWidget* parent, const Configuration& config)
@@ -19,6 +22,13 @@ const Configuration& ConfigurationEditor::getConfig() const
    return m_config;
 }
 
+std::string ConfigurationEditor::getString() const
+{
+   // TODO implementieren ...
+   JsonWriter writer{};
+   m_config.save(writer);
+   return writer.getString();
+}
 
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

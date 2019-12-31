@@ -4,6 +4,7 @@
 #include <string_view>
 #include <unordered_map>
 
+#include "Serialize/JsonStream.h"
 #include "Serialize/JsonReader.h"
 #include "Serialize/JsonWriter.h"
 

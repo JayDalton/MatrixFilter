@@ -10,8 +10,9 @@ namespace fs = std::filesystem;
 Application::Application(int argc, char* argv[], std::string_view title)
    : QApplication(argc, argv), m_data(std::make_shared<DataLayer>())
 {
-   QCoreApplication::setOrganizationName("LegalDuplics");
+   QCoreApplication::setOrganizationName("NoneProfitAG");
    QCoreApplication::setApplicationName(title.data());
+   QCoreApplication::setApplicationVersion("0.1");
 
    setupLogger();
    setupDialog();

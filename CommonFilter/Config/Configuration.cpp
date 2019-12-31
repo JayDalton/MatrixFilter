@@ -236,6 +236,16 @@ bool Configuration::fromJson(const std::string& input)
    return false;
 }
 
+bool Configuration::load(JsonReader& reader)
+{
+   return false;
+}
+
+bool Configuration::save(JsonWriter& writer) const
+{
+   return false;
+}
+
 bool Configuration::registerParameter(StringParameter&& parameter)
 {
    return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;

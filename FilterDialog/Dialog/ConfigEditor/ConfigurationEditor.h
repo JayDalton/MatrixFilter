@@ -4,6 +4,8 @@
 
 #include "ui_ConfigurationEditor.h"
 
+#include "Serialize/JsonReader.h"
+#include "Serialize/JsonWriter.h"
 #include "Config/Configuration.h"
 
 class ConfigurationEditor : public QDialog
@@ -15,6 +17,9 @@ public:
    ~ConfigurationEditor();
 
    const Configuration& getConfig() const;
+
+   std::string getString() const;
+   void setString(std::string_view content);
 
 private:
    Ui::ConfigurationEditor m_ui;
