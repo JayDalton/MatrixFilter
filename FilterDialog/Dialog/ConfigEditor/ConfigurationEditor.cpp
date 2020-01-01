@@ -24,7 +24,6 @@ const Configuration& ConfigurationEditor::getConfig() const
 
 std::string ConfigurationEditor::getString() const
 {
-   // TODO implementieren ...
    JsonWriter writer{};
    m_config.save(writer);
    return writer.getString();

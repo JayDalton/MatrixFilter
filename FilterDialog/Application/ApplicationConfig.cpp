@@ -32,6 +32,11 @@ ApplicationConfig::ApplicationConfig()
       }
    );
 
+   registerParameter(BooleanParameter{DEFAULT_BOOLEAN_VALUE,
+      "Standard Gleitkomma Wert", true
+      }
+   );
+
    registerParameter(ListParameter{DEFAULT_SIGNED_FILELIST, 
       "Standard Datei Liste", { 12, 23, 34, 45, 56 }, 200
       });

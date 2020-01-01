@@ -7,19 +7,19 @@
 
 namespace fs = std::filesystem;
 
-Application::Application(int argc, char* argv[], std::string_view title)
+Application::Application(int argc, char** argv, std::string_view title)
    : QApplication(argc, argv), m_data(std::make_shared<DataLayer>())
 {
-   QCoreApplication::setOrganizationName("NoneProfitAG");
-   QCoreApplication::setApplicationName(title.data());
-   QCoreApplication::setApplicationVersion("0.1");
+   QApplication::setOrganizationName("NoneProfitAG");
+   QApplication::setApplicationName(title.data());
+   QApplication::setApplicationVersion("0.1");
+
+   m_arguments = QApplication::arguments();
 
    setupLogger();
    setupDialog();
 
    auto con = connect(this, &QApplication::lastWindowClosed, this, &QApplication::quit);
-
-   //m_dialog->show();
 }
 
 void Application::setConfig(const ApplicationConfig& config)
@@ -30,6 +30,11 @@ void Application::setConfig(const ApplicationConfig& config)
 DataLayerSPtr Application::getDataLayer() const
 {
    return m_data;
+}
+
+QStringList Application::getArguments() const
+{
+   return m_arguments;
 }
 
 void Application::setupLogger()

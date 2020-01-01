@@ -10,6 +10,7 @@
 
 #include "Config/Parameter/StringParameter.h"
 #include "Config/Parameter/IntegerParameter.h"
+#include "Config/Parameter/BooleanParameter.h"
 #include "Config/Parameter/DoubleParameter.h"
 #include "Config/Parameter/ListParameter.h"
 
@@ -17,7 +18,8 @@
 
 using VariantParameter = std::variant<
    StringParameter, IntegerParameter, 
-   DoubleParameter, ListParameter
+   DoubleParameter, BooleanParameter, 
+   ListParameter
 >;
 
 struct Configuration
@@ -27,6 +29,9 @@ struct Configuration
 
    bool load(const fs::path& filePath);
    bool save(const fs::path& filePath) const;
+
+   bool load(const std::string& content);
+   bool save(const std::string& content) const;
 
    std::string toJson() const;
    bool fromJson(const std::string& input);
@@ -53,6 +58,7 @@ struct Configuration
    std::vector<std::string> getParameterNames() const;
 
    bool registerParameter(StringParameter&& parameter);
+   bool registerParameter(BooleanParameter&& parameter);
    bool registerParameter(IntegerParameter&& parameter);
    bool registerParameter(DoubleParameter&& parameter);
    bool registerParameter(ListParameter&& parameter);

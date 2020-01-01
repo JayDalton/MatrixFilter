@@ -31,6 +31,7 @@ private:
 
    static inline const std::string DEFAULT_SIGNED_VALUE{ "SignedValue" };
    static inline const std::string DEFAULT_DOUBLE_VALUE{ "DoubleValue" };
+   static inline const std::string DEFAULT_BOOLEAN_VALUE{ "BooleanValue" };
 };
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

@@ -81,6 +81,9 @@
     <ClCompile Include="Serialize\JsonStream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Config\Parameter\BooleanParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFilter.h">
@@ -141,6 +144,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Serialize\JsonStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\Parameter\BooleanParameter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -135,6 +135,7 @@ bool Configuration::load(const fs::path& filePath)
       return false;
    }
 
+   //JsonReader reader(filePath);
    ReadHandler handler;
    json::Reader reader;
    json::IStreamWrapper wrapper(stream);
@@ -206,6 +207,16 @@ bool Configuration::save(const fs::path& filePath) const
    return false;
 }
 
+bool Configuration::load(const std::string& content)
+{
+   return false;
+}
+
+bool Configuration::save(const std::string& content) const
+{
+   return false;
+}
+
 std::string Configuration::toJson() const
 {
    json::StringBuffer stream;
@@ -214,6 +225,7 @@ std::string Configuration::toJson() const
    Visitor writeValue = {
       [&writer](const DoubleParameter& value) { writer.Double(value.getCurrent()); },
       [&writer](const StringParameter& value) { writer.String(value.getCurrent()); },
+      [&writer](const BooleanParameter& value) { writer.Bool(value.getCurrent()); },
       [&writer](const IntegerParameter& value) { writer.Int(value.getCurrent()); },
       [&writer](const ListParameter& value) { /*writer.Int(value.getCurrent())*/; },
    };
@@ -243,10 +255,31 @@ bool Configuration::load(JsonReader& reader)
 
 bool Configuration::save(JsonWriter& writer) const
 {
-   return false;
+   Visitor writeValue = {
+      [&writer](const DoubleParameter& value) { writer.Double(value.getCurrent()); },
+      [&writer](const StringParameter& value) { writer.String(value.getCurrent()); },
+      [&writer](const IntegerParameter& value) { writer.Signed(value.getCurrent()); },
+      [&writer](const BooleanParameter& value) { writer.Boolean(value.getCurrent()); },
+      [&writer](const ListParameter& value) { /*writer.Int(value.getCurrent())*/; },
+   };
+
+   writer.StartObject();
+   for (const auto& [key, value] : m_map)
+   {
+      writer.Key(key);
+      std::visit(writeValue, value);
+   }
+   writer.CloseObject();
+
+   return true;
 }
 
 bool Configuration::registerParameter(StringParameter&& parameter)
+{
+   return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
+}
+
+bool Configuration::registerParameter(BooleanParameter&& parameter)
 {
    return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
 }
