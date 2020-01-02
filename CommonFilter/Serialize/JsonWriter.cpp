@@ -2,21 +2,24 @@
 
 #include "JsonWriter.h"
 
-using Buffer = json::StringBuffer;
+using Buffer = json::OStreamWrapper;
 using Writer = json::PrettyWriter<Buffer>;
 
 struct JsonWriter::JsonWriter::Impl
 {
-   Impl() : writer(stream) {}
+   Impl(std::ostream& stream) 
+      : stream(stream), buffer(stream), writer(buffer)
+   {
+   }
 
-   Buffer stream;
+   std::ostream& stream;
+   Buffer buffer;
    Writer writer;
 };
 
-JsonWriter::JsonWriter()
-   : m(std::make_unique<Impl>())
+JsonWriter::JsonWriter(std::ostream& stream)
+   : m(std::make_unique<Impl>(stream))
 {
-   m->writer.StartObject();
 }
 
 JsonWriter::~JsonWriter() = default;
@@ -68,11 +71,24 @@ void JsonWriter::CloseObject()
    m->writer.EndObject();
 }
 
+void JsonWriter::StartArray()
+{
+   m->writer.StartArray();
+}
+
+void JsonWriter::CloseArray()
+{
+   m->writer.EndArray();
+}
+
 std::string JsonWriter::getString() const
 {
-   m->writer.EndObject();
-   m->writer.IsComplete();//???
-   return m->stream.GetString();
+   bool close = m->writer.EndObject();
+   bool complete = m->writer.IsComplete();//???
+
+   std::ostringstream oss;
+   oss << m->stream.rdbuf();
+   return oss.str();
 }
 
 

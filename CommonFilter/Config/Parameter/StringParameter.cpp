@@ -13,8 +13,8 @@ StringParameter::StringParameter(
 {
    m->m_ident = ident.data();
    m->m_label = label.data();
-   m->m_default = default.data();
-   m->m_current = default.data();
+   m->m_default = std::string(default.data());
+   m->m_current = std::string(default.data());
    m->m_maximum = maximum;
    m->m_minimum = minimum;
 }

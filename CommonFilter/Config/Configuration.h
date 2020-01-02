@@ -8,36 +8,23 @@
 #include "Serialize/JsonReader.h"
 #include "Serialize/JsonWriter.h"
 
-#include "Config/Parameter/StringParameter.h"
-#include "Config/Parameter/IntegerParameter.h"
-#include "Config/Parameter/BooleanParameter.h"
-#include "Config/Parameter/DoubleParameter.h"
-#include "Config/Parameter/ListParameter.h"
+#include "Config/Parameter.h"
 
 /////////////////////////////////////////////////////////////////////////////
-
-using VariantParameter = std::variant<
-   StringParameter, IntegerParameter, 
-   DoubleParameter, BooleanParameter, 
-   ListParameter
->;
 
 struct Configuration
 {
    std::string m_ident;
    std::string m_label;
 
-   bool load(const fs::path& filePath);
-   bool save(const fs::path& filePath) const;
+   bool readFile(const fs::path& filePath);
+   bool saveFile(const fs::path& filePath) const;
 
-   bool load(const std::string& content);
-   bool save(const std::string& content) const;
+   std::string toString() const;
+   bool readFrom(const std::string& content);
 
-   std::string toJson() const;
-   bool fromJson(const std::string& input);
-
-   bool load(JsonReader& reader);
-   bool save(JsonWriter& writer) const;
+   bool readFrom(JsonReader& reader);
+   bool writeTo(JsonWriter& writer) const;
 
    void createCopy() const;
 
@@ -72,7 +59,7 @@ struct Configuration
    DoubleParameter& editDoubleParameter(const std::string& ident);
 
 private:
-   std::unordered_map<std::string, VariantParameter> m_map;
+   ParameterMapping m_map;
 };
 
 ///////////////////////////////////////////////////////////////////////////

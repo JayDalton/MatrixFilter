@@ -108,6 +108,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Config\Parameter\BaseParameter.cpp" />
     <ClCompile Include="Config\Parameter\BooleanParameter.cpp" />
     <ClCompile Include="CommonFilter.cpp" />
     <ClCompile Include="Config\Configuration.cpp" />
@@ -134,6 +135,7 @@
     <ClCompile Include="Config\Parameter\StringParameter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Config\Parameter\BaseParameter.h" />
     <ClInclude Include="Config\Parameter\BooleanParameter.h" />
     <ClInclude Include="CommonFilter.h" />
     <ClInclude Include="commonfilter_global.h" />

@@ -22,11 +22,12 @@ const Configuration& ConfigurationEditor::getConfig() const
    return m_config;
 }
 
-std::string ConfigurationEditor::getString() const
+std::string ConfigurationEditor::toString() const
 {
-   JsonWriter writer{};
-   m_config.save(writer);
-   return writer.getString();
+   std::ostringstream oss;
+   JsonWriter writer{oss};
+   m_config.writeTo(writer);
+   return oss.str();
 }
 
 

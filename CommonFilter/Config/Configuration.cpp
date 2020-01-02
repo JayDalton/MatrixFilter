@@ -3,82 +3,6 @@
 #include "Configuration.h"
 #include <Config\Visitor.h>
 
-//#include <rapidjson/writer.h>
-
-struct ReadHandler 
-{
-   // Handler API
-   bool Null() { logger::info("Null()"); return true; }
-   bool Int64(int64_t i) { logger::info("Int64({})", i); return true; }
-   bool Uint64(uint64_t u) { logger::info("UInt64({})", u); return true; }
-   bool RawNumber(const char* str, json::SizeType length, bool copy) { 
-      logger::info("Number({0}, {1}, {2})", str, length, copy); return true;
-   }
-
-   bool Bool(bool b) { 
-
-      //auto& param = m_params.back();
-      //if (std::holds_alternative<bool>(param))
-      //{
-      //   return std::get<bool>(param);
-      //}
-
-
-      //m_params.back().emplace<BaseParameter>();
-      //m_params.back().m_current = b;
-      logger::info("Bool({})", b); 
-      return true; 
-   }
-   
-   bool Int(signed i) { 
-      //m_params.back().m_current = i;
-      logger::info("Int({})", i); 
-      return true; 
-   }
-   bool Uint(unsigned u) { 
-      //m_params.back().m_current = u;
-      logger::info("Uint({})", u); 
-      return true; 
-   }
-   
-   bool Double(double d) { 
-      //m_params.back().m_current = d;
-      logger::info("Double({})", d); 
-      return true; 
-   }
-
-   bool Key(const char* str, json::SizeType length, bool copy) {
-      logger::info("Key({0}, {1}, {2})", str, length, copy); 
-      //m_params.emplace_back(BaseParameter{ 
-      //   std::string{str, length}, 
-      //   std::string{str, length} 
-      //   });
-      return true;
-   }
-
-   bool String(const char* str, json::SizeType length, bool copy) { 
-      //m_params.back().m_current = std::string{str, length};
-      logger::info("String({0}, {1}, {2})", str, length, copy); 
-      return true;
-   }
-   
-   bool StartObject() { logger::info("StartObject()"); return true; }
-   bool EndObject(json::SizeType count) { 
-      logger::info("EndObject({})", count); return true; 
-   }
-   
-   bool StartArray() { logger::info("StartArray()"); return true; }
-   bool EndArray(json::SizeType count) { 
-      logger::info("EndArray({})", count); 
-      return true; 
-   }
-
-//   const ParameterListing& getParameters() const { return m_params; }
-//
-//private:
-//   ParameterListing m_params;
-};
-
 
 Configuration::Configuration(std::string_view ident, std::string_view label)
    : m_ident(ident), m_label(label)
@@ -120,7 +44,7 @@ Configuration& Configuration::operator=(Configuration other)
    return *this;
 }
 
-bool Configuration::load(const fs::path& filePath)
+bool Configuration::readFile(const fs::path& filePath)
 {
    if (!fs::exists(filePath))
    {
@@ -128,71 +52,17 @@ bool Configuration::load(const fs::path& filePath)
       return false;
    }
 
-   std::ifstream stream(filePath, std::ios::binary);
-   if (!stream)
+   if (auto stream = std::ifstream(filePath, std::ios::binary))
    {
-      logger::info("config json file can not read");
-      return false;
+      JsonReader reader(stream);
+      return readFrom(reader);
    }
 
-   //JsonReader reader(filePath);
-   ReadHandler handler;
-   json::Reader reader;
-   json::IStreamWrapper wrapper(stream);
-   if (!reader.Parse(wrapper, handler))
-   {
-      logger::info("config json file parse error");
-      return false;
-   }
-
-   //const auto& params{ handler.getParameters() };
-   //m_params.assign(params.cbegin(), params.cend());
-   //for (const auto& param : handler.getParameters())
-   //{
-   //   param.m_ident;
-   //   param.m_label;
-   //}
-
-   //json::Document document;
-   ////json::IStreamWrapper isw(stream);
-   //document.ParseStream(wrapper);
-   //if (document.HasParseError())
-   //{
-   //   logger::info("config json file parse error");
-   //   return false;
-   //}
-   //
-   //for (const auto& member : document.GetObject())
-   //{
-   //   member.name;
-   //   member.value;
-   //   logger::debug("json member: {0} : {1}", 
-   //      member.name.GetString(),
-   //      member.value.GetString()
-   //   );
-   //}
    return false;
 }
 
-bool Configuration::save(const fs::path& filePath) const
+bool Configuration::saveFile(const fs::path& filePath) const
 {
-   json::StringBuffer buffer;
-   json::PrettyWriter<json::StringBuffer> writer(buffer);
-
-   auto write = [&writer](const auto& value) { value.Serialize(writer); };
-
-   writer.StartObject();
-   //writer.Key("Ident");
-   //writer.String(m_ident);
-   //writer.Key("Label");
-   //writer.String(m_label);
-
-   //for (const auto& keyValue : m_paramMap)
-   //{
-   //   std::visit(write, keyValue.second);
-   //}
-   writer.EndObject();
-
    if (!fs::exists(filePath))
    {
       fs::create_directories(filePath.parent_path());
@@ -200,74 +70,68 @@ bool Configuration::save(const fs::path& filePath) const
 
    if (auto stream = std::ofstream(filePath, std::ios::binary))
    {
-      stream << buffer.GetString() << std::endl;
-      return true;
+      JsonWriter writer(stream);
+      return writeTo(writer);
    }
 
    return false;
 }
 
-bool Configuration::load(const std::string& content)
+std::string Configuration::toString() const
 {
-   return false;
+   std::ostringstream stream;
+   JsonWriter writer(stream);
+   return stream.str();
 }
 
-bool Configuration::save(const std::string& content) const
+bool Configuration::readFrom(const std::string& content)
 {
-   return false;
+   std::istringstream iss(content);
+   JsonReader reader(iss);
+   return readFrom(reader);
 }
 
-std::string Configuration::toJson() const
+bool Configuration::readFrom(JsonReader& reader)
 {
-   json::StringBuffer stream;
-   json::Writer<json::StringBuffer> writer(stream);
+   if (!reader.writeTo(m_map))
+   {
+      logger::info("config json file parse error");
+      return false;
+   }
 
+   return true;
+}
+
+bool Configuration::writeTo(JsonWriter& writer) const
+{
    Visitor writeValue = {
-      [&writer](const DoubleParameter& value) { writer.Double(value.getCurrent()); },
-      [&writer](const StringParameter& value) { writer.String(value.getCurrent()); },
-      [&writer](const BooleanParameter& value) { writer.Bool(value.getCurrent()); },
-      [&writer](const IntegerParameter& value) { writer.Int(value.getCurrent()); },
-      [&writer](const ListParameter& value) { /*writer.Int(value.getCurrent())*/; },
+      [&](const bool value) { writer.Boolean(value); },
+      [&](const signed value) { writer.Signed(value); },
+      [&](const unsigned value) { writer.Signed(value); },
+      [&](const double value) { writer.Double(value); },
+      [&](const std::string& value) { writer.String(value); },
    };
 
-   writer.StartObject();
-   for (const auto& [key, value] : m_map)
-   {
-      writer.Key("hello");
-      std::visit(writeValue, value);
-   }
-   writer.EndObject();
-
-   return std::string(stream.GetString());
-}
-
-bool Configuration::fromJson(const std::string& input)
-{
-   // JsonReader
-
-   return false;
-}
-
-bool Configuration::load(JsonReader& reader)
-{
-   return false;
-}
-
-bool Configuration::save(JsonWriter& writer) const
-{
-   Visitor writeValue = {
-      [&writer](const DoubleParameter& value) { writer.Double(value.getCurrent()); },
-      [&writer](const StringParameter& value) { writer.String(value.getCurrent()); },
-      [&writer](const IntegerParameter& value) { writer.Signed(value.getCurrent()); },
-      [&writer](const BooleanParameter& value) { writer.Boolean(value.getCurrent()); },
-      [&writer](const ListParameter& value) { /*writer.Int(value.getCurrent())*/; },
+   Visitor writeParameter = {
+      [&](const DoubleParameter& value) { writer.Double(value.getCurrent()); },
+      [&](const StringParameter& value) { writer.String(value.getCurrent()); },
+      [&](const BooleanParameter& value) { writer.Boolean(value.getCurrent()); },
+      [&](const IntegerParameter& value) { writer.Signed(value.getCurrent()); },
+      [&](const ListParameter& value) { 
+      writer.StartArray();
+      for (const auto& value : value.getCurrent())
+      {
+         std::visit(writeValue, value);
+      }
+      writer.CloseArray();
+   },
    };
 
    writer.StartObject();
    for (const auto& [key, value] : m_map)
    {
       writer.Key(key);
-      std::visit(writeValue, value);
+      std::visit(writeParameter, value);
    }
    writer.CloseObject();
 

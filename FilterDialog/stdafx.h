@@ -1,5 +1,6 @@
 ﻿#include <QtWidgets>
 
+#include <QDebug>
 #include <QtWidgets/QApplication>
 
 #include "CommonFilter.h"

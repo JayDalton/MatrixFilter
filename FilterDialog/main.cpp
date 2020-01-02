@@ -2,10 +2,10 @@
 
 #include "Dialog/ConfigEditor/ConfigurationEditor.h"
 #include "Application/Application.h"
-//#include <QCommandLineParser>
-#include <QDebug>
-
 #include "Dialog/FilterDialog.h"
+#include "Logger/Logger.h"
+
+#include <QCommandLineParser>
 
 int main(int argc, char *argv[])
 {
@@ -22,14 +22,14 @@ int main(int argc, char *argv[])
    fs::path filePath{ "matrixfilter.cfg" };
 
    ApplicationConfig config;
-   if (!config.load(filePath) || forceConfigEditor)
+   if (!config.readFile(filePath) || forceConfigEditor)
    {
       spdlog::warn("Force using Config Editor!");
       ConfigurationEditor editor(nullptr, config);
       if (editor.exec() == QDialog::Accepted)
       {
-         config.load(editor.getString());
-         config.save(filePath);
+         config.readFrom(editor.toString());
+         config.saveFile(filePath);
       }
    }
 

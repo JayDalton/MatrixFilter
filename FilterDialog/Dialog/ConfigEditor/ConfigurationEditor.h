@@ -18,8 +18,8 @@ public:
 
    const Configuration& getConfig() const;
 
-   std::string getString() const;
-   void setString(std::string_view content);
+   std::string toString() const;
+   void setContent(std::string_view content);
 
 private:
    Ui::ConfigurationEditor m_ui;

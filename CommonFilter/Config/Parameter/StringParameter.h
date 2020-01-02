@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Config/Parameter.h"
+#include "Config/Parameter/BaseParameter.h"
 
 struct StringParameter
 {

@@ -1,17 +1,17 @@
 ﻿#pragma once
 
 #include "Serialize/JsonStream.h"
+#include "Config/Parameter.h"
 
 struct JsonReader
 {
-   explicit JsonReader();
-   explicit JsonReader(const std::string& input);
-   explicit JsonReader(std::string_view content);
-   explicit JsonReader(const fs::path& filePath);
+   explicit JsonReader(std::istream& stream);
 
    ~JsonReader();
    JsonReader(JsonReader&& other);
    JsonReader& operator=(JsonReader&& other);
+
+   bool writeTo(ParameterMapping& mapping);
 
 private:
    struct Impl;

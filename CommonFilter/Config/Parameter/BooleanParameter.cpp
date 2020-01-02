@@ -10,7 +10,7 @@ BooleanParameter::BooleanParameter(
    : m(std::make_unique<ParameterBase>())
 {
    m->m_ident = ident.data();
-   m->m_ident = label.data();
+   m->m_label = label.data();
    m->m_default = default;
    m->m_current = default;
 }

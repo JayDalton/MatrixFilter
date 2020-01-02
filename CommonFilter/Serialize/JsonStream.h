@@ -1,5 +1,11 @@
 ﻿#pragma once
 
+#include <istream>
+#include <ostream>
+#include <sstream>
+#include <fstream>
+#include <iostream>
+
 #include <filesystem>
 namespace fs = std::filesystem;
 

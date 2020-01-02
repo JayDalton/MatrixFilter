@@ -4,7 +4,7 @@
 
 struct JsonWriter
 {
-   JsonWriter();
+   explicit JsonWriter(std::ostream& stream);
    ~JsonWriter();
 
    JsonWriter(JsonWriter&& other);
