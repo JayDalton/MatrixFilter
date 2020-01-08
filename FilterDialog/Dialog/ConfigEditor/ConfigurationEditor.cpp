@@ -10,7 +10,9 @@ ConfigurationEditor::ConfigurationEditor(QWidget* parent, const Configuration& c
     m_ui.setupUi(this);
     setupGUIElements();
 
-    setWindowTitle(tr("Configuration Editor"));
+    m_model->setConfiguration(config);
+
+    setWindowTitle(QString("Config Editor: %1").arg(QString::fromStdString(config.m_label)));
 
     auto con1 = connect(m_ui.pushButtonSave, &QPushButton::clicked, this, [&]() { accept(); });
     auto con2 = connect(m_ui.pushButtonCancle, &QPushButton::clicked, this, [&]() { reject(); });

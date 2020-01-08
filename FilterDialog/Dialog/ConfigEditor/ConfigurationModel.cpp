@@ -6,6 +6,11 @@ ConfigurationModel::ConfigurationModel()
 {
 }
 
+void ConfigurationModel::setConfiguration(const Configuration& config)
+{
+
+}
+
 QModelIndex ConfigurationModel::index(int row, int column, const QModelIndex& parent) const
 {
    if (!parent.isValid())
@@ -24,7 +29,7 @@ int ConfigurationModel::rowCount(const QModelIndex& parent) const
 {
    if (!parent.isValid())
    {
-      return m_config.has_value() ? m_config->getParameterCount() : 0;
+      return m_config.getParameterCount();
    }
    return 0;
 }
@@ -60,13 +65,13 @@ QVariant ConfigurationModel::data(const QModelIndex& index, int role) const
       return {};
    }
 
-   if (!m_config.has_value())
-   {
-      return {};
-   }
+   //if (!m_config.has_value())
+   //{
+   //   return {};
+   //}
 
    if (index.parent().isValid() 
-      || (index.row() > m_config->getParameterCount()) 
+      || (index.row() > m_config.getParameterCount()) 
       || (index.column() > static_cast<int>(Column::Count)))
    {
       return {};

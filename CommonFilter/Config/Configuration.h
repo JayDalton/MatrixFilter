@@ -17,6 +17,10 @@ struct Configuration
    std::string m_ident;
    std::string m_label;
 
+   Configuration() = default;
+   Configuration(const Configuration& other);
+   Configuration& operator=(Configuration other);
+
    bool readFile(const fs::path& filePath);
    bool saveFile(const fs::path& filePath) const;
 
@@ -28,25 +32,14 @@ struct Configuration
 
    void createCopy() const;
 
-   // copy and swap idiom ?
-   Configuration(const Configuration& other);
-   Configuration& operator=(Configuration other);
-   //Configuration& operator=(Configuration other)
-   //{
-   //   std::cout << "copy assignment of A\n";
-   //   std::swap(map, other.map);
-   //   //std::swap(s1, other.s1);
-   //   return *this;
-   //}
-
    explicit Configuration(std::string_view ident, std::string_view label);
 
    std::size_t getParameterCount() const;
    std::vector<std::string> getParameterNames() const;
 
-   bool registerParameter(StringParameter&& parameter);
    bool registerParameter(BooleanParameter&& parameter);
    bool registerParameter(IntegerParameter&& parameter);
+   bool registerParameter(StringParameter&& parameter);
    bool registerParameter(DoubleParameter&& parameter);
    bool registerParameter(ListParameter&& parameter);
 

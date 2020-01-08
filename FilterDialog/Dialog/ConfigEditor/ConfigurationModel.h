@@ -16,7 +16,7 @@ public:
    explicit ConfigurationModel();
    ~ConfigurationModel() override = default;
 
-   void setConfiguration();
+   void setConfiguration(const Configuration& config);
 
 signals:
    void sizeChanged(QRect size);
@@ -31,7 +31,7 @@ protected:
    QVariant data(const QModelIndex& index, int role) const override;
 
 private:
-   std::optional<Configuration> m_config;
+   Configuration m_config;
 };
 
 using ConfigurationModelPtr = std::unique_ptr<ConfigurationModel>;

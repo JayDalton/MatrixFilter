@@ -30,7 +30,7 @@ private:
    Ui::ConfigurationEditor m_ui;
    ConfigurationModelPtr m_model;
    ConfigurationProxyPtr m_proxy;
-   Configuration m_config;
+   const Configuration m_config;
 };
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)
