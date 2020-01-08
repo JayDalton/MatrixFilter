@@ -30,5 +30,9 @@ std::string ConfigurationEditor::toString() const
    return oss.str();
 }
 
+void ConfigurationEditor::setContent(std::string_view content)
+{
+}
+
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)
