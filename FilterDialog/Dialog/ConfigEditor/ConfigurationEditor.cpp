@@ -8,11 +8,12 @@ ConfigurationEditor::ConfigurationEditor(QWidget* parent, const Configuration& c
    : QDialog(parent, Qt::Window | Qt::WindowCloseButtonHint), m_config(config)
 {
     m_ui.setupUi(this);
+    setupGUIElements();
 
     setWindowTitle(tr("Configuration Editor"));
 
-    connect(m_ui.pushButtonSave, &QPushButton::clicked, this, [&]() { accept(); });
-    connect(m_ui.pushButtonCancle, &QPushButton::clicked, this, [&]() { reject(); });
+    auto con1 = connect(m_ui.pushButtonSave, &QPushButton::clicked, this, [&]() { accept(); });
+    auto con2 = connect(m_ui.pushButtonCancle, &QPushButton::clicked, this, [&]() { reject(); });
 }
 
 ConfigurationEditor::~ConfigurationEditor() = default;
@@ -31,6 +32,10 @@ std::string ConfigurationEditor::toString() const
 }
 
 void ConfigurationEditor::setContent(std::string_view content)
+{
+}
+
+void ConfigurationEditor::setupGUIElements()
 {
 }
 

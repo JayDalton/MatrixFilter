@@ -22,6 +22,9 @@ public:
    void setContent(std::string_view content);
 
 private:
+   void setupGUIElements();
+
+private:
    Ui::ConfigurationEditor m_ui;
    Configuration m_config;
 };
