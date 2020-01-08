@@ -8,6 +8,8 @@
 #include "Serialize/JsonWriter.h"
 #include "Config/Configuration.h"
 
+#include "Dialog/ConfigEditor/ConfigurationModel.h"
+
 class ConfigurationEditor : public QDialog
 {
    Q_OBJECT
@@ -26,6 +28,8 @@ private:
 
 private:
    Ui::ConfigurationEditor m_ui;
+   ConfigurationModelPtr m_model;
+   ConfigurationProxyPtr m_proxy;
    Configuration m_config;
 };
 

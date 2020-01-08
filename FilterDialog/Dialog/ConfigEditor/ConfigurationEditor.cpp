@@ -37,6 +37,10 @@ void ConfigurationEditor::setContent(std::string_view content)
 
 void ConfigurationEditor::setupGUIElements()
 {
+   m_model = std::make_unique<ConfigurationModel>();
+   m_proxy = std::make_unique<ConfigurationProxy>();
+   m_proxy->setSourceModel(m_model.get());
+   m_ui.treeView->setModel(m_proxy.get());
 }
 
 
