@@ -11,6 +11,7 @@ ConfigurationEditor::ConfigurationEditor(QWidget* parent, const Configuration& c
     setupGUIElements();
 
     m_model->setConfiguration(config);
+    m_ui.treeView->resizeColumnToContents(0);
 
     setWindowTitle(
        QString("Config Editor: %1")
@@ -41,6 +42,12 @@ std::string ConfigurationEditor::toString() const
    return oss.str();
 }
 
+void ConfigurationEditor::closeEvent(QCloseEvent* event)
+{
+   saveSettings();
+   QWidget::closeEvent(event);
+}
+
 void ConfigurationEditor::setupGUIElements()
 {
    m_model = std::make_unique<ConfigurationModel>();
@@ -51,6 +58,18 @@ void ConfigurationEditor::setupGUIElements()
    //m_ui.treeView->setHeaderHidden(true);
    m_ui.treeView->setUniformRowHeights(true);
    m_ui.treeView->setAlternatingRowColors(true);
+}
+
+void ConfigurationEditor::restoreSettings()
+{
+   QSettings settings;
+   restoreGeometry(settings.value("geometry").toByteArray());
+}
+
+void ConfigurationEditor::saveSettings()
+{
+   QSettings settings;
+   settings.setValue("geometry", saveGeometry());
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

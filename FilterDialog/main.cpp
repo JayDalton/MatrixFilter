@@ -22,6 +22,8 @@ int main(int argc, char *argv[])
    fs::path filePath{ "matrixfilter.cfg" };
 
    ApplicationConfig config;
+   application.setConfig(config);
+
    if (!config.readFile(filePath) || forceConfigEditor)
    {
       spdlog::warn("Force using Config Editor!");
@@ -29,12 +31,12 @@ int main(int argc, char *argv[])
       if (editor.exec() == QDialog::Accepted)
       {
          config.readFrom(editor.toString());
+         application.setConfig(config);
          config.saveFile(filePath);
       }
       else { return 0; }
    }
 
-   application.setConfig(config);
    auto data = application.getDataLayer();
    
    FilterDialog dialog(data);

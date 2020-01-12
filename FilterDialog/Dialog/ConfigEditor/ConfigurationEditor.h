@@ -4,10 +4,11 @@
 
 #include "ui_ConfigurationEditor.h"
 
-#include "Serialize/JsonReader.h"
-#include "Serialize/JsonWriter.h"
+//#include "Serialize/JsonReader.h"
+//#include "Serialize/JsonWriter.h"
 #include "Config/Configuration.h"
 
+#include "Application/DataLayer.h"
 #include "Dialog/ConfigEditor/ConfigurationModel.h"
 
 class ConfigurationEditor : public QDialog
@@ -16,6 +17,7 @@ class ConfigurationEditor : public QDialog
 
 public:
    ConfigurationEditor(QWidget* parent, const Configuration& config);
+   ConfigurationEditor(QWidget* parent, DataLayerSPtr data);
    ~ConfigurationEditor();
 
    const Configuration& getModifiedConfig() const;
@@ -23,10 +25,19 @@ public:
 
    std::string toString() const;
 
-private:
-   void setupGUIElements();
+protected:
+   //bool eventFilter(QObject* object, QEvent* event) override;
+   void closeEvent(QCloseEvent* event) override;
 
 private:
+   void setupGUIElements();
+   void restoreSettings();
+   void saveSettings();
+
+private:
+   //struct Impl;
+   //std::unique_ptr<Impl> m;
+
    Ui::ConfigurationEditor m_ui;
    ConfigurationModelPtr m_model;
    ConfigurationProxyPtr m_proxy;

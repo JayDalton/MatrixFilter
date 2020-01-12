@@ -44,8 +44,6 @@ FilterDialog::FilterDialog(DataLayerSPtr data)
 }
 
 FilterDialog::~FilterDialog() = default;
-//FilterDialog::FilterDialog(FilterDialog&& rhs) = default;
-//FilterDialog& FilterDialog::operator=(FilterDialog&&) = default;
 
 void FilterDialog::setConfig(const Configuration& config)
 {

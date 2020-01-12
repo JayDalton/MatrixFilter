@@ -1,11 +1,11 @@
 ﻿#pragma once
 
-#include "Application/DataLayer.h"
-
 #include <QDialog>
 #include <QWidget>
 #include <QMainWindow>
+
 #include <Config\Configuration.h>
+#include "Application/DataLayer.h"
 
 class FilterDialog : public QDialog
 {
@@ -13,10 +13,7 @@ class FilterDialog : public QDialog
 
 public:
    explicit FilterDialog(DataLayerSPtr data);
-
    ~FilterDialog();
-   //FilterDialog(FilterDialog&& rhs);
-   //FilterDialog& operator=(FilterDialog&&);
 
    void setConfig(const Configuration& config);
 
