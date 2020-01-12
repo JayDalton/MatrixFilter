@@ -11,7 +11,7 @@ class ConfigurationModel : public QAbstractItemModel
 {
    Q_OBJECT
 public:
-   enum class Column { Name, Type, Size, Path, Extension, Count };
+   enum class Column { Label, Value, Count };
 
    explicit ConfigurationModel();
    ~ConfigurationModel() override = default;
