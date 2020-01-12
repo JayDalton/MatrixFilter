@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
          config.readFrom(editor.toString());
          config.saveFile(filePath);
       }
+      else { return 0; }
    }
 
    application.setConfig(config);

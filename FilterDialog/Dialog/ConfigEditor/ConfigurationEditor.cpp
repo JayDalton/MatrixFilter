@@ -23,7 +23,12 @@ ConfigurationEditor::ConfigurationEditor(QWidget* parent, const Configuration& c
 
 ConfigurationEditor::~ConfigurationEditor() = default;
 
-const Configuration& ConfigurationEditor::getConfig() const
+const Configuration& ConfigurationEditor::getModifiedConfig() const
+{
+   return m_model->getConfiguration();
+}
+
+const Configuration& ConfigurationEditor::getOriginalConfig() const
 {
    return m_config;
 }
@@ -36,16 +41,16 @@ std::string ConfigurationEditor::toString() const
    return oss.str();
 }
 
-//void ConfigurationEditor::setContent(std::string_view content)
-//{
-//}
-
 void ConfigurationEditor::setupGUIElements()
 {
    m_model = std::make_unique<ConfigurationModel>();
    m_proxy = std::make_unique<ConfigurationProxy>();
    m_proxy->setSourceModel(m_model.get());
    m_ui.treeView->setModel(m_proxy.get());
+
+   //m_ui.treeView->setHeaderHidden(true);
+   m_ui.treeView->setUniformRowHeights(true);
+   m_ui.treeView->setAlternatingRowColors(true);
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

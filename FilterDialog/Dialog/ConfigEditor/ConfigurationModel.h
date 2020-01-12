@@ -17,6 +17,7 @@ public:
    ~ConfigurationModel() override = default;
 
    void setConfiguration(const Configuration& config);
+   const Configuration& getConfiguration() const;
 
 signals:
    void sizeChanged(QRect size);

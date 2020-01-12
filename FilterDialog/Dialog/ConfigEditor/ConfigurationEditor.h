@@ -18,10 +18,10 @@ public:
    ConfigurationEditor(QWidget* parent, const Configuration& config);
    ~ConfigurationEditor();
 
-   const Configuration& getConfig() const;
+   const Configuration& getModifiedConfig() const;
+   const Configuration& getOriginalConfig() const;
 
    std::string toString() const;
-   //void setContent(std::string_view content);
 
 private:
    void setupGUIElements();

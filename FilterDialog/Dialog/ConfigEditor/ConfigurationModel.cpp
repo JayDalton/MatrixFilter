@@ -14,6 +14,11 @@ void ConfigurationModel::setConfiguration(const Configuration& config)
    endResetModel();
 }
 
+const Configuration& ConfigurationModel::getConfiguration() const
+{
+   return m_config;
+}
+
 QModelIndex ConfigurationModel::index(int row, int column, const QModelIndex& parent) const
 {
    if (!parent.isValid())
