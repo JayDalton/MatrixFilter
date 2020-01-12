@@ -21,7 +21,7 @@ public:
    const Configuration& getConfig() const;
 
    std::string toString() const;
-   void setContent(std::string_view content);
+   //void setContent(std::string_view content);
 
 private:
    void setupGUIElements();

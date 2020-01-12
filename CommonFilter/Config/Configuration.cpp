@@ -163,6 +163,11 @@ bool Configuration::registerParameter(ListParameter&& parameter)
    return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
 }
 
+const VariantParameter& Configuration::getParameter(const std::string& ident) const
+{
+   return m_map.at(ident);
+}
+
 const BooleanParameter& Configuration::getBooleanParameter(const std::string& ident) const
 {
    return std::get<BooleanParameter>(m_map.at(ident));
@@ -186,6 +191,11 @@ const DoubleParameter& Configuration::getDoubleParameter(const std::string& iden
 const ListParameter& Configuration::getListParameter(const std::string& ident) const
 {
    return std::get<ListParameter>(m_map.at(ident));
+}
+
+VariantParameter& Configuration::getParameter(const std::string& ident)
+{
+   return m_map.at(ident);
 }
 
 BooleanParameter& Configuration::editBooleanParameter(const std::string& ident)

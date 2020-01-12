@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 
 #include "ConfigurationModel.h"
+#include <Config\Visitor.h>
 
 ConfigurationModel::ConfigurationModel()
 {
@@ -8,7 +9,9 @@ ConfigurationModel::ConfigurationModel()
 
 void ConfigurationModel::setConfiguration(const Configuration& config)
 {
-
+   beginResetModel();
+   m_config = config;
+   endResetModel();
 }
 
 QModelIndex ConfigurationModel::index(int row, int column, const QModelIndex& parent) const
@@ -55,7 +58,15 @@ QVariant ConfigurationModel::headerData(int section, Qt::Orientation orientation
       return {};
    }
 
-   return section;
+   switch (static_cast<Column>(section))
+   {
+   case Column::Label:
+      return "Bezeichnung";
+   case Column::Value:
+      return "Wertigkeit";
+   default:
+      return {};
+   }
 }
 
 QVariant ConfigurationModel::data(const QModelIndex& index, int role) const
@@ -65,11 +76,6 @@ QVariant ConfigurationModel::data(const QModelIndex& index, int role) const
       return {};
    }
 
-   //if (!m_config.has_value())
-   //{
-   //   return {};
-   //}
-
    if (index.parent().isValid() 
       || (index.row() > m_config.getParameterCount()) 
       || (index.column() > static_cast<int>(Column::Count)))
@@ -77,7 +83,31 @@ QVariant ConfigurationModel::data(const QModelIndex& index, int role) const
       return {};
    }
 
-   return {};
+   Visitor getLabel = {
+      [](const auto& param) -> std::string { return param.getLabel(); }
+   };
+
+   Visitor getValue = {
+      [&](const DoubleParameter& value) -> QVariant { return value.getCurrent(); },
+      [&](const StringParameter& value) -> QVariant { return QString::fromStdString(value.getCurrent()); },
+      [&](const BooleanParameter& value) -> QVariant { return value.getCurrent(); },
+      [&](const IntegerParameter& value) -> QVariant { return value.getCurrent(); },
+      [&](const ListParameter& value) -> QVariant { return {}; },
+   };
+
+   const auto names{ m_config.getParameterNames() };
+   const auto ident{ names.at(index.row()) };
+   const auto parameter{ m_config.getParameter(ident) };
+
+   switch (static_cast<Column>(index.column()))
+   {
+   case Column::Label: 
+      return QLatin1String(std::visit(getLabel, parameter).c_str());
+   case Column::Value:
+      return std::visit(getValue, parameter);
+   default: 
+      return {};
+   }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

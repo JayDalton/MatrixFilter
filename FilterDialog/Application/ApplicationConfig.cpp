@@ -8,41 +8,41 @@ ApplicationConfig::ApplicationConfig()
    : Configuration{ "AppConfig", "Anwendungs Konfiguration" }
 {
    registerParameter(StringParameter{DEFAULT_IMPORT_MATRIX, 
-      "Standard Matrix Datei", "current"
+      "Matrix Datei", "current"
       }
    );
 
    registerParameter(StringParameter{DEFAULT_IMPORT_FOLDER, 
-      "Standard Import Ordner", "application.cfg"
+      "Import Ordner", "application.cfg"
       }
    );
 
    registerParameter(StringParameter{DEFAULT_LOGGER_FOLDER, 
-      "Standard Logfile", "logfiles/dialog.log"
+      "Logfile", "logfiles/dialog.log"
       }
    );
 
    registerParameter(IntegerParameter{DEFAULT_SIGNED_VALUE,
-      "Standard Integer Wert", 1'234, 1'000'000
+      "Integer Wert", 1'234, 1'000'000
       }
    );
 
    registerParameter(DoubleParameter{DEFAULT_DOUBLE_VALUE,
-      "Standard Gleitkomma Wert", 1'234.0, 1'000'000.0
+      "Gleitkomma Wert", 4'321.5, 1'000'000.0
       }
    );
 
    registerParameter(BooleanParameter{DEFAULT_BOOLEAN_VALUE,
-      "Standard Gleitkomma Wert", true
+      "Boolean Wert", true
       }
    );
 
    registerParameter(ListParameter{DEFAULT_SIGNED_FILELIST, 
-      "Standard Datei Liste", { 12, 23, 34, 45, 56 }, 200
+      "Integer Liste", { 12, 23, 34, 45, 56 }, 200
       });
 
    registerParameter(ListParameter{DEFAULT_MATRIX_FILELIST, 
-      "Standard Datei Liste", 
+      "Datei Liste", 
       {
          "path/to/next/sub/folder/1"s,
          "path/to/next/sub/folder/2"s,

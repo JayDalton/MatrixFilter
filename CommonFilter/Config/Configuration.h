@@ -43,12 +43,14 @@ struct Configuration
    bool registerParameter(DoubleParameter&& parameter);
    bool registerParameter(ListParameter&& parameter);
 
+   const VariantParameter& getParameter(const std::string& ident) const;
    const BooleanParameter& getBooleanParameter(const std::string& ident) const;
    const IntegerParameter& getIntegerParameter(const std::string& ident) const;
    const StringParameter& getStringParameter(const std::string& ident) const;
    const DoubleParameter& getDoubleParameter(const std::string& ident) const;
    const ListParameter& getListParameter(const std::string& ident) const;
 
+   VariantParameter& getParameter(const std::string& ident);
    BooleanParameter& editBooleanParameter(const std::string& ident);
    IntegerParameter& editIntegerParameter(const std::string& ident);
    StringParameter& editStringParameter(const std::string& ident);
@@ -57,6 +59,7 @@ struct Configuration
 
 private:
    ParameterMapping m_map;
+   std::vector<std::string> m_orderedIdents;
 };
 
 ///////////////////////////////////////////////////////////////////////////
