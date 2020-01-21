@@ -33,7 +33,7 @@ struct ParameterBase
    VariantValue m_maximum;
    VariantValue m_minimum;
 
-   std::vector<VariantValue> m_values;
+   //std::vector<VariantValue> m_values;
 };
 
 using BaseParameter = std::unique_ptr<ParameterBase>;

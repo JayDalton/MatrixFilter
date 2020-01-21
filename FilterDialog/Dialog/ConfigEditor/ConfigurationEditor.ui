@@ -34,6 +34,11 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>treeView</tabstop>
+  <tabstop>pushButtonSave</tabstop>
+  <tabstop>pushButtonCancle</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

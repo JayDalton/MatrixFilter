@@ -5,7 +5,7 @@
 ListParameter::ListParameter(
    std::string_view ident, 
    std::string_view label, 
-   std::initializer_list<VariantValue> default,
+   std::vector<VariantValue>&& default,
    unsigned maximum,
    unsigned minimum
 )
@@ -13,11 +13,11 @@ ListParameter::ListParameter(
 {
    m->m_ident = ident.data();
    m->m_label = label.data();
-   //m->m_default = default;
+   //m->m_default = std::move(default);
    //m->m_current = default;
    m->m_maximum = maximum;
    m->m_minimum = minimum;
-   m->m_values = default;
+   //m->m_values = default;
 }
 
 ListParameter::~ListParameter() = default;

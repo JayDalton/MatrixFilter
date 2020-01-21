@@ -51,6 +51,8 @@ public:
 
         gridLayout->addWidget(pushButtonSave, 1, 1, 1, 1);
 
+        QWidget::setTabOrder(treeView, pushButtonSave);
+        QWidget::setTabOrder(pushButtonSave, pushButtonCancle);
 
         retranslateUi(ConfigurationEditor);
 

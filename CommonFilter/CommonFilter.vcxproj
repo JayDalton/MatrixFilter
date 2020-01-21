@@ -109,6 +109,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Config\Parameter\BaseParameter.cpp" />
+    <ClCompile Include="Config\Parameter\BinaryParameter.cpp" />
     <ClCompile Include="Config\Parameter\BooleanParameter.cpp" />
     <ClCompile Include="CommonFilter.cpp" />
     <ClCompile Include="Config\Configuration.cpp" />
@@ -136,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config\Parameter\BaseParameter.h" />
+    <ClInclude Include="Config\Parameter\BinaryParameter.h" />
     <ClInclude Include="Config\Parameter\BooleanParameter.h" />
     <ClInclude Include="CommonFilter.h" />
     <ClInclude Include="commonfilter_global.h" />

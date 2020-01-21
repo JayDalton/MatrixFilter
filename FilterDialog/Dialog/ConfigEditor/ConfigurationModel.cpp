@@ -53,7 +53,12 @@ int ConfigurationModel::columnCount(const QModelIndex& parent) const
 
 Qt::ItemFlags ConfigurationModel::flags(const QModelIndex& index) const
 {
-   return QAbstractItemModel::flags(index);
+   if (!index.isValid())
+   {
+      return Qt::NoItemFlags;
+   }
+
+   return Qt::ItemIsEditable | QAbstractItemModel::flags(index);
 }
 
 QVariant ConfigurationModel::headerData(int section, Qt::Orientation orientation, int role) const

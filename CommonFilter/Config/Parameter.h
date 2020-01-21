@@ -2,6 +2,7 @@
 
 #include "Config/Parameter/BaseParameter.h"
 
+#include "Config/Parameter/BinaryParameter.h"
 #include "Config/Parameter/StringParameter.h"
 #include "Config/Parameter/IntegerParameter.h"
 #include "Config/Parameter/BooleanParameter.h"

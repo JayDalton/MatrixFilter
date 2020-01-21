@@ -87,6 +87,9 @@
     <ClCompile Include="Config\Parameter\BaseParameter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Config\Parameter\BinaryParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFilter.h">
@@ -153,6 +156,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Config\Parameter\BaseParameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\Parameter\BinaryParameter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
