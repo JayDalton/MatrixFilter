@@ -120,6 +120,36 @@ QVariant ConfigurationModel::data(const QModelIndex& index, int role) const
    }
 }
 
+bool ConfigurationModel::setData(const QModelIndex& index, const QVariant& value, int role)
+{
+   return false;
+}
+
+bool ConfigurationModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant& value, int role)
+{
+   return false;
+}
+
+bool ConfigurationModel::insertColumns(int position, int columns, const QModelIndex& parent)
+{
+   return false;
+}
+
+bool ConfigurationModel::removeColumns(int position, int columns, const QModelIndex& parent)
+{
+   return false;
+}
+
+bool ConfigurationModel::insertRows(int position, int rows, const QModelIndex& parent)
+{
+   return false;
+}
+
+bool ConfigurationModel::removeRows(int position, int rows, const QModelIndex& parent)
+{
+   return false;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 ConfigurationProxy::ConfigurationProxy(QObject* parent)
