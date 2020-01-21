@@ -3,6 +3,8 @@
 #include "ConfigurationModel.h"
 #include <Config\Visitor.h>
 
+#include <QDebug>
+
 ConfigurationModel::ConfigurationModel()
 {
 }
@@ -219,5 +221,47 @@ bool ConfigurationProxy::lessThan(const QModelIndex& left, const QModelIndex& ri
    return QSortFilterProxyModel::lessThan(left, right);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////
+
+ConfigurationDelegate::ConfigurationDelegate(QObject* parent)
+   : QStyledItemDelegate(parent)
+{
+
+}
+
+QWidget* ConfigurationDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
+{
+   //QSpinBox *editor = new QSpinBox(parent);
+   //editor->setFrame(false);
+   //editor->setMinimum(0);
+   //editor->setMaximum(100);
+
+   //return editor;
+   return nullptr;
+}
+
+void ConfigurationDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
+{
+   qDebug() << "";
+   //int value = index.model()->data(index, Qt::EditRole).toInt();
+
+   //QSpinBox *spinBox = static_cast<QSpinBox*>(editor);
+   //spinBox->setValue(value);
+}
+
+void ConfigurationDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
+{
+   qDebug() << "";
+   //QSpinBox *spinBox = static_cast<QSpinBox*>(editor);
+   //spinBox->interpretText();
+   //int value = spinBox->value();
+
+   //model->setData(index, value, Qt::EditRole);
+}
+
+void ConfigurationDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
+{
+   editor->setGeometry(option.rect);
+}
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

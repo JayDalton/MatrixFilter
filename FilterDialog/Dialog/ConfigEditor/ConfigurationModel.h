@@ -3,6 +3,7 @@
 #include <optional>
 
 #include <QAbstractItemModel>
+#include <QStyledItemDelegate>
 #include <QSortFilterProxyModel>
 
 #include "Config/Configuration.h"
@@ -37,13 +38,13 @@ protected:
       const QVariant &value, int role = Qt::EditRole) override;
 
    bool insertColumns(int position, int columns,
-      const QModelIndex &parent = QModelIndex()) override;
+      const QModelIndex& parent = {}) override;
    bool removeColumns(int position, int columns,
-      const QModelIndex &parent = QModelIndex()) override;
+      const QModelIndex &parent = {}) override;
    bool insertRows(int position, int rows,
-      const QModelIndex &parent = QModelIndex()) override;
+      const QModelIndex &parent = {}) override;
    bool removeRows(int position, int rows,
-      const QModelIndex &parent = QModelIndex()) override;
+      const QModelIndex &parent = {}) override;
 private:
    Configuration m_config;
 };
@@ -71,5 +72,30 @@ private:
 };
 
 using ConfigurationProxyPtr = std::unique_ptr<ConfigurationProxy>;
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+class ConfigurationDelegate : public QStyledItemDelegate
+{
+   Q_OBJECT
+public:
+
+   ConfigurationDelegate(QObject* parent = nullptr);
+
+   QWidget* createEditor(QWidget* parent, 
+      const QStyleOptionViewItem& option,
+      const QModelIndex &index) const override;
+
+   void setEditorData(QWidget* editor, 
+      const QModelIndex& index) const override;
+
+   void setModelData(QWidget* editor, 
+      QAbstractItemModel* model,
+      const QModelIndex& index) const override;
+
+   void updateEditorGeometry(QWidget* editor, 
+      const QStyleOptionViewItem& option,
+      const QModelIndex& index) const override;
+};
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

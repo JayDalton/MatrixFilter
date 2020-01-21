@@ -41,6 +41,7 @@ private:
    Ui::ConfigurationEditor m_ui;
    ConfigurationModelPtr m_model;
    ConfigurationProxyPtr m_proxy;
+   ConfigurationDelegate m_delegate;
    const Configuration m_config;
 };
 

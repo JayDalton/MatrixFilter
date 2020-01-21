@@ -4,6 +4,8 @@
 
 #include "ConfigurationEditor.h"
 
+#include <QHeaderView>
+
 ConfigurationEditor::ConfigurationEditor(QWidget* parent, const Configuration& config)
    : QDialog(parent, Qt::Window | Qt::WindowCloseButtonHint), m_config(config)
 {
@@ -12,6 +14,9 @@ ConfigurationEditor::ConfigurationEditor(QWidget* parent, const Configuration& c
 
     m_model->setConfiguration(config);
     m_ui.treeView->resizeColumnToContents(0);
+    m_ui.treeView->header()->setStretchLastSection(true);
+
+    m_ui.treeView->setItemDelegate(&m_delegate);
 
     setWindowTitle(
        QString("Config Editor: %1")
