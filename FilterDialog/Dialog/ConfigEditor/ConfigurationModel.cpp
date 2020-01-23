@@ -229,8 +229,10 @@ ConfigurationDelegate::ConfigurationDelegate(QObject* parent)
 
 }
 
-QWidget* ConfigurationDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
+QWidget* ConfigurationDelegate::createEditor(QWidget* parent, 
+   const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
+   qDebug() << "createEditor: " << index;
    //QSpinBox *editor = new QSpinBox(parent);
    //editor->setFrame(false);
    //editor->setMinimum(0);
@@ -240,18 +242,20 @@ QWidget* ConfigurationDelegate::createEditor(QWidget* parent, const QStyleOption
    return nullptr;
 }
 
-void ConfigurationDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
+void ConfigurationDelegate::setEditorData(QWidget* editor, 
+   const QModelIndex& index) const
 {
-   qDebug() << "";
+   qDebug() << "setEditorData: " << index;
    //int value = index.model()->data(index, Qt::EditRole).toInt();
 
    //QSpinBox *spinBox = static_cast<QSpinBox*>(editor);
    //spinBox->setValue(value);
 }
 
-void ConfigurationDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
+void ConfigurationDelegate::setModelData(QWidget* editor, 
+   QAbstractItemModel* model, const QModelIndex& index) const
 {
-   qDebug() << "";
+   qDebug() << "setModelData: " << index;
    //QSpinBox *spinBox = static_cast<QSpinBox*>(editor);
    //spinBox->interpretText();
    //int value = spinBox->value();
@@ -259,8 +263,10 @@ void ConfigurationDelegate::setModelData(QWidget* editor, QAbstractItemModel* mo
    //model->setData(index, value, Qt::EditRole);
 }
 
-void ConfigurationDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
+void ConfigurationDelegate::updateEditorGeometry(QWidget* editor, 
+   const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
+   qDebug() << "" << index;
    editor->setGeometry(option.rect);
 }
 
