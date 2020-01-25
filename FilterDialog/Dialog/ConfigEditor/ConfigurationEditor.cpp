@@ -79,23 +79,5 @@ void ConfigurationEditor::saveSettings()
    settings.setValue("geometry", saveGeometry());
 }
 
-/////////////////////////////////////////////////////////////////////////////
-
-IntegerParameterEditor::IntegerParameterEditor(QWidget* parent, const IntegerParameter& param)
-   : QSpinBox(parent)
-{
-   setMaximum(param.getMaximum());
-   setMinimum(param.getMinimum());
-   setValue(param.getCurrent());
-}
-
-DoubleParameterEditor::DoubleParameterEditor(QWidget* parent, const DoubleParameter& param)
-   : QDoubleSpinBox(parent)
-{
-   setMaximum(param.getMaximum());
-   setMinimum(param.getMinimum());
-   setValue(param.getCurrent());
-}
-
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

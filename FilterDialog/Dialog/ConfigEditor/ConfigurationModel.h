@@ -5,6 +5,7 @@
 #include <QAbstractItemModel>
 #include <QStyledItemDelegate>
 #include <QSortFilterProxyModel>
+#include <QSpinBox>
 
 #include "Config/Configuration.h"
 
@@ -77,6 +78,32 @@ private:
 using ConfigurationProxyPtr = std::unique_ptr<ConfigurationProxy>;
 
 //////////////////////////////////////////////////////////////////////////////////////////
+
+class IntegerParameterEditor : public QSpinBox
+{
+   Q_OBJECT
+public:
+   IntegerParameterEditor(QWidget* parent, const IntegerParameter& param);
+
+private:
+   signed m_minimum{ 0 };
+   signed m_maximum{ 0 };
+   signed m_current{ 0 };
+};
+
+class DoubleParameterEditor : public QDoubleSpinBox
+{
+   Q_OBJECT
+public:
+   DoubleParameterEditor(QWidget* parent, const DoubleParameter& param);
+
+private:
+   double m_minimum{ 0 };
+   double m_maximum{ 0 };
+   double m_current{ 0 };
+};
+
+/////////////////////////////////////////////////////////////////////////////
 
 class ConfigurationDelegate : public QStyledItemDelegate
 {

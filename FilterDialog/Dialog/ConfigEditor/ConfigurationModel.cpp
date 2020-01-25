@@ -13,6 +13,7 @@ void ConfigurationModel::setConfiguration(const Configuration& config)
 {
    beginResetModel();
    m_config = config;
+   m_repository = config.getParameterList();
    endResetModel();
 }
 
@@ -179,7 +180,7 @@ uint ConfigurationProxy::getSourceRow(const QModelIndex& index)
 
 VariantParameter ConfigurationProxy::getSourceParameter(const QModelIndex& index)
 {
-   const auto sourceIndex{ mapFromSource(index) };
+   const auto sourceIndex{ mapToSource(index) };
    if (auto model = qobject_cast<ConfigurationModel*>(sourceModel()))
    {
       return model->getConfigParameter(sourceIndex);
@@ -228,6 +229,25 @@ bool ConfigurationProxy::lessThan(const QModelIndex& left, const QModelIndex& ri
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+IntegerParameterEditor::IntegerParameterEditor(QWidget* parent, const IntegerParameter& param)
+   : QSpinBox(parent)
+{
+   setMaximum(param.getMaximum());
+   setMinimum(param.getMinimum());
+   setValue(param.getCurrent());
+   setFrame(false);
+}
+
+DoubleParameterEditor::DoubleParameterEditor(QWidget* parent, const DoubleParameter& param)
+   : QDoubleSpinBox(parent)
+{
+   setMaximum(param.getMaximum());
+   setMinimum(param.getMinimum());
+   setValue(param.getCurrent());
+   setFrame(false);
+}
+
+
 ConfigurationDelegate::ConfigurationDelegate(ConfigurationProxy* model)
    : m_model(model)
 {
@@ -239,33 +259,27 @@ QWidget* ConfigurationDelegate::createEditor(QWidget* parent,
 {
    qDebug() << "createEditor: " << index;
 
-   QWidget* editor{ nullptr };
-
    auto param = m_model->getSourceParameter(index);
 
    Visitor setWidget = {
-      [parent, editor](const BooleanParameter&) mutable { editor = nullptr; },
-      [parent, editor](const IntegerParameter&) mutable { editor = nullptr; },
-      [parent, editor](const StringParameter&) mutable { editor = nullptr; },
-      [parent, editor](const DoubleParameter&) mutable { editor = nullptr; },
-      [parent, editor](const ListParameter&) mutable { editor = nullptr; },
+      [parent, &param](const BooleanParameter&) -> QWidget* { return nullptr; },
+      [parent, &param](const IntegerParameter&) -> QWidget* 
+   { 
+      const auto& parameter = std::get<IntegerParameter>(param);
+      return new IntegerParameterEditor(parent, parameter); 
+   },
+      [parent, &param](const StringParameter&) -> QWidget* { return nullptr; },
+      [parent, &param](const DoubleParameter&) -> QWidget* 
+   { 
+      const auto& parameter = std::get<DoubleParameter>(param);
+      return new DoubleParameterEditor(parent, parameter); 
+   },
+      [parent, &param](const ListParameter&) -> QWidget* { return nullptr; },
    };
 
-   std::visit(setWidget, param);
+   QWidget* editor = std::visit(setWidget, param);
 
-   if (std::holds_alternative<BooleanParameter>(param))
-   {
-      
-   }
-
-   index.data();
-   //QSpinBox *editor = new QSpinBox(parent);
-   //editor->setFrame(false);
-   //editor->setMinimum(0);
-   //editor->setMaximum(100);
-
-   //return editor;
-   return nullptr;
+   return editor;
 }
 
 void ConfigurationDelegate::setEditorData(QWidget* editor, 

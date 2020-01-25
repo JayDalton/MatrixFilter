@@ -35,7 +35,9 @@ struct Configuration
    explicit Configuration(std::string_view ident, std::string_view label);
 
    std::size_t getParameterCount() const;
-   std::vector<std::string> getParameterNames() const;
+   StringVector getParameterNames() const;
+
+   ParameterListing getParameterList() const;
 
    bool registerParameter(BooleanParameter&& parameter);
    bool registerParameter(IntegerParameter&& parameter);
@@ -59,7 +61,7 @@ struct Configuration
 
 private:
    ParameterMapping m_map;
-   std::vector<std::string> m_orderedIdents;
+   StringVector m_orderedIdents;
 };
 
 ///////////////////////////////////////////////////////////////////////////

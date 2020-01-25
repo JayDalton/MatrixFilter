@@ -132,6 +132,146 @@ void ConfigurationModel::sizeChanged(QRect _t1)
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
+struct qt_meta_stringdata_IntegerParameterEditor_t {
+    QByteArrayData data[1];
+    char stringdata0[23];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_IntegerParameterEditor_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_IntegerParameterEditor_t qt_meta_stringdata_IntegerParameterEditor = {
+    {
+QT_MOC_LITERAL(0, 0, 22) // "IntegerParameterEditor"
+
+    },
+    "IntegerParameterEditor"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_IntegerParameterEditor[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void IntegerParameterEditor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject IntegerParameterEditor::staticMetaObject = { {
+    QMetaObject::SuperData::link<QSpinBox::staticMetaObject>(),
+    qt_meta_stringdata_IntegerParameterEditor.data,
+    qt_meta_data_IntegerParameterEditor,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *IntegerParameterEditor::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *IntegerParameterEditor::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_IntegerParameterEditor.stringdata0))
+        return static_cast<void*>(this);
+    return QSpinBox::qt_metacast(_clname);
+}
+
+int IntegerParameterEditor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QSpinBox::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_DoubleParameterEditor_t {
+    QByteArrayData data[1];
+    char stringdata0[22];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_DoubleParameterEditor_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_DoubleParameterEditor_t qt_meta_stringdata_DoubleParameterEditor = {
+    {
+QT_MOC_LITERAL(0, 0, 21) // "DoubleParameterEditor"
+
+    },
+    "DoubleParameterEditor"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_DoubleParameterEditor[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void DoubleParameterEditor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject DoubleParameterEditor::staticMetaObject = { {
+    QMetaObject::SuperData::link<QDoubleSpinBox::staticMetaObject>(),
+    qt_meta_stringdata_DoubleParameterEditor.data,
+    qt_meta_data_DoubleParameterEditor,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *DoubleParameterEditor::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *DoubleParameterEditor::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_DoubleParameterEditor.stringdata0))
+        return static_cast<void*>(this);
+    return QDoubleSpinBox::qt_metacast(_clname);
+}
+
+int DoubleParameterEditor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QDoubleSpinBox::qt_metacall(_c, _id, _a);
+    return _id;
+}
 struct qt_meta_stringdata_ConfigurationDelegate_t {
     QByteArrayData data[1];
     char stringdata0[22];

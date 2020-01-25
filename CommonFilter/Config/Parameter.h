@@ -18,6 +18,7 @@ using VariantParameter = std::variant<
 using ParameterListing = std::vector<VariantParameter>;
 using ParameterMapping = std::unordered_map<std::string, VariantParameter>;
 
+using StringVector = std::vector<std::string>;
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)
 
