@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <QDialog>
+#include <QSpinBox>
 
 #include "ui_ConfigurationEditor.h"
 
@@ -39,10 +40,34 @@ private:
    //std::unique_ptr<Impl> m;
 
    Ui::ConfigurationEditor m_ui;
+   const Configuration m_config;
    ConfigurationModelPtr m_model;
    ConfigurationProxyPtr m_proxy;
-   ConfigurationDelegate m_delegate;
-   const Configuration m_config;
+   ConfigurationDelegatePtr m_delegate;
+};
+
+class IntegerParameterEditor : public QSpinBox
+{
+   Q_OBJECT
+public:
+   IntegerParameterEditor(QWidget* parent, const IntegerParameter& param);
+
+private:
+   signed m_minimum{ 0 };
+   signed m_maximum{ 0 };
+   signed m_current{ 0 };
+};
+
+class DoubleParameterEditor : public QDoubleSpinBox
+{
+   Q_OBJECT
+public:
+   DoubleParameterEditor(QWidget* parent, const DoubleParameter& param);
+
+private:
+   double m_minimum{ 0 };
+   double m_maximum{ 0 };
+   double m_current{ 0 };
 };
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

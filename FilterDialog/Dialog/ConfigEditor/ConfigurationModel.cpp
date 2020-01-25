@@ -21,6 +21,11 @@ const Configuration& ConfigurationModel::getConfiguration() const
    return m_config;
 }
 
+VariantParameter& ConfigurationModel::getConfigParameter(const QModelIndex& index)
+{
+   return m_repository.at(index.row());
+}
+
 QModelIndex ConfigurationModel::index(int row, int column, const QModelIndex& parent) const
 {
    if (!parent.isValid())
@@ -164,23 +169,23 @@ ConfigurationProxy::ConfigurationProxy(QObject* parent)
 //   m_searchStringList = searchString.split(' ', QString::SkipEmptyParts);
 //   invalidate();
 //}
-//
-//uint ConfigurationProxy::getSourceIndex(const QModelIndex& index)
-//{
-//   auto sourceIndex{ mapToSource(index) };
-//   auto sourceRow{ sourceIndex.row() };
-//   return static_cast<uint>(sourceRow);
-//}
 
-//MatrixFileInfo MatrixDataProxy::getSourceContact(const QModelIndex& index)
-//{
-//   const auto sourceIndex{ mapFromSource(index) };
-//   if (auto model = qobject_cast<MatrixDataModel*>(sourceModel()))
-//   {
-//      return model->getMatrixFile(sourceIndex);
-//   }
-//   return MatrixFileInfo{""};
-//}
+uint ConfigurationProxy::getSourceRow(const QModelIndex& index)
+{
+   auto sourceIndex{ mapToSource(index) };
+   auto sourceRow{ sourceIndex.row() };
+   return static_cast<uint>(sourceRow);
+}
+
+VariantParameter ConfigurationProxy::getSourceParameter(const QModelIndex& index)
+{
+   const auto sourceIndex{ mapFromSource(index) };
+   if (auto model = qobject_cast<ConfigurationModel*>(sourceModel()))
+   {
+      return model->getConfigParameter(sourceIndex);
+   }
+   return BooleanParameter("default", "default", false);
+}
 
 bool ConfigurationProxy::filterAcceptsRow(int row, const QModelIndex& parent) const
 {
@@ -223,8 +228,8 @@ bool ConfigurationProxy::lessThan(const QModelIndex& left, const QModelIndex& ri
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-ConfigurationDelegate::ConfigurationDelegate(QObject* parent)
-   : QStyledItemDelegate(parent)
+ConfigurationDelegate::ConfigurationDelegate(ConfigurationProxy* model)
+   : m_model(model)
 {
 
 }
@@ -233,6 +238,27 @@ QWidget* ConfigurationDelegate::createEditor(QWidget* parent,
    const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
    qDebug() << "createEditor: " << index;
+
+   QWidget* editor{ nullptr };
+
+   auto param = m_model->getSourceParameter(index);
+
+   Visitor setWidget = {
+      [parent, editor](const BooleanParameter&) mutable { editor = nullptr; },
+      [parent, editor](const IntegerParameter&) mutable { editor = nullptr; },
+      [parent, editor](const StringParameter&) mutable { editor = nullptr; },
+      [parent, editor](const DoubleParameter&) mutable { editor = nullptr; },
+      [parent, editor](const ListParameter&) mutable { editor = nullptr; },
+   };
+
+   std::visit(setWidget, param);
+
+   if (std::holds_alternative<BooleanParameter>(param))
+   {
+      
+   }
+
+   index.data();
    //QSpinBox *editor = new QSpinBox(parent);
    //editor->setFrame(false);
    //editor->setMinimum(0);

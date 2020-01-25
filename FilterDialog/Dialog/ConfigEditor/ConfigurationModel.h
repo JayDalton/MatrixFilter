@@ -20,6 +20,8 @@ public:
    void setConfiguration(const Configuration& config);
    const Configuration& getConfiguration() const;
 
+   VariantParameter& getConfigParameter(const QModelIndex& index);
+
 signals:
    void sizeChanged(QRect size);
 
@@ -47,6 +49,7 @@ protected:
       const QModelIndex &parent = {}) override;
 private:
    Configuration m_config;
+   ParameterListing m_repository;
 };
 
 using ConfigurationModelPtr = std::unique_ptr<ConfigurationModel>;
@@ -60,8 +63,8 @@ public:
    ~ConfigurationProxy() override = default;
 
    //void updateSearch(const QString& searchString);
-   //uint getSourceIndex(const QModelIndex& index);
-   //MatrixFileInfo getSourceContact(const QModelIndex& index);
+   uint getSourceRow(const QModelIndex& index);
+   VariantParameter getSourceParameter(const QModelIndex& index);
 
 protected:
    bool filterAcceptsRow(int row, const QModelIndex& parent) const override;
@@ -80,7 +83,7 @@ class ConfigurationDelegate : public QStyledItemDelegate
    Q_OBJECT
 public:
 
-   ConfigurationDelegate(QObject* parent = nullptr);
+   ConfigurationDelegate(ConfigurationProxy* model);
 
    QWidget* createEditor(QWidget* parent, 
       const QStyleOptionViewItem& option,
@@ -96,6 +99,11 @@ public:
    void updateEditorGeometry(QWidget* editor, 
       const QStyleOptionViewItem& option,
       const QModelIndex& index) const override;
+
+private:
+   ConfigurationProxy* m_model{ nullptr };
 };
+
+using ConfigurationDelegatePtr = std::unique_ptr<ConfigurationDelegate>;
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)
