@@ -132,6 +132,76 @@ void ConfigurationModel::sizeChanged(QRect _t1)
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
+struct qt_meta_stringdata_BooleanParameterEditor_t {
+    QByteArrayData data[1];
+    char stringdata0[23];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_BooleanParameterEditor_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_BooleanParameterEditor_t qt_meta_stringdata_BooleanParameterEditor = {
+    {
+QT_MOC_LITERAL(0, 0, 22) // "BooleanParameterEditor"
+
+    },
+    "BooleanParameterEditor"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_BooleanParameterEditor[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void BooleanParameterEditor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject BooleanParameterEditor::staticMetaObject = { {
+    QMetaObject::SuperData::link<QCheckBox::staticMetaObject>(),
+    qt_meta_stringdata_BooleanParameterEditor.data,
+    qt_meta_data_BooleanParameterEditor,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *BooleanParameterEditor::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *BooleanParameterEditor::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_BooleanParameterEditor.stringdata0))
+        return static_cast<void*>(this);
+    return QCheckBox::qt_metacast(_clname);
+}
+
+int BooleanParameterEditor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QCheckBox::qt_metacall(_c, _id, _a);
+    return _id;
+}
 struct qt_meta_stringdata_IntegerParameterEditor_t {
     QByteArrayData data[1];
     char stringdata0[23];
@@ -270,6 +340,146 @@ void *DoubleParameterEditor::qt_metacast(const char *_clname)
 int DoubleParameterEditor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QDoubleSpinBox::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_StringParameterEditor_t {
+    QByteArrayData data[1];
+    char stringdata0[22];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_StringParameterEditor_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_StringParameterEditor_t qt_meta_stringdata_StringParameterEditor = {
+    {
+QT_MOC_LITERAL(0, 0, 21) // "StringParameterEditor"
+
+    },
+    "StringParameterEditor"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_StringParameterEditor[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void StringParameterEditor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject StringParameterEditor::staticMetaObject = { {
+    QMetaObject::SuperData::link<QLineEdit::staticMetaObject>(),
+    qt_meta_stringdata_StringParameterEditor.data,
+    qt_meta_data_StringParameterEditor,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *StringParameterEditor::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *StringParameterEditor::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_StringParameterEditor.stringdata0))
+        return static_cast<void*>(this);
+    return QLineEdit::qt_metacast(_clname);
+}
+
+int StringParameterEditor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QLineEdit::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_ListParameterEditor_t {
+    QByteArrayData data[1];
+    char stringdata0[20];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_ListParameterEditor_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_ListParameterEditor_t qt_meta_stringdata_ListParameterEditor = {
+    {
+QT_MOC_LITERAL(0, 0, 19) // "ListParameterEditor"
+
+    },
+    "ListParameterEditor"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_ListParameterEditor[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void ListParameterEditor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject ListParameterEditor::staticMetaObject = { {
+    QMetaObject::SuperData::link<QComboBox::staticMetaObject>(),
+    qt_meta_stringdata_ListParameterEditor.data,
+    qt_meta_data_ListParameterEditor,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *ListParameterEditor::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *ListParameterEditor::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_ListParameterEditor.stringdata0))
+        return static_cast<void*>(this);
+    return QComboBox::qt_metacast(_clname);
+}
+
+int ListParameterEditor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QComboBox::qt_metacall(_c, _id, _a);
     return _id;
 }
 struct qt_meta_stringdata_ConfigurationDelegate_t {

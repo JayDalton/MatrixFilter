@@ -5,6 +5,9 @@
 #include <QAbstractItemModel>
 #include <QStyledItemDelegate>
 #include <QSortFilterProxyModel>
+#include <QLineEdit>
+#include <QCheckBox>
+#include <QComboBox>
 #include <QSpinBox>
 
 #include "Config/Configuration.h"
@@ -37,17 +40,7 @@ protected:
 
    bool setData(const QModelIndex &index, const QVariant &value,
       int role = Qt::EditRole) override;
-   bool setHeaderData(int section, Qt::Orientation orientation,
-      const QVariant &value, int role = Qt::EditRole) override;
 
-   bool insertColumns(int position, int columns,
-      const QModelIndex& parent = {}) override;
-   bool removeColumns(int position, int columns,
-      const QModelIndex &parent = {}) override;
-   bool insertRows(int position, int rows,
-      const QModelIndex &parent = {}) override;
-   bool removeRows(int position, int rows,
-      const QModelIndex &parent = {}) override;
 private:
    Configuration m_config;
    ParameterListing m_repository;
@@ -63,9 +56,8 @@ public:
    explicit ConfigurationProxy(QObject* parent = nullptr);
    ~ConfigurationProxy() override = default;
 
-   //void updateSearch(const QString& searchString);
    uint getSourceRow(const QModelIndex& index);
-   VariantParameter getSourceParameter(const QModelIndex& index);
+   VariantParameter& getSourceParameter(const QModelIndex& index);
 
 protected:
    bool filterAcceptsRow(int row, const QModelIndex& parent) const override;
@@ -79,16 +71,18 @@ using ConfigurationProxyPtr = std::unique_ptr<ConfigurationProxy>;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+class BooleanParameterEditor : public QCheckBox // QComboBox
+{
+   Q_OBJECT
+public:
+   BooleanParameterEditor(QWidget* parent, const BooleanParameter& param);
+};
+
 class IntegerParameterEditor : public QSpinBox
 {
    Q_OBJECT
 public:
    IntegerParameterEditor(QWidget* parent, const IntegerParameter& param);
-
-private:
-   signed m_minimum{ 0 };
-   signed m_maximum{ 0 };
-   signed m_current{ 0 };
 };
 
 class DoubleParameterEditor : public QDoubleSpinBox
@@ -96,11 +90,20 @@ class DoubleParameterEditor : public QDoubleSpinBox
    Q_OBJECT
 public:
    DoubleParameterEditor(QWidget* parent, const DoubleParameter& param);
+};
 
-private:
-   double m_minimum{ 0 };
-   double m_maximum{ 0 };
-   double m_current{ 0 };
+class StringParameterEditor : public QLineEdit
+{
+   Q_OBJECT
+public:
+   StringParameterEditor(QWidget* parent, const StringParameter& param);
+};
+
+class ListParameterEditor : public QComboBox
+{
+   Q_OBJECT
+public:
+   ListParameterEditor(QWidget* parent, const ListParameter& param);
 };
 
 /////////////////////////////////////////////////////////////////////////////

@@ -14,6 +14,7 @@ void ConfigurationModel::setConfiguration(const Configuration& config)
    beginResetModel();
    m_config = config;
    m_repository = config.getParameterList();
+   //m_repository.insert();
    endResetModel();
 }
 
@@ -45,7 +46,8 @@ int ConfigurationModel::rowCount(const QModelIndex& parent) const
 {
    if (!parent.isValid())
    {
-      return m_config.getParameterCount();
+      return m_repository.size();
+      //return m_config.getParameterCount();
    }
    return 0;
 }
@@ -95,7 +97,8 @@ QVariant ConfigurationModel::data(const QModelIndex& index, int role) const
    }
 
    if (index.parent().isValid() 
-      || (index.row() > m_config.getParameterCount()) 
+      || (index.row() > m_repository.size()) 
+      //|| (index.row() > m_config.getParameterCount()) 
       || (index.column() > static_cast<int>(Column::Count)))
    {
       return {};
@@ -113,9 +116,10 @@ QVariant ConfigurationModel::data(const QModelIndex& index, int role) const
       [&](const ListParameter& value) -> QVariant { return {}; },
    };
 
-   const auto names{ m_config.getParameterNames() };
-   const auto ident{ names.at(index.row()) };
-   const auto parameter{ m_config.getParameter(ident) };
+   //const auto names{ m_config.getParameterNames() };
+   //const auto ident{ names.at(index.row()) };
+   //const auto parameter{ m_config.getParameter(ident) };
+   const auto parameter{ m_repository.at(index.row()) };
 
    switch (static_cast<Column>(index.column()))
    {
@@ -133,43 +137,12 @@ bool ConfigurationModel::setData(const QModelIndex& index, const QVariant& value
    return false;
 }
 
-bool ConfigurationModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant& value, int role)
-{
-   return false;
-}
-
-bool ConfigurationModel::insertColumns(int position, int columns, const QModelIndex& parent)
-{
-   return false;
-}
-
-bool ConfigurationModel::removeColumns(int position, int columns, const QModelIndex& parent)
-{
-   return false;
-}
-
-bool ConfigurationModel::insertRows(int position, int rows, const QModelIndex& parent)
-{
-   return false;
-}
-
-bool ConfigurationModel::removeRows(int position, int rows, const QModelIndex& parent)
-{
-   return false;
-}
-
 //////////////////////////////////////////////////////////////////////////////////////////
 
 ConfigurationProxy::ConfigurationProxy(QObject* parent)
    : QSortFilterProxyModel(parent)
 {
 }
-
-//void ConfigurationProxy::updateSearch(const QString& searchString)
-//{
-//   m_searchStringList = searchString.split(' ', QString::SkipEmptyParts);
-//   invalidate();
-//}
 
 uint ConfigurationProxy::getSourceRow(const QModelIndex& index)
 {
@@ -178,14 +151,11 @@ uint ConfigurationProxy::getSourceRow(const QModelIndex& index)
    return static_cast<uint>(sourceRow);
 }
 
-VariantParameter ConfigurationProxy::getSourceParameter(const QModelIndex& index)
+VariantParameter& ConfigurationProxy::getSourceParameter(const QModelIndex& index)
 {
    const auto sourceIndex{ mapToSource(index) };
-   if (auto model = qobject_cast<ConfigurationModel*>(sourceModel()))
-   {
-      return model->getConfigParameter(sourceIndex);
-   }
-   return BooleanParameter("default", "default", false);
+   auto model = qobject_cast<ConfigurationModel*>(sourceModel());
+   return model->getConfigParameter(sourceIndex);
 }
 
 bool ConfigurationProxy::filterAcceptsRow(int row, const QModelIndex& parent) const
@@ -229,6 +199,12 @@ bool ConfigurationProxy::lessThan(const QModelIndex& left, const QModelIndex& ri
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+BooleanParameterEditor::BooleanParameterEditor(QWidget* parent, const BooleanParameter& param)
+   : QCheckBox(parent)
+{
+   setChecked(param.getCurrent());
+}
+
 IntegerParameterEditor::IntegerParameterEditor(QWidget* parent, const IntegerParameter& param)
    : QSpinBox(parent)
 {
@@ -247,28 +223,41 @@ DoubleParameterEditor::DoubleParameterEditor(QWidget* parent, const DoubleParame
    setFrame(false);
 }
 
+StringParameterEditor::StringParameterEditor(QWidget* parent, const StringParameter& param)
+   : QLineEdit(parent)
+{
+   setText(QString::fromStdString(param.getCurrent()));
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
 
 ConfigurationDelegate::ConfigurationDelegate(ConfigurationProxy* model)
    : m_model(model)
 {
-
 }
 
 QWidget* ConfigurationDelegate::createEditor(QWidget* parent, 
    const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-   qDebug() << "createEditor: " << index;
+   auto& param = m_model->getSourceParameter(index);
 
-   auto param = m_model->getSourceParameter(index);
-
-   Visitor setWidget = {
-      [parent, &param](const BooleanParameter&) -> QWidget* { return nullptr; },
+   Visitor setWidget = 
+   {
+      [parent, &param](const BooleanParameter&) -> QWidget* 
+   { 
+      const auto& parameter = std::get<BooleanParameter>(param);
+      return new BooleanParameterEditor(parent, parameter); 
+   },
       [parent, &param](const IntegerParameter&) -> QWidget* 
    { 
       const auto& parameter = std::get<IntegerParameter>(param);
       return new IntegerParameterEditor(parent, parameter); 
    },
-      [parent, &param](const StringParameter&) -> QWidget* { return nullptr; },
+      [parent, &param](const StringParameter&) -> QWidget* 
+   { 
+      const auto& parameter = std::get<StringParameter>(param);
+      return new StringParameterEditor(parent, parameter); 
+   },
       [parent, &param](const DoubleParameter&) -> QWidget* 
    { 
       const auto& parameter = std::get<DoubleParameter>(param);
@@ -277,37 +266,67 @@ QWidget* ConfigurationDelegate::createEditor(QWidget* parent,
       [parent, &param](const ListParameter&) -> QWidget* { return nullptr; },
    };
 
-   QWidget* editor = std::visit(setWidget, param);
-
-   return editor;
+   return std::visit(setWidget, param);
 }
 
-void ConfigurationDelegate::setEditorData(QWidget* editor, 
+void ConfigurationDelegate::setEditorData(QWidget* widget, 
    const QModelIndex& index) const
 {
+   Q_UNUSED(widget);
    qDebug() << "setEditorData: " << index;
    //int value = index.model()->data(index, Qt::EditRole).toInt();
-
    //QSpinBox *spinBox = static_cast<QSpinBox*>(editor);
    //spinBox->setValue(value);
 }
 
-void ConfigurationDelegate::setModelData(QWidget* editor, 
+void ConfigurationDelegate::setModelData(QWidget* widget, 
    QAbstractItemModel* model, const QModelIndex& index) const
 {
    qDebug() << "setModelData: " << index;
-   //QSpinBox *spinBox = static_cast<QSpinBox*>(editor);
-   //spinBox->interpretText();
-   //int value = spinBox->value();
 
-   //model->setData(index, value, Qt::EditRole);
+   Visitor setCurrent = 
+   {
+      [widget](BooleanParameter& param) mutable { 
+      if (auto* editor = static_cast<BooleanParameterEditor*>(widget))
+      {
+         param.setCurrent(editor->isChecked());
+      }},
+      [widget](IntegerParameter& param) mutable { 
+      if (auto* editor = static_cast<IntegerParameterEditor*>(widget))
+      {
+         param.setCurrent(editor->value());
+      }},
+      [widget](StringParameter& param) mutable { 
+      if (auto* editor = static_cast<StringParameterEditor*>(widget))
+      {
+         param.setCurrent(editor->text().toStdString());
+      }},
+      [widget](DoubleParameter& param) mutable {
+      if (auto* editor = static_cast<DoubleParameterEditor*>(widget))
+      {
+         param.setCurrent(editor->value());
+      }},
+      [widget](ListParameter& param) mutable { ; },
+   };
+
+   std::visit(setCurrent, m_model->getSourceParameter(index));
 }
 
 void ConfigurationDelegate::updateEditorGeometry(QWidget* editor, 
    const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-   qDebug() << "" << index;
    editor->setGeometry(option.rect);
 }
+
+
+//signed IntegerParameterEditor::getCurrentValue() const
+//{
+//   return value();
+//}
+//
+//double DoubleParameterEditor::getCurrentValue() const
+//{
+//   return value();
+//}
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)
