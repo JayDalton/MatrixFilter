@@ -282,8 +282,6 @@ void ConfigurationDelegate::setEditorData(QWidget* widget,
 void ConfigurationDelegate::setModelData(QWidget* widget, 
    QAbstractItemModel* model, const QModelIndex& index) const
 {
-   qDebug() << "setModelData: " << index;
-
    Visitor setCurrent = 
    {
       [widget](BooleanParameter& param) mutable { 

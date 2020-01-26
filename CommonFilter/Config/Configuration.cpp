@@ -37,13 +37,13 @@ std::size_t Configuration::getParameterCount() const
 StringVector Configuration::getParameterNames() const
 {
    //#todo aus m_orderedIdents nehmen
-   StringVector names;
-   names.reserve(m_map.size());
-   std::transform(m_map.cbegin(), m_map.cend(), std::back_inserter(names), 
+   StringVector result;
+   result.reserve(m_map.size());
+   std::transform(m_map.cbegin(), m_map.cend(), std::back_inserter(result), 
       [](const auto& pair) { return pair.first; }
    );
 
-   return names;
+   return result;
 }
 
 ParameterListing Configuration::getParameterList() const
@@ -55,6 +55,35 @@ ParameterListing Configuration::getParameterList() const
    );
 
    return result;
+}
+
+void Configuration::updateParameter(const ParameterListing& list)
+{
+   Visitor isValid =
+   {
+      [&](const auto& param) -> bool { return m_map.contains(param.getIdent()); }
+   };
+
+   Visitor updateCurrent =
+   {
+      [&](const BooleanParameter& param) { editBooleanParameter(param.getIdent()).setCurrent(param.getCurrent()); },
+      [&](const IntegerParameter& param) { editIntegerParameter(param.getIdent()).setCurrent(param.getCurrent()); },
+      [&](const DoubleParameter& param) { editDoubleParameter(param.getIdent()).setCurrent(param.getCurrent()); },
+      [&](const StringParameter& param) { editStringParameter(param.getIdent()).setCurrent(param.getCurrent()); },
+      [&](const ListParameter& param) { editListParameter(param.getIdent()).setCurrent(param.getCurrent()); },
+   };
+
+   for (const VariantParameter& param : list)
+   {
+      if (std::visit(isValid, param))
+      {
+         std::visit(updateCurrent, param);
+      }
+   }
+}
+
+void Configuration::updateParameter(const VariantParameter& parameter)
+{
 }
 
 //todo auslagern

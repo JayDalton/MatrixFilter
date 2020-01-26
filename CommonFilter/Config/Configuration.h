@@ -9,6 +9,7 @@
 #include "Serialize/JsonWriter.h"
 
 #include "Config/Parameter.h"
+#include "Config/Visitor.h"
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -38,6 +39,8 @@ struct Configuration
    StringVector getParameterNames() const;
 
    ParameterListing getParameterList() const;
+   void updateParameter(const ParameterListing& list);
+   void updateParameter(const VariantParameter& parameter);
 
    bool registerParameter(BooleanParameter&& parameter);
    bool registerParameter(IntegerParameter&& parameter);
@@ -62,6 +65,12 @@ struct Configuration
 private:
    ParameterMapping m_map;
    StringVector m_orderedIdents;
+
+   //Visitor isValid =
+   //{
+   //   [&](const auto& param) -> bool { return m_map.contains(param.getIdent()); }
+   //};
+
 };
 
 ///////////////////////////////////////////////////////////////////////////
