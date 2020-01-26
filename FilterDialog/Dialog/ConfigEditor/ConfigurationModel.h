@@ -24,10 +24,12 @@ public:
    void setConfiguration(const Configuration& config);
    const Configuration& getConfiguration() const;
 
+   const ParameterListing& getParameterListing() const;
+
    VariantParameter& getConfigParameter(const QModelIndex& index);
 
 signals:
-   void sizeChanged(QRect size);
+   void sizeChanged(QRect size); // ???
 
 protected:
    QModelIndex index(int row, int column, const QModelIndex& parent) const override;
@@ -37,9 +39,6 @@ protected:
    Qt::ItemFlags flags(const QModelIndex&) const override;
    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
    QVariant data(const QModelIndex& index, int role) const override;
-
-   bool setData(const QModelIndex &index, const QVariant &value,
-      int role = Qt::EditRole) override;
 
 private:
    Configuration m_config;

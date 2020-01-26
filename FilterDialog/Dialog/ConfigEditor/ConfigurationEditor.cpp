@@ -47,6 +47,11 @@ std::string ConfigurationEditor::toString() const
    return oss.str();
 }
 
+const ParameterListing& ConfigurationEditor::toVector() const
+{
+   return m_model->getParameterListing();
+}
+
 void ConfigurationEditor::closeEvent(QCloseEvent* event)
 {
    saveSettings();

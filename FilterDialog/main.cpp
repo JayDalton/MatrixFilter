@@ -33,7 +33,8 @@ int main(int argc, char *argv[])
       ConfigurationEditor editor(nullptr, config);
       if (editor.exec() == QDialog::Accepted)
       {
-         config.readFrom(editor.toString());
+         config.updateParameter(editor.toVector());
+         //config.readFrom(editor.toString());
          application.setConfig(config);
          config.saveFile(filePath);
       }

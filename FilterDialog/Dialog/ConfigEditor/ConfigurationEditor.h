@@ -24,6 +24,7 @@ public:
    const Configuration& getOriginalConfig() const;
 
    std::string toString() const;
+   const ParameterListing& toVector() const;
 
 protected:
    //bool eventFilter(QObject* object, QEvent* event) override;

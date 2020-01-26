@@ -27,6 +27,7 @@ struct ParameterBase
 {
    std::string m_ident;
    std::string m_label;
+   //unsigned m_order{ 0 };
 
    VariantValue m_default;
    VariantValue m_current;

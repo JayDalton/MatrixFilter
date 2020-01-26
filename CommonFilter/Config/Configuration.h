@@ -40,7 +40,6 @@ struct Configuration
 
    ParameterListing getParameterList() const;
    void updateParameter(const ParameterListing& list);
-   void updateParameter(const VariantParameter& parameter);
 
    bool registerParameter(BooleanParameter&& parameter);
    bool registerParameter(IntegerParameter&& parameter);
@@ -56,21 +55,15 @@ struct Configuration
    const ListParameter& getListParameter(const std::string& ident) const;
 
    VariantParameter& getParameter(const std::string& ident);
-   BooleanParameter& editBooleanParameter(const std::string& ident);
-   IntegerParameter& editIntegerParameter(const std::string& ident);
-   StringParameter& editStringParameter(const std::string& ident);
-   DoubleParameter& editDoubleParameter(const std::string& ident);
-   ListParameter& editListParameter(const std::string& ident);
+   BooleanParameter& getBooleanParameter(const std::string& ident);
+   IntegerParameter& getIntegerParameter(const std::string& ident);
+   StringParameter& getStringParameter(const std::string& ident);
+   DoubleParameter& getDoubleParameter(const std::string& ident);
+   ListParameter& getListParameter(const std::string& ident);
 
 private:
    ParameterMapping m_map;
-   StringVector m_orderedIdents;
-
-   //Visitor isValid =
-   //{
-   //   [&](const auto& param) -> bool { return m_map.contains(param.getIdent()); }
-   //};
-
+   StringVector m_ordered; // ???
 };
 
 ///////////////////////////////////////////////////////////////////////////

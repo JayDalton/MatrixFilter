@@ -36,7 +36,7 @@ std::size_t Configuration::getParameterCount() const
 
 StringVector Configuration::getParameterNames() const
 {
-   //#todo aus m_orderedIdents nehmen
+   //#todo aus m_ordered nehmen
    StringVector result;
    result.reserve(m_map.size());
    std::transform(m_map.cbegin(), m_map.cend(), std::back_inserter(result), 
@@ -66,11 +66,11 @@ void Configuration::updateParameter(const ParameterListing& list)
 
    Visitor updateCurrent =
    {
-      [&](const BooleanParameter& param) { editBooleanParameter(param.getIdent()).setCurrent(param.getCurrent()); },
-      [&](const IntegerParameter& param) { editIntegerParameter(param.getIdent()).setCurrent(param.getCurrent()); },
-      [&](const DoubleParameter& param) { editDoubleParameter(param.getIdent()).setCurrent(param.getCurrent()); },
-      [&](const StringParameter& param) { editStringParameter(param.getIdent()).setCurrent(param.getCurrent()); },
-      [&](const ListParameter& param) { editListParameter(param.getIdent()).setCurrent(param.getCurrent()); },
+      [&](const BooleanParameter& param) { getBooleanParameter(param.getIdent()).setCurrent(param.getCurrent()); },
+      [&](const IntegerParameter& param) { getIntegerParameter(param.getIdent()).setCurrent(param.getCurrent()); },
+      [&](const DoubleParameter& param) { getDoubleParameter(param.getIdent()).setCurrent(param.getCurrent()); },
+      [&](const StringParameter& param) { getStringParameter(param.getIdent()).setCurrent(param.getCurrent()); },
+      [&](const ListParameter& param) { getListParameter(param.getIdent()).setCurrent(param.getCurrent()); },
    };
 
    for (const VariantParameter& param : list)
@@ -80,10 +80,6 @@ void Configuration::updateParameter(const ParameterListing& list)
          std::visit(updateCurrent, param);
       }
    }
-}
-
-void Configuration::updateParameter(const VariantParameter& parameter)
-{
 }
 
 //todo auslagern
@@ -213,27 +209,27 @@ const VariantParameter& Configuration::getParameter(const std::string& ident) co
 
 const BooleanParameter& Configuration::getBooleanParameter(const std::string& ident) const
 {
-   return std::get<BooleanParameter>(m_map.at(ident));
+   return std::get<BooleanParameter>(getParameter(ident));
 }
 
 const IntegerParameter& Configuration::getIntegerParameter(const std::string& ident) const
 {
-   return std::get<IntegerParameter>(m_map.at(ident));
+   return std::get<IntegerParameter>(getParameter(ident));
 }
 
 const StringParameter& Configuration::getStringParameter(const std::string& ident) const
 {
-   return std::get<StringParameter>(m_map.at(ident));
+   return std::get<StringParameter>(getParameter(ident));
 }
 
 const DoubleParameter& Configuration::getDoubleParameter(const std::string& ident) const
 {
-   return std::get<DoubleParameter>(m_map.at(ident));
+   return std::get<DoubleParameter>(getParameter(ident));
 }
 
 const ListParameter& Configuration::getListParameter(const std::string& ident) const
 {
-   return std::get<ListParameter>(m_map.at(ident));
+   return std::get<ListParameter>(getParameter(ident));
 }
 
 VariantParameter& Configuration::getParameter(const std::string& ident)
@@ -241,29 +237,29 @@ VariantParameter& Configuration::getParameter(const std::string& ident)
    return m_map.at(ident);
 }
 
-BooleanParameter& Configuration::editBooleanParameter(const std::string& ident)
+BooleanParameter& Configuration::getBooleanParameter(const std::string& ident)
 {
-   return std::get<BooleanParameter>(m_map.at(ident));
+   return std::get<BooleanParameter>(getParameter(ident));
 }
 
-IntegerParameter& Configuration::editIntegerParameter(const std::string& ident)
+IntegerParameter& Configuration::getIntegerParameter(const std::string& ident)
 {
-   return std::get<IntegerParameter>(m_map.at(ident));
+   return std::get<IntegerParameter>(getParameter(ident));
 }
 
-StringParameter& Configuration::editStringParameter(const std::string& ident)
+StringParameter& Configuration::getStringParameter(const std::string& ident)
 {
-   return std::get<StringParameter>(m_map.at(ident));
+   return std::get<StringParameter>(getParameter(ident));
 }
 
-DoubleParameter& Configuration::editDoubleParameter(const std::string& ident)
+DoubleParameter& Configuration::getDoubleParameter(const std::string& ident)
 {
-   return std::get<DoubleParameter>(m_map.at(ident));
+   return std::get<DoubleParameter>(getParameter(ident));
 }
 
-ListParameter& Configuration::editListParameter(const std::string& ident)
+ListParameter& Configuration::getListParameter(const std::string& ident)
 {
-   return std::get<ListParameter>(m_map.at(ident));
+   return std::get<ListParameter>(getParameter(ident));
 }
 
 //const ListParameter& Configuration::getListParameter(const std::string& ident) const

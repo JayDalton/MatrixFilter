@@ -59,7 +59,7 @@ std::string ApplicationConfig::getDefaultImportMatrix() const
 
 void ApplicationConfig::setDefaultImportMatrix(const std::string& file)
 {
-   editStringParameter(DEFAULT_IMPORT_MATRIX).setCurrent(file);
+   getStringParameter(DEFAULT_IMPORT_MATRIX).setCurrent(file);
 }
 
 signed ApplicationConfig::getDefaultSignedValue() const
@@ -69,7 +69,7 @@ signed ApplicationConfig::getDefaultSignedValue() const
 
 void ApplicationConfig::setDefaultSignedValue(signed value)
 {
-   editIntegerParameter(DEFAULT_SIGNED_VALUE).setCurrent(value);
+   getIntegerParameter(DEFAULT_SIGNED_VALUE).setCurrent(value);
 }
 
 double ApplicationConfig::getDefaultDoubleValue() const
@@ -89,7 +89,7 @@ std::string ApplicationConfig::getDefaultImportFolder() const
 
 void ApplicationConfig::setDefaultImportFolder(std::string_view folder)
 {
-   editStringParameter(DEFAULT_IMPORT_FOLDER).setCurrent(folder.data());
+   getStringParameter(DEFAULT_IMPORT_FOLDER).setCurrent(folder.data());
 }
 
 std::vector<std::string> ApplicationConfig::getFolderFilelist() const

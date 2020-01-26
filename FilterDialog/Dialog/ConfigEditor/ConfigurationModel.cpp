@@ -14,13 +14,17 @@ void ConfigurationModel::setConfiguration(const Configuration& config)
    beginResetModel();
    m_config = config;
    m_repository = config.getParameterList();
-   //m_repository.insert();
    endResetModel();
 }
 
 const Configuration& ConfigurationModel::getConfiguration() const
 {
    return m_config;
+}
+
+const ParameterListing& ConfigurationModel::getParameterListing() const
+{
+   return m_repository;
 }
 
 VariantParameter& ConfigurationModel::getConfigParameter(const QModelIndex& index)
@@ -132,10 +136,10 @@ QVariant ConfigurationModel::data(const QModelIndex& index, int role) const
    }
 }
 
-bool ConfigurationModel::setData(const QModelIndex& index, const QVariant& value, int role)
-{
-   return false;
-}
+//bool ConfigurationModel::setData(const QModelIndex& index, const QVariant& value, int role)
+//{
+//   return false;
+//}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
