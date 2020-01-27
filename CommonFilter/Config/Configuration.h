@@ -41,11 +41,11 @@ struct Configuration
    ParameterListing getParameterList() const;
    void updateParameter(const ParameterListing& list);
 
-   bool registerParameter(BooleanParameter&& parameter);
-   bool registerParameter(IntegerParameter&& parameter);
-   bool registerParameter(StringParameter&& parameter);
-   bool registerParameter(DoubleParameter&& parameter);
-   bool registerParameter(ListParameter&& parameter);
+   void registerParameter(BooleanParameter&& parameter);
+   void registerParameter(IntegerParameter&& parameter);
+   void registerParameter(StringParameter&& parameter);
+   void registerParameter(DoubleParameter&& parameter);
+   void registerParameter(ListParameter&& parameter);
 
    const VariantParameter& getParameter(const std::string& ident) const;
    const BooleanParameter& getBooleanParameter(const std::string& ident) const;

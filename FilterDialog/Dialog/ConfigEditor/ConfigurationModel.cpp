@@ -51,7 +51,6 @@ int ConfigurationModel::rowCount(const QModelIndex& parent) const
    if (!parent.isValid())
    {
       return m_repository.size();
-      //return m_config.getParameterCount();
    }
    return 0;
 }
@@ -102,7 +101,6 @@ QVariant ConfigurationModel::data(const QModelIndex& index, int role) const
 
    if (index.parent().isValid() 
       || (index.row() > m_repository.size()) 
-      //|| (index.row() > m_config.getParameterCount()) 
       || (index.column() > static_cast<int>(Column::Count)))
    {
       return {};
@@ -120,9 +118,6 @@ QVariant ConfigurationModel::data(const QModelIndex& index, int role) const
       [&](const ListParameter& value) -> QVariant { return {}; },
    };
 
-   //const auto names{ m_config.getParameterNames() };
-   //const auto ident{ names.at(index.row()) };
-   //const auto parameter{ m_config.getParameter(ident) };
    const auto parameter{ m_repository.at(index.row()) };
 
    switch (static_cast<Column>(index.column()))
@@ -135,11 +130,6 @@ QVariant ConfigurationModel::data(const QModelIndex& index, int role) const
       return {};
    }
 }
-
-//bool ConfigurationModel::setData(const QModelIndex& index, const QVariant& value, int role)
-//{
-//   return false;
-//}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -206,6 +196,8 @@ bool ConfigurationProxy::lessThan(const QModelIndex& left, const QModelIndex& ri
 BooleanParameterEditor::BooleanParameterEditor(QWidget* parent, const BooleanParameter& param)
    : QCheckBox(parent)
 {
+   //addItem("enabled", true);
+   //addItem("disabled", false);
    setChecked(param.getCurrent());
 }
 

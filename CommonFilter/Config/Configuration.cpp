@@ -43,7 +43,8 @@ StringVector Configuration::getParameterNames() const
       [](const auto& pair) { return pair.first; }
    );
 
-   return result;
+   //return result;
+   return m_ordered;
 }
 
 ParameterListing Configuration::getParameterList() const
@@ -177,29 +178,34 @@ bool Configuration::writeTo(JsonWriter& writer) const
    return true;
 }
 
-bool Configuration::registerParameter(StringParameter&& parameter)
+void Configuration::registerParameter(StringParameter&& parameter)
 {
-   return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
+   m_ordered.push_back(parameter.getIdent());
+   m_map.emplace( parameter.getIdent(), std::move(parameter) );
 }
 
-bool Configuration::registerParameter(BooleanParameter&& parameter)
+void Configuration::registerParameter(BooleanParameter&& parameter)
 {
-   return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
+   m_ordered.push_back(parameter.getIdent());
+   m_map.emplace( parameter.getIdent(), std::move(parameter) );
 }
 
-bool Configuration::registerParameter(IntegerParameter&& parameter)
+void Configuration::registerParameter(IntegerParameter&& parameter)
 {
-   return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
+   m_ordered.push_back(parameter.getIdent());
+   m_map.emplace( parameter.getIdent(), std::move(parameter) );
 }
 
-bool Configuration::registerParameter(DoubleParameter&& parameter)
+void Configuration::registerParameter(DoubleParameter&& parameter)
 {
-   return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
+   m_ordered.push_back(parameter.getIdent());
+   m_map.emplace( parameter.getIdent(), std::move(parameter) );
 }
 
-bool Configuration::registerParameter(ListParameter&& parameter)
+void Configuration::registerParameter(ListParameter&& parameter)
 {
-   return m_map.emplace( parameter.getIdent(), std::move(parameter) ).second;
+   m_ordered.push_back(parameter.getIdent());
+   m_map.emplace( parameter.getIdent(), std::move(parameter) );
 }
 
 const VariantParameter& Configuration::getParameter(const std::string& ident) const

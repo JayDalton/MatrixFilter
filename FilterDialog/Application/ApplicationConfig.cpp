@@ -23,12 +23,12 @@ ApplicationConfig::ApplicationConfig()
    );
 
    registerParameter(IntegerParameter{DEFAULT_SIGNED_VALUE,
-      "Integer Wert", 1'234, 1'000'000
+      "Integer Wert", 825, 1000, 800
       }
    );
 
    registerParameter(DoubleParameter{DEFAULT_DOUBLE_VALUE,
-      "Gleitkomma Wert", 4'321.5, 1'000'000.0
+      "Gleitkomma Wert", 321.5, 1000.0, 300.0
       }
    );
 
@@ -39,7 +39,8 @@ ApplicationConfig::ApplicationConfig()
 
    registerParameter(ListParameter{DEFAULT_SIGNED_FILELIST, 
       "Integer Liste", { 12, 23, 34, 45, 56 }, 200
-      });
+      }
+   );
 
    registerParameter(ListParameter{DEFAULT_MATRIX_FILELIST, 
       "Datei Liste", 

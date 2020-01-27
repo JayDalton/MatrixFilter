@@ -70,7 +70,7 @@ using ConfigurationProxyPtr = std::unique_ptr<ConfigurationProxy>;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-class BooleanParameterEditor : public QCheckBox // QComboBox
+class BooleanParameterEditor : public QCheckBox /*QComboBox*/
 {
    Q_OBJECT
 public:
