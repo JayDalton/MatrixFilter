@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include <unordered_set>
+
 #include <QDialog>
 
 #include "ui_ConfigurationEditor.h"
@@ -24,7 +26,7 @@ public:
    const ParameterListing& toVector() const;
 
 protected:
-   //bool eventFilter(QObject* object, QEvent* event) override;
+   bool eventFilter(QObject* object, QEvent* event) override;
    void closeEvent(QCloseEvent* event) override;
 
 private:
@@ -41,6 +43,8 @@ private:
    ConfigurationModelPtr m_model;
    ConfigurationProxyPtr m_proxy;
    ConfigurationDelegatePtr m_delegate;
+   const std::unordered_set<int> m_treeViewKeySet{
+      Qt::Key_Left, Qt::Key_Right/*, Qt::Key_Up, Qt::Key_Down*/};
 };
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

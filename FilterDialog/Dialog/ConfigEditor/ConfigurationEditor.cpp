@@ -1,9 +1,10 @@
 ﻿#include "stdafx.h"
 
 #include "Serialize/JsonWriter.h"
-
 #include "ConfigurationEditor.h"
 
+#include <QDebug>
+#include <QKeyEvent>
 #include <QHeaderView>
 
 ConfigurationEditor::ConfigurationEditor(QWidget* parent, const Configuration& config)
@@ -12,7 +13,10 @@ ConfigurationEditor::ConfigurationEditor(QWidget* parent, const Configuration& c
     m_ui.setupUi(this);
     setupGUIElements();
 
+    installEventFilter(this);
+
     m_model->setConfiguration(config);
+    m_ui.treeView->installEventFilter(this);
     m_ui.treeView->resizeColumnToContents(0);
     m_ui.treeView->header()->setStretchLastSection(true);
 
@@ -52,6 +56,32 @@ const ParameterListing& ConfigurationEditor::toVector() const
    return m_model->getParameterListing();
 }
 
+bool ConfigurationEditor::eventFilter(QObject* object, QEvent* event)
+{
+   if (event->type() != QEvent::KeyPress)
+   {
+      return false;
+   }
+
+   const auto keyEvent{static_cast<QKeyEvent*>(event)};
+   const auto keyValue{ keyEvent->key() };
+
+   if (object == this && m_treeViewKeySet.count(keyValue))
+   {
+      m_ui.treeView->setFocus();
+      qDebug() << "SaveBtn Key: " << keyEvent->key();
+      //return QCoreApplication::sendEvent(m_ui.treeView, event);
+      return true;
+   }
+   if (object == m_ui.treeView && m_treeViewKeySet.count(keyValue))
+   {
+      qDebug() << "TreeView Key: " << keyEvent->key();
+      return true;
+   }
+
+   return QObject::eventFilter(object, event);
+}
+
 void ConfigurationEditor::closeEvent(QCloseEvent* event)
 {
    saveSettings();
@@ -65,7 +95,7 @@ void ConfigurationEditor::setupGUIElements()
    m_proxy->setSourceModel(m_model.get());
    m_ui.treeView->setModel(m_proxy.get());
 
-   //m_ui.treeView->setHeaderHidden(true);
+   m_ui.treeView->setHeaderHidden(true);
    m_ui.treeView->setUniformRowHeights(true);
    m_ui.treeView->setAlternatingRowColors(true);
 
