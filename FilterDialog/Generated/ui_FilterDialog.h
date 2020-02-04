@@ -12,6 +12,10 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QProgressBar>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QWidget>
 
@@ -21,6 +25,10 @@ class Ui_FilterDialogClass
 {
 public:
     QGridLayout *gridLayout;
+    QHBoxLayout *horizontalLayout;
+    QLabel *statusLabel;
+    QSpacerItem *horizontalSpacer;
+    QProgressBar *progressBar;
     QTabWidget *tabWidget;
 
     void setupUi(QWidget *FilterDialogClass)
@@ -32,6 +40,27 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        statusLabel = new QLabel(FilterDialogClass);
+        statusLabel->setObjectName(QString::fromUtf8("statusLabel"));
+
+        horizontalLayout->addWidget(statusLabel);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        progressBar = new QProgressBar(FilterDialogClass);
+        progressBar->setObjectName(QString::fromUtf8("progressBar"));
+        progressBar->setTextVisible(false);
+
+        horizontalLayout->addWidget(progressBar);
+
+
+        gridLayout->addLayout(horizontalLayout, 1, 0, 1, 1);
+
         tabWidget = new QTabWidget(FilterDialogClass);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
 
@@ -46,6 +75,7 @@ public:
     void retranslateUi(QWidget *FilterDialogClass)
     {
         FilterDialogClass->setWindowTitle(QCoreApplication::translate("FilterDialogClass", "Filter Dialog", nullptr));
+        statusLabel->setText(QCoreApplication::translate("FilterDialogClass", "Status:", nullptr));
     } // retranslateUi
 
 };

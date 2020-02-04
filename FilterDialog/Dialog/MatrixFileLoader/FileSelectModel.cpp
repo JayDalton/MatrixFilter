@@ -1,5 +1,7 @@
 ﻿#include <stdafx.h>
 
+#include <iostream>
+
 #include "FileSelectModel.h"
 
 struct FileInfoCompare
@@ -18,6 +20,7 @@ FileSelectModel::FileSelectModel()
 void FileSelectModel::setImageMatrix(MatrixFileInfo matrixFile)
 {
    beginResetModel();
+   searchForFiles(); matrixFile;
    m_repository.push_back(matrixFile);
    endResetModel();
 }
@@ -140,6 +143,16 @@ QString FileSelectModel::formatFileType(MatrixFileInfo::Type type) const
    default:
       return "undefined";
    }
+}
+
+void FileSelectModel::searchForFiles()
+{
+   auto iterOpts{ fs::directory_options::skip_permission_denied };
+   for (const auto& entry : fs::recursive_directory_iterator(".", iterOpts))
+   {
+      std::cout << entry.path().lexically_normal() << std::endl;
+   }
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

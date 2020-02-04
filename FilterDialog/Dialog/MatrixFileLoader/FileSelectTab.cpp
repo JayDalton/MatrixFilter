@@ -5,11 +5,13 @@
 #include "ui_FileSelectTab.h"
 
 #include <QMenu>
-#include <QtGui/qevent.h>
+#include <QEvent>
+#include <QKeyEvent>
 #include <QPushButton>
+#include <QFileDialog>
+#include <QMessageBox>
 #include <QAbstractItemView>
-#include <QtWidgets\qfiledialog.h>
-#include <QtWidgets\qmessagebox.h>
+
 #include <Matrix/FileManager.h>
 
 #include <unordered_set>
@@ -124,6 +126,17 @@ bool FileSelectTab::eventFilter(QObject* object, QEvent* event)
    {
       return false;
    }
+
+   const auto keyEvent{static_cast<QKeyEvent*>(event)};
+   const auto keyValue{ keyEvent->key() };
+
+   //if (object == this && m_treeViewKeySet.count(keyValue))
+   //{
+   //   m_ui.treeView->setFocus();
+   //   qDebug() << "SaveBtn Key: " << keyEvent->key();
+   //   //return QCoreApplication::sendEvent(m_ui.treeView, event);
+   //   return true;
+   //}
 
    if (auto* keyEvent = static_cast<QKeyEvent*>(event))
    {

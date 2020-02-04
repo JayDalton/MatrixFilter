@@ -28,6 +28,7 @@ public:
 
 private:
    QString formatFileType(MatrixFileInfo::Type type) const;
+   void searchForFiles();
 
 private:
    MatrixFileRepository m_repository;
