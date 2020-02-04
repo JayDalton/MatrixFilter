@@ -4,7 +4,7 @@
 #include <QFileSystemModel>
 
 #include "Application/DataLayer.h"
-#include "Dialog\FileSelect\FileSelectModel.h"
+#include "Dialog/MatrixFileLoader/FileSelectModel.h"
 
 class FileSelectTab : public QWidget
 {

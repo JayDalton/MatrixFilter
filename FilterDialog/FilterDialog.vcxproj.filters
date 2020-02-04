@@ -43,12 +43,6 @@
     <ClCompile Include="Dialog\FilterDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Dialog\FileSelect\FileSelectModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dialog\FileSelect\FileSelectTab.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Dialog\MatrixDataPlot\QCustomPlot\qcustomplot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -76,6 +70,12 @@
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Dialog\MatrixFileLoader\FileSelectModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\MatrixFileLoader\FileSelectTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -93,12 +93,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Dialog\FilterDialog.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Dialog\FileSelect\FileSelectModel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Dialog\FileSelect\FileSelectTab.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Dialog\MatrixDataPlot\QCustomPlot\qcustomplot.h">
@@ -128,6 +122,12 @@
     <QtMoc Include="Dialog\ConfigEditor\ConfigurationModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Dialog\MatrixFileLoader\FileSelectModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\MatrixFileLoader\FileSelectTab.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="FilterDialog.qrc">
@@ -138,9 +138,6 @@
     <ResourceCompile Include="FilterDialog.rc" />
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="Dialog\FileSelect\FileSelectTab.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="Dialog\MatrixDataPlot\MatrixDataPlot.ui">
       <Filter>Form Files</Filter>
     </QtUic>
@@ -154,6 +151,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Dialog\ConfigEditor\ConfigurationEditor.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Dialog\MatrixFileLoader\FileSelectTab.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

@@ -6,7 +6,7 @@
 #include "QTabWidget"
 #include "QKeyEvent"
 
-#include "FileSelect/FileSelectTab.h"
+#include "MatrixFileLoader/FileSelectTab.h"
 #include "MatrixDataView/MatrixDataTab.h"
 #include "MatrixDataPlot/MatrixDataPlot.h"
 #include "MatrixImageView/MatrixImageView.h"

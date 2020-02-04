@@ -130,8 +130,8 @@
     <ClCompile Include="Application\DataLayer.cpp" />
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationModel.cpp" />
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationEditor.cpp" />
-    <ClCompile Include="Dialog\FileSelect\FileSelectModel.cpp" />
-    <ClCompile Include="Dialog\FileSelect\FileSelectTab.cpp" />
+    <ClCompile Include="Dialog\MatrixFileLoader\FileSelectModel.cpp" />
+    <ClCompile Include="Dialog\MatrixFileLoader\FileSelectTab.cpp" />
     <ClCompile Include="Dialog\FilterDialog.cpp" />
     <ClCompile Include="Dialog\MatrixDataPlot\MatrixDataPlot.cpp" />
     <ClCompile Include="Dialog\MatrixDataPlot\QCustomPlot\qcustomplot.cpp" />
@@ -151,8 +151,8 @@
     <ClInclude Include="Application\ApplicationConfig.h" />
     <QtMoc Include="Application\DataLayer.h" />
     <QtMoc Include="Dialog\FilterDialog.h" />
-    <QtMoc Include="Dialog\FileSelect\FileSelectModel.h" />
-    <QtMoc Include="Dialog\FileSelect\FileSelectTab.h" />
+    <QtMoc Include="Dialog\MatrixFileLoader\FileSelectModel.h" />
+    <QtMoc Include="Dialog\MatrixFileLoader\FileSelectTab.h" />
     <QtMoc Include="Dialog\MatrixDataPlot\QCustomPlot\qcustomplot.h" />
     <QtMoc Include="Dialog\MatrixDataPlot\MatrixDataPlot.h" />
     <QtMoc Include="Dialog\MatrixDataView\MatrixDataTab.h" />
@@ -182,7 +182,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="Dialog\FileSelect\FileSelectTab.ui" />
+    <QtUic Include="Dialog\MatrixFileLoader\FileSelectTab.ui" />
     <QtUic Include="Dialog\MatrixDataPlot\MatrixDataPlot.ui" />
     <QtUic Include="Dialog\MatrixDataView\MatrixDataTab.ui" />
     <QtUic Include="Dialog\MatrixImageView\MatrixImageView.ui" />
