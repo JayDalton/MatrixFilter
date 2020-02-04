@@ -4,10 +4,7 @@
 
 #include "ui_ConfigurationEditor.h"
 
-//#include "Serialize/JsonReader.h"
-//#include "Serialize/JsonWriter.h"
 #include "Config/Configuration.h"
-
 #include "Application/DataLayer.h"
 #include "Dialog/ConfigEditor/ConfigurationModel.h"
 

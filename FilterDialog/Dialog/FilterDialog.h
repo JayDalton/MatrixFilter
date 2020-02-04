@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QMainWindow>
 
-#include <Config\Configuration.h>
+#include "Config/Configuration.h"
 #include "Application/DataLayer.h"
 
 class FilterDialog : public QDialog

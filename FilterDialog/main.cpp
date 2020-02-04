@@ -11,9 +11,6 @@ int main(int argc, char *argv[])
 {
    Application application(argc, argv, "Matrix Filter");
 
-   std::ifstream input( "C:\\Final.gif", std::ios::binary );
-   std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(input), {});
-
    QCommandLineParser parser;
    parser.addOptions({
       {{"c", "config"}, QCoreApplication::translate("main", "Show config dialog on startup")},
@@ -34,7 +31,6 @@ int main(int argc, char *argv[])
       if (editor.exec() == QDialog::Accepted)
       {
          config.updateParameter(editor.toVector());
-         //config.readFrom(editor.toString());
          application.setConfig(config);
          config.saveFile(filePath);
       }
