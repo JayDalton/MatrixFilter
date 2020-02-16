@@ -15,6 +15,7 @@ public:
    ~FileSelectTab() = default;
 
 signals:
+   void startLoadingData();
    void displayMatrixData();
 
 protected:

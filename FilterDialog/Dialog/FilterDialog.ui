@@ -37,7 +37,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QProgressBar" name="progressBar">
+      <widget class="ProgressBar" name="progressBar">
        <property name="textVisible">
         <bool>false</bool>
        </property>
@@ -51,6 +51,13 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>ProgressBar</class>
+   <extends>QProgressBar</extends>
+   <header location="global">Basic/ProgressBar.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../FilterDialog.qrc"/>
  </resources>

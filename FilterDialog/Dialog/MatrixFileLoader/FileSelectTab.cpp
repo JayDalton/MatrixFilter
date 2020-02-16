@@ -108,8 +108,9 @@ void FileSelectTab::openFile(const QModelIndex& index)
    auto fileInfo = m->fileModel.fileInfo(index);
    auto filePath = m->fileModel.filePath(index);
    const auto matrixFile = filePath.toStdString();
-   m->data->loadMatrixFile(MatrixFileInfo{ matrixFile });
 
+   emit startLoadingData();
+   m->data->loadMatrixFile(MatrixFileInfo{ matrixFile });
    emit displayMatrixData();
 }
 

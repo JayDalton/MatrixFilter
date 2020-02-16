@@ -76,6 +76,9 @@
     <ClCompile Include="Dialog\MatrixFileLoader\FileSelectTab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Basic\ProgressBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Dialog\MatrixFileLoader\FileSelectTab.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Basic\ProgressBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -78,7 +78,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Qt\Qt5.14.0\5.14.0\msvc2017\include;C:\Qt\Qt5.14.0\5.14.0\sources;$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Qt\Qt5.14.0\5.14.0\msvc2017\include;C:\Qt\Qt5.14.0\5.14.0\sources;$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -108,7 +108,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Qt\Qt5.14.0\5.14.0\msvc2017\include;C:\Qt\Qt5.14.0\5.14.0\sources;$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Qt\Qt5.14.0\5.14.0\msvc2017\include;C:\Qt\Qt5.14.0\5.14.0\sources;$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -128,6 +128,7 @@
     <ClCompile Include="Application\Application.cpp" />
     <ClCompile Include="Application\ApplicationConfig.cpp" />
     <ClCompile Include="Application\DataLayer.cpp" />
+    <ClCompile Include="Basic\ProgressBar.cpp" />
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationModel.cpp" />
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationEditor.cpp" />
     <ClCompile Include="Dialog\MatrixFileLoader\FileSelectModel.cpp" />
@@ -162,6 +163,7 @@
     <QtMoc Include="Dialog\MatrixImageView\MatrixImageView.h" />
     <QtMoc Include="Dialog\ConfigEditor\ConfigurationEditor.h" />
     <QtMoc Include="Dialog\ConfigEditor\ConfigurationModel.h" />
+    <QtMoc Include="Basic\ProgressBar.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
