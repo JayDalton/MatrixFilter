@@ -25,6 +25,8 @@ private:
    void setupDataLayers();
    void setupTabWidgets();
    void restoreSettings();
+   void setupProgress();
+   void updateProgress();
    void saveSettings();
 
 private:

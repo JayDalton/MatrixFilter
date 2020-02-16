@@ -5,6 +5,7 @@
 
 #include "QTabWidget"
 #include "QKeyEvent"
+#include "QTimer"
 
 #include "MatrixFileLoader/FileSelectTab.h"
 #include "MatrixDataView/MatrixDataTab.h"
@@ -24,6 +25,8 @@ struct FilterDialog::Impl
 
    DataLayerSPtr data{ nullptr };
 
+   QTimer m_progressTimer;
+
    Ui::FilterDialogClass ui;
 };
 
@@ -37,6 +40,7 @@ FilterDialog::FilterDialog(DataLayerSPtr data)
    restoreSettings();
    setupDataLayers();
    setupTabWidgets();
+   setupProgress();
 
    installEventFilter(this);
 
@@ -78,6 +82,26 @@ void FilterDialog::restoreSettings()
 {
    const auto settings = m->data->settings();
    restoreGeometry(settings.value("geometry").toByteArray());
+}
+
+void FilterDialog::setupProgress()
+{
+   m->ui.progressBar->setTextVisible(false);
+   m->ui.progressBar->setMaximum(0);
+   m->ui.progressBar->setMinimum(0);
+   m->ui.progressBar->setValue(0);
+
+   using namespace std::chrono_literals;
+   m->m_progressTimer.setInterval(100ms);
+   m->m_progressTimer.setSingleShot(false);
+   m->m_progressTimer.callOnTimeout(this, &FilterDialog::updateProgress);
+   //m->m_progressTimer.start(); // ???
+}
+
+void FilterDialog::updateProgress()
+{
+   const auto value = m->ui.progressBar->value();
+   m->ui.progressBar->setValue(100 <= value ? 0 : value + 1);
 }
 
 void FilterDialog::saveSettings()

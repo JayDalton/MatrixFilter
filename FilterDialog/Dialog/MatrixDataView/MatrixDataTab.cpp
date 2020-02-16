@@ -18,8 +18,10 @@ private:
    MatrixDataTab* parent{ nullptr };
 };
 
-MatrixDataTab::MatrixDataTab(DataLayerSPtr data, QWidget *parent)
-    : QWidget(parent), m(std::make_unique<Impl>(this, data))
+//////////////////////////////////////////////////////////////////////
+
+MatrixDataTab::MatrixDataTab(DataLayerSPtr data, QWidget* parent)
+   : QWidget(parent), m(std::make_unique<Impl>(this, data))
 {
    m->ui.setupUi(this);
    
