@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <opencv2/core.hpp>
 
@@ -13,3 +13,6 @@ private:
 };
 
 using ImageMatrixUPtr = std::unique_ptr<ImageMatrix>;
+using ImagematrixSPtr = std::shared_ptr<ImageMatrix>;
+
+// Codepage: UTF-8 (ÜüÖöÄäẞß)

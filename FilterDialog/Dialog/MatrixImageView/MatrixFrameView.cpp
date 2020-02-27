@@ -19,6 +19,7 @@ void MatrixFrameView::setImageMatrix(const cv::Mat& matrix)
    m_bitmapImage = coverMatrixByImage(matrix);
    m_contentRect = m_bitmapImage.rect();
    m_visibleRect = m_bitmapImage.rect();
+   m_displayRect = {};
 }
 
 void MatrixFrameView::scaleArea(double _factor)

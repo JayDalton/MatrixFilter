@@ -83,11 +83,6 @@ void FileSelectTab::setupContextActions()
    m->m_openFile->setShortcuts(QKeySequence::Open);
    m->m_openFile->setStatusTip(tr("Create a new file"));
    connect(m->m_openFile.get(), &QAction::triggered, this, &FileSelectTab::selectDirectory);
-
-   //m->m_saveFile = std::make_unique<QAction>(tr("&Sichern"));
-   //m->m_saveFile->setShortcuts(QKeySequence::Save);
-   //m->m_saveFile->setStatusTip(tr("Save existing file"));
-   //connect(m->m_saveFile.get(), &QAction::triggered, this, &FileSelectTab::saveFile);
 }
 
 void FileSelectTab::selectDirectory()
@@ -131,27 +126,16 @@ bool FileSelectTab::eventFilter(QObject* object, QEvent* event)
    const auto keyEvent{static_cast<QKeyEvent*>(event)};
    const auto keyValue{ keyEvent->key() };
 
-   //if (object == this && m_treeViewKeySet.count(keyValue))
-   //{
-   //   m_ui.treeView->setFocus();
-   //   qDebug() << "SaveBtn Key: " << keyEvent->key();
-   //   //return QCoreApplication::sendEvent(m_ui.treeView, event);
-   //   return true;
-   //}
-
-   if (auto* keyEvent = static_cast<QKeyEvent*>(event))
+   if (!m->m_validKeys.contains(keyValue))
    {
-      if (!m->m_validKeys.contains(keyEvent->key()))
-      {
-         return false;
-      }
+      return false;
+   }
 
-      if (object == m->ui.treeView)
-      {
-         auto selection = m->ui.treeView->selectionModel();
-         openFile(selection->currentIndex());
-         return true;
-      }
+   if (object == m->ui.treeView)
+   {
+      auto selection = m->ui.treeView->selectionModel();
+      openFile(selection->currentIndex());
+      return true;
    }
 
    return false;

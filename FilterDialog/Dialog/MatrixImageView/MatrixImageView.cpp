@@ -79,11 +79,11 @@ void MatrixImageView::keyReleaseEvent(QKeyEvent* event)
    switch (event->key())
    {
    case Qt::Key_Up:
-      return m->ui.frameView->setTranslateY(0.05);
+      return m->ui.frameView->setTranslateY(-0.05);
    case Qt::Key_Down:
       return m->ui.frameView->setTranslateY(0.05);
    case Qt::Key_Left:
-      return m->ui.frameView->setTranslateX(0.05);
+      return m->ui.frameView->setTranslateX(-0.05);
    case Qt::Key_Right:
       return m->ui.frameView->setTranslateX(0.05);
    //case Qt::Key_PageUp:
