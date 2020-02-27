@@ -39,7 +39,7 @@ private:
 
 private:
    cv::Mat m_matrix;
-   QRectF m_displayRect;
+   QRectF m_displayRect{};
    QRectF m_visibleRect{ 0.0, 0.0, 4000.0, 4000.0 };
    QRectF m_contentRect{ 0.0, 0.0, 4000.0, 4000.0 };
    QImage m_bitmapImage;
