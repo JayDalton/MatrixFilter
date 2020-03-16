@@ -38,10 +38,10 @@ protected:
    QVariant data(const QModelIndex& index, int role) const override;
 
 private:
+   QVariant getVariant(int row, int col) const;
 
 private:
-   QRect m_range;// {0, 0, 100, 100};
-   //ImageMatrix m_matrix;
+   QRect m_range{};
    cv::Mat m_matrix;
 };
 

@@ -12,9 +12,10 @@ void MatrixValueDataModel::setImageMatrix(const cv::Mat& matrix)
 {
    beginResetModel();
    m_matrix = matrix;
+   m_range.setRect(0, 0, 100, 100);
    endResetModel();
 
-   emit sizeChanged(QRect{0, 0, 100, 100});
+   emit sizeChanged(m_range);
 }
 
 void MatrixValueDataModel::setSectionRange(const QRect& range)
@@ -45,7 +46,7 @@ QModelIndex MatrixValueDataModel::parent(const QModelIndex& child) const
 
 int MatrixValueDataModel::rowCount(const QModelIndex& parent) const
 {
-   if (!parent.isValid())
+   if (m_range.isValid())
    {
       return m_range.height();
    }
@@ -54,7 +55,7 @@ int MatrixValueDataModel::rowCount(const QModelIndex& parent) const
 
 int MatrixValueDataModel::columnCount(const QModelIndex& parent) const
 {
-   if (!parent.isValid())
+   if (m_range.isValid())
    {
       return m_range.width();
    }
@@ -83,14 +84,43 @@ QVariant MatrixValueDataModel::data(const QModelIndex& index, int role) const
       return {};
    }
 
-   if (index.parent().isValid() 
-      || (index.row() > m_range.height()) 
-      || (index.column() > m_range.width()))
+   if (!m_range.isValid()
+      || m_matrix.empty()
+      || index.parent().isValid() 
+      || (index.row() >= m_range.height()) 
+      || (index.column() >= m_range.width()))
    {
       return {};
    }
 
-   return m_matrix.at<float>(m_range.y() + index.row(), m_range.x() + index.column());
+   const auto row = m_range.y() + index.row();
+   const auto col = m_range.x() + index.column();
+   return getVariant(row, col);
+}
+
+QVariant MatrixValueDataModel::getVariant(int row, int col) const
+{
+   switch (m_matrix.type())
+   {
+   case CV_8U:
+      return m_matrix.at<uchar>(row, col);
+   case CV_8S:
+      return m_matrix.at<schar>(row, col);
+   case CV_16U:
+      return m_matrix.at<ushort>(row, col);
+   case CV_16S:
+      return m_matrix.at<short>(row, col);
+   case CV_32S:
+      return m_matrix.at<int>(row, col);
+   case CV_32F:
+      return m_matrix.at<float>(row, col);
+   case CV_64F:
+      return m_matrix.at<double>(row, col);
+   default:
+      return {};
+   }
+
+   return {};
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

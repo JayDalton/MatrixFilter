@@ -20,7 +20,7 @@ FileSelectModel::FileSelectModel()
 void FileSelectModel::setImageMatrix(MatrixFileInfo matrixFile)
 {
    beginResetModel();
-   searchForFiles(); matrixFile;
+   searchForFiles();
    m_repository.push_back(matrixFile);
    endResetModel();
 }

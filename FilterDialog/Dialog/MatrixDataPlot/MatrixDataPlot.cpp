@@ -44,7 +44,7 @@ void MatrixDataPlot::load(int index)
 
    m->ui.customPlot->clearGraphs();
 
-   if (index > matrix.rows)
+   if (index >= matrix.rows)
    {
       return;
    }
