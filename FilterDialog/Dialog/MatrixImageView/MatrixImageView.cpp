@@ -61,19 +61,18 @@ bool MatrixImageView::eventFilter(QObject* object, QEvent* event)
       return false;
    }
 
-   if (auto* keyEvent = static_cast<QKeyEvent*>(event))
-   {
-      if (!m->m_validKeys.contains(keyEvent->key()))
-      {
-         return false;
-      }
+   const auto keyEvent{static_cast<QKeyEvent*>(event)};
+   const auto keyValue{ keyEvent->key() };
 
-      if (object == m->ui.frameView)
-      {
-         qDebug() << QString("frameView: %1").arg(keyEvent->key());
-         return true;
-      }
+   if (!m->m_validKeys.contains(keyValue))
+   {
+      return false;
    }
+
+   //if (object == m->ui.frameView)
+   //{
+   //   return true;
+   //}
 
    return false;
 }
@@ -94,9 +93,7 @@ void MatrixImageView::keyReleaseEvent(QKeyEvent* event)
       return m->ui.frameView->setScaleValue(0.95);
    case Qt::Key_Minus:
       return m->ui.frameView->setScaleValue(1.05);
-
    default:
-      //spdlog::debug("key press not valid: {}", event->key());
       break;
    }
 }

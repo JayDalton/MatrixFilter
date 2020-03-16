@@ -10,11 +10,14 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QFutureWatcher>
 #include <QAbstractItemView>
+#include <QtConcurrent/QtConcurrent>
 
 #include <Matrix/FileManager.h>
 
 #include <unordered_set>
+#include <future>
 
 struct FileSelectTab::Impl
 {
@@ -30,6 +33,9 @@ struct FileSelectTab::Impl
 
    QFileSystemModel fileModel;
    DataLayerSPtr data{ nullptr };
+
+   QFutureWatcher<void> openWatcher;
+
    Ui::FileSelectTab ui;
 
 private:
@@ -75,6 +81,9 @@ void FileSelectTab::setupUIInteractions()
    
    auto con2 = connect(m->ui.treeView, &QTreeView::doubleClicked, 
       this, [&](const QModelIndex& index) { openFile(index); });
+
+   auto con3 = connect(&m->openWatcher, &QFutureWatcher<void>::finished, 
+      this, &FileSelectTab::finishedOpenFile);
 }
 
 void FileSelectTab::setupContextActions()
@@ -98,15 +107,28 @@ void FileSelectTab::selectDirectory()
    }
 }
 
+void FileSelectTab::finishedOpenFile()
+{
+   emit displayMatrixData();
+}
+
 void FileSelectTab::openFile(const QModelIndex& index)
 {
-   auto fileInfo = m->fileModel.fileInfo(index);
-   auto filePath = m->fileModel.filePath(index);
-   const auto matrixFile = filePath.toStdString();
+   if (m->openWatcher.isRunning())
+   {
+      return;
+   }
+
+   auto openTask = [=]() 
+   {
+      auto fileInfo = m->fileModel.fileInfo(index);
+      auto filePath = m->fileModel.filePath(index);
+      const auto matrixFile = filePath.toStdString();
+      m->data->loadMatrixFile(MatrixFileInfo{ matrixFile });
+   };
 
    emit startLoadingData();
-   m->data->loadMatrixFile(MatrixFileInfo{ matrixFile });
-   emit displayMatrixData();
+   m->openWatcher.setFuture(QtConcurrent::run(openTask));
 }
 
 void FileSelectTab::setCurrentDir(const QString& path)

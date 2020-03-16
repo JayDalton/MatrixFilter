@@ -57,12 +57,12 @@ bool FilterDialog::eventFilter(QObject* object, QEvent* event)
       return false;
    }
 
-   if (auto* keyEvent = static_cast<QKeyEvent*>(event))
-   {
-      if (keyEvent->key() == Qt::Key_Escape) {
-         QCoreApplication::exit();
-         return true;
-      }
+   const auto keyEvent{static_cast<QKeyEvent*>(event)};
+   const auto keyValue{ keyEvent->key() };
+
+   if (keyValue == Qt::Key_Escape) {
+      QCoreApplication::exit();
+      return true;
    }
 
    return false;

@@ -30,6 +30,7 @@ private:
    void openFile(const QModelIndex& index);
    void setCurrentDir(const QString& path);
    void selectDirectory();
+   void finishedOpenFile();
 
 private:
    struct Impl;
