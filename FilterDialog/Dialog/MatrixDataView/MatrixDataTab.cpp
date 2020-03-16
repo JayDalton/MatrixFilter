@@ -69,67 +69,54 @@ void MatrixDataTab::setupUIElements()
    auto a = connect(m_matrixValueDataModel.get(), &MatrixValueDataModel::sizeChanged,
       this, [&]() { setupMatrixRange(m_matrixValueDataModel->getSectionRange()); });
 
-   auto b = connect(m->ui.comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+   auto z = connect(m->ui.comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
       this, [&](int index) { static_cast<MatrixLayer>(index); });
 
-   for (const auto& [value, label] : m->matrixLayer)
+   //#todo layer select impl
+   for (const auto& [index, label] : m->matrixLayer)
    {
-      m->ui.comboBox->addItem(label, static_cast<int>(value));
+      m->ui.comboBox->addItem(label, static_cast<int>(index));
    }
-
 
    setupMatrixRange(QRect{});
 
-   //auto b = connect(m->ui.spinBoxPointX, QOverload<int>::of(&QSpinBox::valueChanged),
-   //   this, [&](int value) { 
-   //      auto rect = retriveMatrixRange(); rect.setLeft(value);
-   //      m_matrixValueDataModel->setSectionRange(rect); });
+   auto b = connect(m->ui.spinBoxPointX, QOverload<int>::of(&QSpinBox::valueChanged),
+      this, [&](int value) { 
+         auto rect = m_matrixValueDataModel->getSectionRange(); rect.setLeft(value);
+         m_matrixValueDataModel->setSectionRange(rect); });
 
-   //auto c = connect(m->ui.spinBoxPointY, QOverload<int>::of(&QSpinBox::valueChanged),
-   //   this, [&](int value) { 
-   //      auto rect = retriveMatrixRange(); rect.setTop(value);
-   //      m_matrixValueDataModel->setSectionRange(rect); });
+   auto c = connect(m->ui.spinBoxPointY, QOverload<int>::of(&QSpinBox::valueChanged),
+      this, [&](int value) { 
+         auto rect = m_matrixValueDataModel->getSectionRange(); rect.setTop(value);
+         m_matrixValueDataModel->setSectionRange(rect); });
 
-   //auto x = connect(m->ui.spinBoxSizeW, QOverload<int>::of(&QSpinBox::valueChanged),
-   //   this, [&](int value) { 
-   //      auto rect = retriveMatrixRange(); rect.setWidth(value);
-   //      m_matrixValueDataModel->setSectionRange(rect); });
+   auto x = connect(m->ui.spinBoxSizeW, QOverload<int>::of(&QSpinBox::valueChanged),
+      this, [&](int value) { 
+         auto rect = m_matrixValueDataModel->getSectionRange(); rect.setWidth(value);
+         m_matrixValueDataModel->setSectionRange(rect); });
 
-   //auto y = connect(m->ui.spinBoxSizeH, QOverload<int>::of(&QSpinBox::valueChanged),
-   //   this, [&](int value) { 
-   //      auto rect = retriveMatrixRange(); rect.setHeight(value);
-   //      m_matrixValueDataModel->setSectionRange(rect); });
+   auto y = connect(m->ui.spinBoxSizeH, QOverload<int>::of(&QSpinBox::valueChanged),
+      this, [&](int value) { 
+         auto rect = m_matrixValueDataModel->getSectionRange(); rect.setHeight(value);
+         m_matrixValueDataModel->setSectionRange(rect); });
 
 }
 
 void MatrixDataTab::setupMatrixRange(const QRect& range)
 {
+   //#todo range => matrix.size
    m->ui.spinBoxPointX->setRange(0, range.width());
-   m->ui.spinBoxPointX->setSingleStep(10);
-   m->ui.spinBoxPointX->setValue(range.x());
-
    m->ui.spinBoxPointY->setRange(0, range.height());
-   m->ui.spinBoxPointY->setSingleStep(10);
+
+
+   m->ui.spinBoxPointX->setValue(range.x());
    m->ui.spinBoxPointY->setValue(range.y());
 
    m->ui.spinBoxSizeW->setRange(0, range.width());
-   m->ui.spinBoxSizeW->setSingleStep(10);
-   m->ui.spinBoxSizeW->setValue(10);
+   m->ui.spinBoxSizeW->setValue(range.width());
 
    m->ui.spinBoxSizeH->setRange(0, range.height());
-   m->ui.spinBoxSizeH->setSingleStep(10);
-   m->ui.spinBoxSizeH->setValue(10);
-}
-
-QRect MatrixDataTab::retriveMatrixRange() const
-{
-   const auto rect = QRect(
-      m->ui.spinBoxPointX->value(),
-      m->ui.spinBoxPointY->value(),
-      m->ui.spinBoxSizeW->value(),
-      m->ui.spinBoxSizeH->value()
-   );
-   return rect;
+   m->ui.spinBoxSizeH->setValue(range.height());
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

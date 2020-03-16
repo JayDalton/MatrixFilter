@@ -20,9 +20,12 @@ void MatrixValueDataModel::setImageMatrix(const cv::Mat& matrix)
 
 void MatrixValueDataModel::setSectionRange(const QRect& range)
 {
-   beginResetModel();
-   m_range = range;
-   endResetModel();
+   if (m_range != range)
+   {
+      beginResetModel();
+      m_range = range;
+      endResetModel();
+   }
 }
 
 const QRect& MatrixValueDataModel::getSectionRange() const

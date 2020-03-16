@@ -19,7 +19,6 @@ public:
 private:
    void setupUIElements();
    void setupMatrixRange(const QRect& range);
-   QRect retriveMatrixRange() const;
 
 private:
    struct Impl;
