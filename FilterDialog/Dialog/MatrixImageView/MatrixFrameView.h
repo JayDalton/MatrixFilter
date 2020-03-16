@@ -21,32 +21,17 @@ public:
 
 protected:
    void paintEvent(QPaintEvent* event) override;
-   //void mouseDoubleClickEvent(QMouseEvent* event);
-   //void mousePressEvent(QMouseEvent* event);
-   //void mouseMoveEvent(QMouseEvent* event);
-   //void mouseReleaseEvent(QMouseEvent* event);
-   //void wheelEvent(QWheelEvent* event) override;
 
 private:
-   void setDisplayRect(const QRect& display);
-   QImage coverMatrixByImage(const cv::Mat& _matrix) const;
    QTransform createTransform() const;
-
-   void updateTransform();
-   void updateTransformAndRepaint();
-
-   void scaleArea(double factor);
+   QImage coverMatrixByImage(const cv::Mat& _matrix) const;
 
 private:
    cv::Mat m_matrix;
-   QRectF m_displayRect{};
-   QRectF m_visibleRect{ 0.0, 0.0, 4000.0, 4000.0 };
-   QRectF m_contentRect{ 0.0, 0.0, 4000.0, 4000.0 };
    QImage m_bitmapImage;
-   QImage m_bitmapOverlay;
-   QTransform m_transform;
-
-   bool m_mouseActive{ false };
+   QRectF m_displayRect{};
+   QRectF m_visibleRect{};
+   QRectF m_contentRect{};
 };
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

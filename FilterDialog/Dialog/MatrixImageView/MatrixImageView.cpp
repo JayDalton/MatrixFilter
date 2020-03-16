@@ -90,9 +90,6 @@ void MatrixImageView::keyReleaseEvent(QKeyEvent* event)
       return m->ui.frameView->setTranslateX(-0.05);
    case Qt::Key_Right:
       return m->ui.frameView->setTranslateX(0.05);
-   //case Qt::Key_PageUp:
-   //case Qt::Key_PageDown:
-   //   break;
    case Qt::Key_Plus:
       return m->ui.frameView->setScaleValue(0.95);
    case Qt::Key_Minus:
