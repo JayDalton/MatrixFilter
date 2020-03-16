@@ -7,6 +7,7 @@
 
 #include "ui_MatrixImageView.h"
 
+#include <QDebug>
 #include <QKeyEvent>
 
 #include <unordered_set>
@@ -19,13 +20,16 @@ struct MatrixImageView::Impl
    Ui::MatrixImageView ui;
    DataLayerSPtr data{ nullptr };
    std::unordered_set<int> m_validKeys{
-      Qt::Key_Left, Qt::Key_Right, Qt::Key_Up, Qt::Key_Down,
-      Qt::Key_Plus, Qt::Key_Minus
+      Qt::Key_Left, Qt::Key_Right, 
+      Qt::Key_Plus, Qt::Key_Minus,
+      Qt::Key_Up, Qt::Key_Down,
    };
  
 private:
    MatrixImageView* parent{ nullptr };
 };
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 MatrixImageView::MatrixImageView(DataLayerSPtr data, QWidget* parent)
    : QWidget(parent), m(std::make_unique<Impl>(this, data))

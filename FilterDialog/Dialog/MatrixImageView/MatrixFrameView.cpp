@@ -83,53 +83,53 @@ void MatrixFrameView::paintEvent(QPaintEvent* event)
    painter.drawImage(QPoint(0,0), m_bitmapImage);
 }
 
-void MatrixFrameView::mousePressEvent(QMouseEvent* event)
-{
-   if (event->button() == Qt::LeftButton) 
-   {
-      //lastPoint = event->pos();
-      m_mouseActive = true;
-   }
-}
-
-void MatrixFrameView::mouseMoveEvent(QMouseEvent* event)
-{
-   if ((event->buttons() & Qt::LeftButton) && m_mouseActive)
-   {
-      //drawLineTo(event->pos());
-   }
-}
-
-void MatrixFrameView::mouseReleaseEvent(QMouseEvent* event)
-{
-   if (event->button() == Qt::LeftButton && m_mouseActive) 
-   {
-      //drawLineTo(event->pos());
-      m_mouseActive = false;
-   }
-}
-
-void MatrixFrameView::wheelEvent(QWheelEvent* event)
-{
-   QPoint numPixels = event->pixelDelta();
-   QPoint numDegrees = event->angleDelta() / 8;
-
-   if (!numPixels.isNull()) 
-   {
-      qDebug() << numPixels;
-      //scrollWithPixels(numPixels);
-   
-   } else if (!numDegrees.isNull()) 
-   {
-      QPoint numSteps = numDegrees / 15;
-      qDebug() << numSteps;
-      //scrollWithDegrees(numSteps);
-   }
-
-   qDebug() << event->posF();
-
-   event->accept();
-}
+//void MatrixFrameView::mousePressEvent(QMouseEvent* event)
+//{
+//   if (event->button() == Qt::LeftButton) 
+//   {
+//      //lastPoint = event->pos();
+//      m_mouseActive = true;
+//   }
+//}
+//
+//void MatrixFrameView::mouseMoveEvent(QMouseEvent* event)
+//{
+//   if ((event->buttons() & Qt::LeftButton) && m_mouseActive)
+//   {
+//      //drawLineTo(event->pos());
+//   }
+//}
+//
+//void MatrixFrameView::mouseReleaseEvent(QMouseEvent* event)
+//{
+//   if (event->button() == Qt::LeftButton && m_mouseActive) 
+//   {
+//      //drawLineTo(event->pos());
+//      m_mouseActive = false;
+//   }
+//}
+//
+//void MatrixFrameView::wheelEvent(QWheelEvent* event)
+//{
+//   QPoint numPixels = event->pixelDelta();
+//   QPoint numDegrees = event->angleDelta() / 8;
+//
+//   if (!numPixels.isNull()) 
+//   {
+//      qDebug() << numPixels;
+//      //scrollWithPixels(numPixels);
+//   
+//   } else if (!numDegrees.isNull()) 
+//   {
+//      QPoint numSteps = numDegrees / 15;
+//      qDebug() << numSteps;
+//      //scrollWithDegrees(numSteps);
+//   }
+//
+//   qDebug() << event->posF();
+//
+//   event->accept();
+//}
 
 void MatrixFrameView::setDisplayRect(const QRect& display)
 {

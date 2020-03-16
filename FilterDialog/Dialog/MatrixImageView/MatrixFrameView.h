@@ -22,10 +22,10 @@ public:
 protected:
    void paintEvent(QPaintEvent* event) override;
    //void mouseDoubleClickEvent(QMouseEvent* event);
-   void mousePressEvent(QMouseEvent* event);
-   void mouseMoveEvent(QMouseEvent* event);
-   void mouseReleaseEvent(QMouseEvent* event);
-   void wheelEvent(QWheelEvent* event) override;
+   //void mousePressEvent(QMouseEvent* event);
+   //void mouseMoveEvent(QMouseEvent* event);
+   //void mouseReleaseEvent(QMouseEvent* event);
+   //void wheelEvent(QWheelEvent* event) override;
 
 private:
    void setDisplayRect(const QRect& display);
