@@ -14,6 +14,14 @@ struct MatrixDataTab::Impl
    DataLayerSPtr data{ nullptr };
    Ui::MatrixDataTab ui;
 
+   const std::map<MatrixLayer, QString> matrixLayer
+   { 
+      {MatrixLayer::Source, "Source"}, 
+      {MatrixLayer::Viewer, "Viewer"}, 
+      {MatrixLayer::Floating, "Floating"}, 
+      {MatrixLayer::Fourier, "Fourier"}, 
+   };
+
 private:
    MatrixDataTab* parent{ nullptr };
 };
@@ -45,6 +53,9 @@ void MatrixDataTab::load()
 
 void MatrixDataTab::setupUIElements()
 {
+   m->ui.treeView->setRootIsDecorated(false);
+   m->ui.treeView->setUniformRowHeights(true);
+
    m_matrixValueDataModel = std::make_unique<MatrixValueDataModel>();
    m_matrixValueDataProxy = std::make_unique<MatrixValueDataProxy>();
    m_matrixValueDataProxy->setSourceModel(m_matrixValueDataModel.get());
@@ -57,6 +68,15 @@ void MatrixDataTab::setupUIElements()
 
    auto a = connect(m_matrixValueDataModel.get(), &MatrixValueDataModel::sizeChanged,
       this, [&]() { setupMatrixRange(m_matrixValueDataModel->getSectionRange()); });
+
+   auto b = connect(m->ui.comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+      this, [&](int index) { static_cast<MatrixLayer>(index); });
+
+   for (const auto& [value, label] : m->matrixLayer)
+   {
+      m->ui.comboBox->addItem(label, static_cast<int>(value));
+   }
+
 
    setupMatrixRange(QRect{});
 

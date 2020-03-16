@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -29,6 +30,7 @@ public:
     QTreeView *treeView;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout;
+    QComboBox *comboBox;
     QHBoxLayout *horizontalLayout_2;
     QLabel *labelPoint;
     QSpinBox *spinBoxPointX;
@@ -59,6 +61,11 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        comboBox = new QComboBox(groupBox);
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+
+        verticalLayout->addWidget(comboBox);
+
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
