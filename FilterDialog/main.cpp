@@ -3,13 +3,12 @@
 #include "Dialog/ConfigEditor/ConfigurationEditor.h"
 #include "Application/Application.h"
 #include "Dialog/FilterDialog.h"
-#include "Logger/Logger.h"
 
 #include <QCommandLineParser>
 
 int main(int argc, char *argv[])
 {
-   Application application(argc, argv, "Matrix Filter");
+   Application application{ argc, argv, "Matrix Filter" };
 
    QCommandLineParser parser;
    parser.addOptions({
@@ -19,14 +18,13 @@ int main(int argc, char *argv[])
    parser.process(application.getArguments());
    bool forceConfigEditor = parser.isSet("c");
 
-   fs::path filePath{ "matrixfilter.cfg" };
-
    ApplicationConfig config;
    application.setConfig(config);
 
+   fs::path filePath{ "matrixfilter.cfg" };
    if (!config.readFile(filePath) || forceConfigEditor)
    {
-      spdlog::warn("Force using Config Editor!");
+      SPDLOG_INFO("Force using Config Editor!");
       ConfigurationEditor editor(nullptr, config);
       if (editor.exec() == QDialog::Accepted)
       {
@@ -37,10 +35,7 @@ int main(int argc, char *argv[])
       else { return 0; }
    }
 
-   auto data = application.getDataLayer();
-   
-   FilterDialog dialog(data);
-   dialog.setConfig(config); // ???
+   FilterDialog dialog{ application.getDataLayer() };
    dialog.show();
 
    return application.exec();

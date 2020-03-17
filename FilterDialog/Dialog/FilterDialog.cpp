@@ -11,6 +11,7 @@
 #include "MatrixDataView/MatrixDataTab.h"
 #include "MatrixDataPlot/MatrixDataPlot.h"
 #include "MatrixImageView/MatrixImageView.h"
+#include "LoggerView/LoggerView.h"
 
 #include "Application/DataLayer.h"
 #include "Logger/Logger.h"
@@ -23,6 +24,7 @@ struct FilterDialog::Impl
    MatrixDataTab* tabMatrixData{ nullptr };
    MatrixDataPlot* tabMatrixPlot{ nullptr };
    MatrixImageView* tabMatrixView{ nullptr };
+   LoggerView* tabLoggerView{ nullptr };
 
    DataLayerSPtr data{ nullptr };
 
@@ -106,6 +108,9 @@ void FilterDialog::setupTabWidgets()
 
    m->tabMatrixPlot = new MatrixDataPlot{ m->data, this };
    m->ui.tabWidget->addTab(m->tabMatrixPlot, tr("Matrix Plot"));
+
+   m->tabLoggerView = new LoggerView{ m->data, this };
+   m->ui.tabWidget->addTab(m->tabLoggerView, tr("Logger View"));
 
    auto con1 = connect(m->tabFileSelect, &FileSelectTab::startLoadingData, 
       this, [=]() { m->ui.progressBar->setBusyIndicator(true); }

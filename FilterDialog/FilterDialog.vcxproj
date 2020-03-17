@@ -78,7 +78,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;.\Dialog\LoggerView;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -108,7 +108,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;.\Dialog\LoggerView;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -131,6 +131,7 @@
     <ClCompile Include="Basic\ProgressBar.cpp" />
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationModel.cpp" />
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationEditor.cpp" />
+    <ClCompile Include="Dialog\LoggerView\LoggerView.cpp" />
     <ClCompile Include="Dialog\MatrixFileLoader\FileSelectModel.cpp" />
     <ClCompile Include="Dialog\MatrixFileLoader\FileSelectTab.cpp" />
     <ClCompile Include="Dialog\FilterDialog.cpp" />
@@ -164,6 +165,7 @@
     <QtMoc Include="Dialog\ConfigEditor\ConfigurationEditor.h" />
     <QtMoc Include="Dialog\ConfigEditor\ConfigurationModel.h" />
     <QtMoc Include="Basic\ProgressBar.h" />
+    <QtMoc Include="Dialog\LoggerView\LoggerView.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +186,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="Dialog\LoggerView\LoggerView.ui" />
     <QtUic Include="Dialog\MatrixFileLoader\FileSelectTab.ui" />
     <QtUic Include="Dialog\MatrixDataPlot\MatrixDataPlot.ui" />
     <QtUic Include="Dialog\MatrixDataView\MatrixDataTab.ui" />

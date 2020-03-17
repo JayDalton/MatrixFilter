@@ -1,6 +1,5 @@
 ﻿#include "stdafx.h"
 
-
 #include "JsonReader.h"
 #include <CommonFilter\Config\Visitor.h>
 
@@ -15,7 +14,6 @@ struct JsonParser
 
    bool Key(const char* str, json::SizeType length, bool copy) 
    {
-      logger::info("Key({0}, {1}, {2})", str, length, copy); 
       m_iter = std::find_if(m_map.begin(), m_map.end(), 
          [str](const auto& pair) { return pair.first == str; }
       );
@@ -84,33 +82,26 @@ struct JsonParser
 
    bool Null() 
    { 
-      logger::info("Null()"); return true; 
+      SPDLOG_WARN("Null()"); return true; 
    }
    bool Int64(int64_t i) 
    { 
-      logger::info("Int64({})", i); return true; 
+      SPDLOG_WARN("Int64({})", i); return true; 
    }
    bool Uint64(uint64_t u) 
    { 
-      logger::info("UInt64({})", u); return true; 
+      SPDLOG_WARN("UInt64({})", u); return true; 
    }
    bool RawNumber(const char* str, json::SizeType length, bool copy) { 
-      logger::info("Number({0}, {1}, {2})", str, length, copy); return true;
+      SPDLOG_WARN("Number({0}, {1}, {2})", str, length, copy); return true;
    }
 
-   bool StartObject() { logger::info("StartObject()"); return true; }
-   bool EndObject(json::SizeType count) { 
-      logger::info("EndObject({})", count); return true; 
-   }
+   bool StartObject() { return true; }
+   bool EndObject(json::SizeType count) { return true; }
 
-   bool StartArray() { logger::info("StartArray()"); return true; }
-   bool EndArray(json::SizeType count) { 
-      logger::info("EndArray({})", count); 
-      return true; 
-   }
+   bool StartArray() { return true; }
+   bool EndArray(json::SizeType count) { return true; }
 
-   //   const ParameterListing& getParameters() const { return m_params; }
-   //
 private:
    ParameterMapping& m_map;
    ParameterMapping::iterator m_iter;
@@ -142,14 +133,13 @@ bool JsonReader::writeTo(ParameterMapping& mapping)
    json::Reader reader;
    JsonParser parser{ mapping };
    json::IStreamWrapper wrapper(m->stream);
-   if (!reader.Parse(wrapper, parser))
+   if (auto error = reader.Parse(wrapper, parser))
    {
-      logger::info("config json file parse error");
+      SPDLOG_WARN("json parse error: {} {}", error.Code(), error.Offset());
       return false;
    }
 
-
-   return false;
+   return true;
 }
 
 

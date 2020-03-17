@@ -135,7 +135,7 @@ bool Configuration::readFrom(JsonReader& reader)
 {
    if (!reader.writeTo(m_map))
    {
-      logger::info("config json file parse error");
+      SPDLOG_WARN("config json file parse error");
       return false;
    }
 

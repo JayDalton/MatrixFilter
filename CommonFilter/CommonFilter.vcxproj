@@ -147,6 +147,7 @@
     <ClInclude Include="Config\Parameter\DoubleParameter.h" />
     <ClInclude Include="Config\Parameter\IntegerParameter.h" />
     <ClInclude Include="Config\Parameter\ListParameter.h" />
+    <ClInclude Include="Logger\BufferedQueue.h" />
     <ClInclude Include="Serialize\JsonStream.h" />
     <ClInclude Include="Matrix\FilterManager.h" />
     <ClInclude Include="Serialize\JsonWriter.h" />

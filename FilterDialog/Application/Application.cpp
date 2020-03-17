@@ -24,8 +24,7 @@ Application::Application(int argc, char** argv, std::string_view title)
 
 Application::~Application()
 {
-   spdlog::info("App ends.");
-   spdlog::info("===============================================");
+   spdlog::info("###############################################");
 }
 
 void Application::setConfig(const ApplicationConfig& config)

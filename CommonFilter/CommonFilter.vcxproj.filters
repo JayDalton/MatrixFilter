@@ -161,6 +161,9 @@
     <ClInclude Include="Config\Parameter\BinaryParameter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Logger\BufferedQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="commonfilter_global.h">
