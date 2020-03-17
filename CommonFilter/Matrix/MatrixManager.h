@@ -29,6 +29,8 @@ private:
    cv::Mat transformToMagnitude(const cv::Mat& source) const;
    cv::Mat transformToInvert(const cv::Mat& source) const;
 
+   void recenterDFT(cv::Mat& source);
+
    int64 dump_duration(int64 now, std::string label) const;
 
    MatrixPropertyList showInformation(const cv::Mat& matrix) const;

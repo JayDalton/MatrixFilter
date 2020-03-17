@@ -14,6 +14,19 @@
    <string>MatrixImageView</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="1">
+    <widget class="QGroupBox" name="claheGroupBox">
+     <property name="title">
+      <string>CLAHE</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
    <item row="2" column="1">
     <widget class="QGroupBox" name="suaceGroupBox">
      <property name="title">
@@ -34,20 +47,7 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="QGroupBox" name="claheGroupBox">
-     <property name="title">
-      <string>CLAHE</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
+   <item row="4" column="1">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -60,7 +60,7 @@
      </property>
     </spacer>
    </item>
-   <item row="0" column="0" rowspan="4">
+   <item row="0" column="0" rowspan="5">
     <widget class="MatrixFrameView" name="frameView">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -75,6 +75,9 @@
       <enum>QFrame::Raised</enum>
      </property>
     </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QComboBox" name="comboBox"/>
    </item>
   </layout>
  </widget>

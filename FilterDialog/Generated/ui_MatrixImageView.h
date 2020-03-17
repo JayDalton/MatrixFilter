@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QSpacerItem>
@@ -24,11 +25,12 @@ class Ui_MatrixImageView
 {
 public:
     QGridLayout *gridLayout;
+    QGroupBox *claheGroupBox;
     QGroupBox *suaceGroupBox;
     QCheckBox *checkHistoEqualize;
-    QGroupBox *claheGroupBox;
     QSpacerItem *verticalSpacer;
     MatrixFrameView *frameView;
+    QComboBox *comboBox;
 
     void setupUi(QWidget *MatrixImageView)
     {
@@ -39,6 +41,13 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        claheGroupBox = new QGroupBox(MatrixImageView);
+        claheGroupBox->setObjectName(QString::fromUtf8("claheGroupBox"));
+        claheGroupBox->setCheckable(true);
+        claheGroupBox->setChecked(false);
+
+        gridLayout->addWidget(claheGroupBox, 1, 1, 1, 1);
+
         suaceGroupBox = new QGroupBox(MatrixImageView);
         suaceGroupBox->setObjectName(QString::fromUtf8("suaceGroupBox"));
         suaceGroupBox->setCheckable(true);
@@ -51,16 +60,9 @@ public:
 
         gridLayout->addWidget(checkHistoEqualize, 0, 1, 1, 1);
 
-        claheGroupBox = new QGroupBox(MatrixImageView);
-        claheGroupBox->setObjectName(QString::fromUtf8("claheGroupBox"));
-        claheGroupBox->setCheckable(true);
-        claheGroupBox->setChecked(false);
-
-        gridLayout->addWidget(claheGroupBox, 1, 1, 1, 1);
-
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout->addItem(verticalSpacer, 3, 1, 1, 1);
+        gridLayout->addItem(verticalSpacer, 4, 1, 1, 1);
 
         frameView = new MatrixFrameView(MatrixImageView);
         frameView->setObjectName(QString::fromUtf8("frameView"));
@@ -72,7 +74,12 @@ public:
         frameView->setFrameShape(QFrame::StyledPanel);
         frameView->setFrameShadow(QFrame::Raised);
 
-        gridLayout->addWidget(frameView, 0, 0, 4, 1);
+        gridLayout->addWidget(frameView, 0, 0, 5, 1);
+
+        comboBox = new QComboBox(MatrixImageView);
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+
+        gridLayout->addWidget(comboBox, 3, 1, 1, 1);
 
 
         retranslateUi(MatrixImageView);
@@ -83,9 +90,9 @@ public:
     void retranslateUi(QWidget *MatrixImageView)
     {
         MatrixImageView->setWindowTitle(QCoreApplication::translate("MatrixImageView", "MatrixImageView", nullptr));
+        claheGroupBox->setTitle(QCoreApplication::translate("MatrixImageView", "CLAHE", nullptr));
         suaceGroupBox->setTitle(QCoreApplication::translate("MatrixImageView", "SUACE", nullptr));
         checkHistoEqualize->setText(QCoreApplication::translate("MatrixImageView", "Histo Equalize", nullptr));
-        claheGroupBox->setTitle(QCoreApplication::translate("MatrixImageView", "CLAHE", nullptr));
     } // retranslateUi
 
 };

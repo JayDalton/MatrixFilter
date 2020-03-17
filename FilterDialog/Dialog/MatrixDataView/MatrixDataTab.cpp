@@ -19,7 +19,7 @@ struct MatrixDataTab::Impl
       {MatrixLayer::Source, "Source"}, 
       {MatrixLayer::Viewer, "Viewer"}, 
       {MatrixLayer::Floating, "Floating"}, 
-      {MatrixLayer::Fourier, "Fourier"}, 
+      {MatrixLayer::Magnitude, "Magnitude"}, 
    };
 
 private:
@@ -36,18 +36,22 @@ MatrixDataTab::MatrixDataTab(DataLayerSPtr data, QWidget* parent)
    setupUIElements();
 
    auto con = connect(data.get(), &DataLayer::currentMatrixChanged, 
-      this, [&]() { load(); }
+      this, [&]() 
+      { 
+         const auto index{ m->ui.comboBox->currentIndex() };
+         loadMatrix(static_cast<MatrixLayer>(index)); 
+      }
    );
 }
 
 MatrixDataTab::~MatrixDataTab() = default;
 
-void MatrixDataTab::load()
+void MatrixDataTab::loadMatrix(MatrixLayer layer)
 {
-   auto matrix = m->data->currentMatrix(MatrixLayer::Source);
+   auto matrix = m->data->currentMatrix(layer);
    m_matrixValueDataModel->setImageMatrix(matrix);
    
-   auto list = m->data->currentPropertyList(MatrixLayer::Source);
+   auto list = m->data->currentPropertyList(layer);
    m_matrixPropertyModel->setPropertyList(list);
 }
 
@@ -70,12 +74,15 @@ void MatrixDataTab::setupUIElements()
       this, [&]() { setupMatrixRange(m_matrixValueDataModel->getSectionRange()); });
 
    auto z = connect(m->ui.comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-      this, [&](int index) { static_cast<MatrixLayer>(index); });
+      this, [&](int index) 
+      {
+         const auto value = m->ui.comboBox->itemData(index);
+         loadMatrix(static_cast<MatrixLayer>(value.toInt())); 
+      });
 
-   //#todo layer select impl
-   for (const auto& [index, label] : m->matrixLayer)
+   for (const auto& [value, label] : m->matrixLayer)
    {
-      m->ui.comboBox->addItem(label, static_cast<int>(index));
+      m->ui.comboBox->addItem(label, static_cast<int>(value));
    }
 
    setupMatrixRange(QRect{});

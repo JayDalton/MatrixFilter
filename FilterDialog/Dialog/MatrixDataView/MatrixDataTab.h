@@ -14,7 +14,7 @@ public:
     explicit MatrixDataTab(DataLayerSPtr data, QWidget *parent);
     ~MatrixDataTab();
 
-    void load();
+    void loadMatrix(MatrixLayer layer);
 
 private:
    void setupUIElements();
