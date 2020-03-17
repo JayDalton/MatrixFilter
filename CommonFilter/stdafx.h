@@ -31,7 +31,10 @@ namespace fs = std::filesystem;
 // Logging
 #include <spdlog/spdlog.h>
 #include <spdlog/logger.h>
+#include <spdlog/sinks/msvc_sink.h>
+#include <spdlog/sinks/stdout_sinks.h>
 #include "spdlog/sinks/basic_file_sink.h"
+#include <spdlog/sinks/rotating_file_sink.h>
 namespace logger = spdlog;
 
 #define RAPIDJSON_HAS_STDSTRING 1

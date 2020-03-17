@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 
 #include <string_view>
-//#include "Logger/Logger.h"
+#include "Logger/Logger.h"
 
 #include "Application.h"
 
@@ -10,9 +10,9 @@ namespace fs = std::filesystem;
 Application::Application(int argc, char** argv, std::string_view title)
    : QApplication(argc, argv), m_data(std::make_shared<DataLayer>())
 {
-   QApplication::setOrganizationName("NoneProfitAG");
+   QApplication::setOrganizationName("NoneProfit");
    QApplication::setApplicationName(title.data());
-   QApplication::setApplicationVersion("0.1");
+   QApplication::setApplicationVersion("0.2");
 
    m_arguments = QApplication::arguments();
 
@@ -20,6 +20,12 @@ Application::Application(int argc, char** argv, std::string_view title)
    setupDialog();
 
    auto con = connect(this, &QApplication::lastWindowClosed, this, &QApplication::quit);
+}
+
+Application::~Application()
+{
+   spdlog::info("App ends.");
+   spdlog::info("===============================================");
 }
 
 void Application::setConfig(const ApplicationConfig& config)
@@ -40,19 +46,25 @@ QStringList Application::getArguments() const
 void Application::setupLogger()
 {
    fs::path path("logfiles/dialog.log");
-   if (!fs::exists(path))
+   if (!fs::exists(path.parent_path()))
    {
       auto p = path.parent_path();
       fs::create_directories(p);
    }
 
-   auto file_logger = spdlog::basic_logger_mt("logger", path.string());
-   spdlog::set_default_logger(file_logger);
-   //spdlog::set_level(spdlog::level::debug);
-   spdlog::flush_every(std::chrono::seconds(3));
-   //spdlog::flush_on(spdlog::level::warn);
-   spdlog::flush_on(spdlog::level::info);
+   auto msvc_sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
+   msvc_sink->set_pattern("[%M:%S.%e] [%t] [%l] %v ");
+   auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path.string());
+   file_sink->set_pattern("[%H:%M:%S.%e] [%t] [%l] %-64v [%!] [%@]");
 
+   std::vector<spdlog::sink_ptr> sinks{ msvc_sink, file_sink };
+   spdlog::set_default_logger(std::make_shared<spdlog::logger>(
+      "logger", std::begin(sinks), std::end(sinks))
+   );
+
+   spdlog::flush_on(spdlog::level::debug);
+   spdlog::set_level(spdlog::level::trace);
+   
    const auto app = QCoreApplication::applicationName().toStdString();
    const auto ver = QCoreApplication::applicationVersion().toStdString();
    spdlog::info("===============================================");

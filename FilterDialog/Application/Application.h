@@ -17,6 +17,7 @@ class Application : public QApplication
 
 public:
    Application(int argc, char** argv, std::string_view title);
+   ~Application();
 
    void setConfig(const ApplicationConfig& config);
 

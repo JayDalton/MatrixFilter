@@ -13,6 +13,7 @@
 #include "MatrixImageView/MatrixImageView.h"
 
 #include "Application/DataLayer.h"
+#include "Logger/Logger.h"
 
 struct FilterDialog::Impl
 {
@@ -40,6 +41,8 @@ FilterDialog::FilterDialog(DataLayerSPtr data)
    setupTabWidgets();
 
    installEventFilter(this);
+
+   SPDLOG_DEBUG("CTOR FilterDialog");
 
    setWindowTitle(tr("Matrix Filter Dialog"));
 }

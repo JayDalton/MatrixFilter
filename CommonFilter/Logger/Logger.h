@@ -6,8 +6,11 @@
 
 // Logger
 #include <spdlog/spdlog.h>
-#include <spdlog/sinks/basic_file_sink.h> // support for basic file logging
-#include <spdlog/sinks/rotating_file_sink.h> // support for rotating file logging
+#include <spdlog/logger.h>
+#include <spdlog/sinks/msvc_sink.h>
+#include <spdlog/sinks/stdout_sinks.h>
+#include "spdlog/sinks/basic_file_sink.h"
+#include <spdlog/sinks/rotating_file_sink.h>
 
 #define RAPIDJSON_HAS_STDSTRING 1
 #include <rapidjson/reader.h>
