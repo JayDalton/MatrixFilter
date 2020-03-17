@@ -20,6 +20,7 @@ struct MatrixDataTab::Impl
       {MatrixLayer::Viewer, "Viewer"}, 
       {MatrixLayer::Floating, "Floating"}, 
       {MatrixLayer::Magnitude, "Magnitude"}, 
+      {MatrixLayer::Display, "Display"}, 
    };
 
 private:

@@ -23,6 +23,8 @@ private:
    void saveFilterSettings() const;
    FilterSettings readFilterSettings() const;
 
+   void loadMatrix(MatrixLayer layer);
+
 private:
    struct Impl;
    std::unique_ptr<Impl> m;

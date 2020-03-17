@@ -24,7 +24,13 @@ struct MatrixImageView::Impl
       Qt::Key_Plus, Qt::Key_Minus,
       Qt::Key_Up, Qt::Key_Down,
    };
- 
+
+   const std::map<MatrixLayer, QString> matrixLayer
+   { 
+      {MatrixLayer::Viewer, "Viewer"}, 
+      {MatrixLayer::Display, "Display"}, 
+   };
+
 private:
    MatrixImageView* parent{ nullptr };
 };
@@ -45,9 +51,9 @@ MatrixImageView::MatrixImageView(DataLayerSPtr data, QWidget* parent)
    auto con = connect(data.get(), &DataLayer::currentMatrixChanged, 
       this, [=]()
       {
-         auto matrix = m->data->currentMatrix(MatrixLayer::Viewer);
-         m->ui.frameView->setImageMatrix(matrix);
-         m->ui.frameView->update();
+         const auto index{ m->ui.comboBox->currentIndex() };
+         const auto value{ m->ui.comboBox->itemData(index) };
+         loadMatrix(static_cast<MatrixLayer>(value.toInt())); 
       }
    );
 }
@@ -100,6 +106,18 @@ void MatrixImageView::keyReleaseEvent(QKeyEvent* event)
 
 void MatrixImageView::setupUIElements()
 {
+   for (const auto& [value, label] : m->matrixLayer)
+   {
+      m->ui.comboBox->addItem(label, static_cast<int>(value));
+   }
+
+   connect(m->ui.comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+      this, [&](int index) 
+      {
+         const auto value = m->ui.comboBox->itemData(index);
+         loadMatrix(static_cast<MatrixLayer>(value.toInt())); 
+      });
+
    connect(m->ui.checkHistoEqualize, &QCheckBox::toggled, 
       this, [&](bool) { applyFilterSetting(); });
 
@@ -145,6 +163,13 @@ FilterSettings MatrixImageView::readFilterSettings() const
    filter.m_suaceEnabled = m->ui.suaceGroupBox->isChecked();
 
    return filter;
+}
+
+void MatrixImageView::loadMatrix(MatrixLayer layer)
+{
+   auto matrix = m->data->currentMatrix(layer);
+   m->ui.frameView->setImageMatrix(matrix);
+   m->ui.frameView->update();
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

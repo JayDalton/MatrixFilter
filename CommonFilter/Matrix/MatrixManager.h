@@ -7,7 +7,7 @@
 #include "MatrixFile.h"
 #include "MatrixImage.h"
 
-enum class MatrixLayer { Source, Viewer, Floating, Fourier, Magnitude, Target, Count };
+enum class MatrixLayer { Source, Viewer, Floating, Fourier, Magnitude, Display, Target, Count };
 
 struct MatrixManager
 {
@@ -29,7 +29,7 @@ private:
    cv::Mat transformToMagnitude(const cv::Mat& source) const;
    cv::Mat transformToInvert(const cv::Mat& source) const;
 
-   void recenterDFT(cv::Mat& source);
+   cv::Mat recenterDFT(const cv::Mat& source) const;
 
    int64 dump_duration(int64 now, std::string label) const;
 
@@ -46,6 +46,7 @@ private:
    cv::Mat m_floating;
    cv::Mat m_fourier;
    cv::Mat m_magnitude;
+   cv::Mat m_display;
    cv::Mat m_target;
 
    // MatrixImage

@@ -34,6 +34,8 @@ void MatrixManager::loadMatrixFromFile(MatrixFileInfo fileInfo)
 
    m_magnitude = transformToMagnitude(m_fourier);
 
+   m_display = transformToInteger(m_magnitude);
+
    m_target = transformToInteger(m_fourier);
 }
 
@@ -51,6 +53,8 @@ cv::Mat MatrixManager::getMatrixData(MatrixLayer layer) const
       return m_fourier;
    case MatrixLayer::Magnitude:
       return m_magnitude;
+   case MatrixLayer::Display:
+      return m_display;
    case MatrixLayer::Target:
       return m_target;
    default:
@@ -170,6 +174,12 @@ cv::Mat MatrixManager::transformToMagnitude(const cv::Mat& source) const
    cv::Mat result = planes[0];
    result += cv::Scalar::all(1);							// switch to logarithmic scale
    cv::log(result, result);
+
+   // crop the spectrum, if it has an odd number of rows or columns
+   result = result(cv::Rect(0, 0, result.cols & -2, result.rows & -2));
+
+   result = recenterDFT(result);
+
    cv::normalize(result, result, 0.0, 1.0, cv::NORM_MINMAX);
 
    dump_duration(now, "complete magnitude");
@@ -182,7 +192,7 @@ cv::Mat MatrixManager::transformToMagnitude(const cv::Mat& source) const
    return result;
 }
 
-void MatrixManager::recenterDFT(cv::Mat& source) 
+cv::Mat MatrixManager::recenterDFT(const cv::Mat& source) const
 {
    int centerX = source.cols / 2;
    int centerY = source.rows / 2;
@@ -201,6 +211,8 @@ void MatrixManager::recenterDFT(cv::Mat& source)
    q2.copyTo(swapMap);
    q3.copyTo(q2);
    swapMap.copyTo(q3);
+
+   return swapMap;
 }
 
 cv::Mat MatrixManager::transformToInvert(const cv::Mat& source) const
