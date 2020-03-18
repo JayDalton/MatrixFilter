@@ -20,6 +20,8 @@ LoggerView::LoggerView(DataLayerSPtr data, QWidget* parent)
    : QWidget(parent), m(std::make_unique<Impl>(this, data))
 {
    m->ui.setupUi(this);
+
+   m->ui.loggerWidget;
 }
 
 LoggerView::~LoggerView() = default;

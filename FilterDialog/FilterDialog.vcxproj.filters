@@ -82,6 +82,9 @@
     <ClCompile Include="Dialog\LoggerView\LoggerView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Dialog\LoggerView\LoggerWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -138,6 +141,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Dialog\LoggerView\LoggerView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\LoggerView\LoggerWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

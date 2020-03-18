@@ -10,7 +10,7 @@ struct LoggerEntry
 };
 
 template<typename Mutex>
-class LogAdapter : public spdlog::sinks::base_sink <Mutex>
+struct LogAdapter : public spdlog::sinks::base_sink <Mutex>
 {
    LogAdapter();
 
@@ -19,6 +19,13 @@ class LogAdapter : public spdlog::sinks::base_sink <Mutex>
 protected:
    void sink_it_(const spdlog::details::log_msg& msg) override
    {
+      msg.level;
+      msg.logger_name;
+      msg.payload;
+      msg.source;
+      msg.thread_id;
+      msg.time;
+
       spdlog::memory_buf_t formatted;
       base_sink<Mutex>::formatter_->format(msg, formatted);
       std::cout << fmt::to_string(formatted);

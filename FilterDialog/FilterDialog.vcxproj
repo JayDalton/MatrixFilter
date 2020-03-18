@@ -132,6 +132,7 @@
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationModel.cpp" />
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationEditor.cpp" />
     <ClCompile Include="Dialog\LoggerView\LoggerView.cpp" />
+    <ClCompile Include="Dialog\LoggerView\LoggerWidget.cpp" />
     <ClCompile Include="Dialog\MatrixFileLoader\FileSelectModel.cpp" />
     <ClCompile Include="Dialog\MatrixFileLoader\FileSelectTab.cpp" />
     <ClCompile Include="Dialog\FilterDialog.cpp" />
@@ -166,6 +167,7 @@
     <QtMoc Include="Dialog\ConfigEditor\ConfigurationModel.h" />
     <QtMoc Include="Basic\ProgressBar.h" />
     <QtMoc Include="Dialog\LoggerView\LoggerView.h" />
+    <QtMoc Include="Dialog\LoggerView\LoggerWidget.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
