@@ -21,7 +21,9 @@ LoggerView::LoggerView(DataLayerSPtr data, QWidget* parent)
 {
    m->ui.setupUi(this);
 
-   m->ui.loggerWidget;
+   auto adapter = m->ui.loggerWidget->createLoggerAdapter();
+   data->appendLoggerSink(adapter);
+
 }
 
 LoggerView::~LoggerView() = default;

@@ -2,26 +2,29 @@
 
 #include <QTimer>
 #include <QTreeView>
+#include <QDateTime>
 
-#include "Logger/BufferedQueue.h"
-
-struct LoggerEntry
-{
-
-};
-
-struct LoggerAppender // public spdlog::sinks::base_sink <Mutex>
-{
-
-};
+#include "Logger/Logger.h"
+#include "Application/DataLayer.h"
 
 ///////////////////////////////////////////////////////////////////////////////
+
+struct LoggerItem
+{
+   LoggerItem(const LoggerEntry& entry);
+
+   uint m_thread;
+   QString m_place;
+   QString m_message;
+   QDateTime m_timestamp;
+   LoggerLevel m_priority;
+};
 
 class LoggerModel : public QAbstractItemModel
 {
    Q_OBJECT
 
-   using LoggerEntryPtr = std::unique_ptr<LoggerEntry>;
+   using LoggerItemPtr = std::unique_ptr<LoggerItem>;
 
    enum class Column
    {
@@ -29,18 +32,19 @@ class LoggerModel : public QAbstractItemModel
       Priority,
       Message,
       Thread,
-      Line,
+      Place,
       Count
    };
 
 public:
    ~LoggerModel() override = default;
-   LoggerModel(std::size_t maxLogLength = MAX_ROW_COUNT, 
-      std::chrono::milliseconds interval = UPDATE_INTERVAL);
+   LoggerModel(std::size_t maxLogLength = MAX_ROW_COUNT);
 
-   void appendLog();
-   void showBuffered();
+   static constexpr std::size_t MAX_ROW_COUNT{ 200 };
+
    void setFreezed(bool freeze);
+   void applyBufferedContent();
+   void appendLoggerEntry(const LoggerEntry& entry);
 
    QModelIndex index(int row, int column, const QModelIndex& parent = {}) const override;
    QModelIndex parent(const QModelIndex &child) const override;
@@ -50,16 +54,15 @@ public:
    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
-   static constexpr std::size_t MAX_ROW_COUNT{ 200 };
-   static constexpr std::chrono::milliseconds UPDATE_INTERVAL{ 250 };
+private:
+   QVariant getDisplayData(int column, const LoggerItemPtr& item) const;
+   QVariant getPriorityInfo(LoggerLevel level) const;
 
 private:
-   void updateViewModelFromBuffer();
-
-private:
-   QTimer m_updateTimer;
-   BufferedQueue<LoggerEntryPtr> m_queue;
+   BufferedQueue<LoggerItemPtr> m_queue;
 };
+
+using LoggerModelPtr = std::unique_ptr<LoggerModel>;
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -71,9 +74,11 @@ public:
    LoggerWidget(QWidget *parent);
    ~LoggerWidget() override = default;
 
-   void logEvent();
+   void logEvent(const LoggerEntry& entry);
    void setFreeze(bool freeze);
    void clearModel();
+
+   BaseMutexLoggerPtr createLoggerAdapter();
 
 protected:
    void showEvent(QShowEvent* event) override;
@@ -83,7 +88,8 @@ protected:
    void handleRowsInserted();
 
 private:
-   std::unique_ptr<LoggerModel> m_model;
+   QTimer m_updateTimer;
+   LoggerModelPtr m_model;
    bool m_autoScrolling{ true };
    bool m_isFreezed{ false };
 };

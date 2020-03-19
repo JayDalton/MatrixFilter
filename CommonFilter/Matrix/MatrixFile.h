@@ -26,7 +26,7 @@ struct MatrixFileInfo
 
 private:
    fs::path m_path;
-   static inline const std::array m_validExtensions{".pgm", ".dcm"};
+   static constexpr std::array m_validExtensions{".pgm", ".dcm"};
 };
 
 using MatrixFileUPtr = std::unique_ptr<MatrixFileInfo>;

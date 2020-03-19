@@ -97,6 +97,7 @@ void FilterDialog::setupDataLayers()
 
 void FilterDialog::setupTabWidgets()
 {
+   SPDLOG_INFO("Start Dialog Tab Loading");
    m->tabFileSelect = new FileSelectTab{ m->data, this };
    m->ui.tabWidget->addTab(m->tabFileSelect, tr("File Select"));
 

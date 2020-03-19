@@ -10,9 +10,9 @@ struct LoggerEntry
 };
 
 template<typename Mutex>
-struct LogAdapter : public spdlog::sinks::base_sink <Mutex>
+struct LoggerAdapter : public spdlog::sinks::base_sink <Mutex>
 {
-   LogAdapter();
+   LoggerAdapter();
 
    using EntryType = std::unique_ptr<LoggerEntry>;
 

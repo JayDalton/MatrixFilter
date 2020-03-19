@@ -1,12 +1,13 @@
-#pragma once
+﻿#pragma once
 
+#include <mutex>
 #include <iostream>
 #include <string_view>
-//#include <experimental/>
 
 // Logger
 #include <spdlog/spdlog.h>
 #include <spdlog/logger.h>
+#include <spdlog/sinks/base_sink.h>
 #include <spdlog/sinks/msvc_sink.h>
 #include <spdlog/sinks/stdout_sinks.h>
 #include "spdlog/sinks/basic_file_sink.h"
@@ -26,43 +27,76 @@
 #include <rapidjson/ostreamwrapper.h>
 namespace json = rapidjson;
 
-using cstr = const char * const;
+#include "BufferedQueue.h"
 
-static constexpr cstr past_last_slash(cstr str, cstr last_slash)
+enum class LoggerLevel
 {
-   return
-      *str == '\0' ? last_slash :
-      *str == '/' ? past_last_slash(str + 1, str + 1) :
-      past_last_slash(str + 1, last_slash);
-}
+   Trace,
+   Debug,
+   Info,
+   Warning,
+   Error,
+   Critical,
+   None,
+};
 
-static constexpr cstr past_last_slash(cstr str) 
-{ 
-   return past_last_slash(str, str);
-}
-
-#define __SHORT_FILE__ ({constexpr cstr sf__ {past_last_slash(__FILE__)}; sf__;})
-
-struct Logger
+struct LoggerEntry
 {
-   explicit Logger();
-   ~Logger();
-   // const char* functionName, const char* fileName, int lineNo, int maxDurationMSecs = 0
-   //explicit Logger(const std::string_view& message, const std::string_view& file, const std::string_view& line);
-   //~Logger();
+   LoggerEntry(const spdlog::details::log_msg& msg);
 
-   static void debug(std::string_view message);
+   LoggerLevel m_level;
+   std::string m_logger;
+   std::string m_payload;
+   std::size_t m_threadId;
+   std::string m_srcFileName;
+   std::string m_srcFuncName;
+   std::size_t m_srcLocation;
+   using TimePoint = std::chrono::system_clock::time_point;
+     TimePoint m_timePoint;
 
 private:
-   struct Impl;
-   static std::unique_ptr<Impl> m;
+   LoggerLevel getLevel(spdlog::level::level_enum level) const;
 };
 
-struct CallLogger
+using LoggerEntryPtr = std::unique_ptr<LoggerEntry>;
+
+///////////////////////////////////////////////////////////////////
+
+template<typename Mutex>
+struct LoggerAdapter : public spdlog::sinks::base_sink <Mutex>
 {
-   CallLogger(std::string_view message, std::string_view file = __FILE__);
+   //LoggerAdapter();
+
+protected:
+   void sink_it_(const spdlog::details::log_msg& msg) override
+   {
+      //msg.level;
+      //msg.logger_name;
+      //msg.payload;
+      //msg.source;
+      //msg.thread_id;
+      //msg.time;
+
+      //spdlog::memory_buf_t formatted;
+      //base_sink<Mutex>::formatter_->format(msg, formatted);
+      //std::cout << fmt::to_string(formatted);
+
+      appendEntry(LoggerEntry{ msg });
+      //appendEntry(std::make_unique<LoggerEntry>(msg));
+   }
+
+   void flush_() override 
+   {
+      //std::cout << std::flush;
+   }
+
+   virtual void appendEntry(const LoggerEntry& entry) = 0;
+   //virtual void appendEntry(LoggerEntryPtr&& entry) = 0;
 };
 
-constexpr auto Square = [] (int n) { return n*n; }; // implicitly constexpr
-//constexpr auto LOGGER_CALL() { return Logger(__FUNCTION__, __FILE__, __LINE__); }
+using BaseMutexLogger = LoggerAdapter<std::mutex>;
+using BaseStaticLogger = LoggerAdapter<spdlog::details::null_mutex>;
 
+using BaseMutexLoggerPtr = std::shared_ptr<BaseMutexLogger>;
+
+// Codepage: UTF-8 (ÜüÖöÄäẞß)

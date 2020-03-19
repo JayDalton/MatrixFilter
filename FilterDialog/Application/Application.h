@@ -3,13 +3,12 @@
 #include <optional>
 
 #include <QApplication>
-//#include "Dialog/FilterDialog.h"
 
 #include "ApplicationConfig.h"
 #include "Logger/Logger.h"
 #include "DataLayer.h"
 
-using FileLogger = std::shared_ptr<spdlog::logger>;
+//using FileLogger = std::shared_ptr<spdlog::logger>;
 
 class Application : public QApplication
 {

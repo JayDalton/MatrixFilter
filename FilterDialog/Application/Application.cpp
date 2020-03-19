@@ -51,6 +51,7 @@ void Application::setupLogger()
       fs::create_directories(p);
    }
 
+   //auto base_sink = std::make_shared<BasicSinkLogger>(m_data);
    auto msvc_sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
    msvc_sink->set_pattern("[%M:%S.%e] [%t] [%l] %v ");
    auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path.string());
@@ -58,12 +59,12 @@ void Application::setupLogger()
 
    std::vector<spdlog::sink_ptr> sinks{ msvc_sink, file_sink };
    spdlog::set_default_logger(std::make_shared<spdlog::logger>(
-      "logger", std::begin(sinks), std::end(sinks))
-   );
+      "logger", std::begin(sinks), std::end(sinks)));
+   m_data->setDefaultLogger(spdlog::default_logger());
 
    spdlog::flush_on(spdlog::level::debug);
    spdlog::set_level(spdlog::level::trace);
-   
+
    const auto app = QCoreApplication::applicationName().toStdString();
    const auto ver = QCoreApplication::applicationVersion().toStdString();
    spdlog::info("===============================================");
