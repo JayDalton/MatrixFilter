@@ -62,8 +62,8 @@ using LoggerEntryPtr = std::unique_ptr<LoggerEntry>;
 
 ///////////////////////////////////////////////////////////////////
 
-template<typename Mutex>
-struct LoggerAdapter : public spdlog::sinks::base_sink <Mutex>
+//template<typename Mutex>
+struct LoggerAdapter : public spdlog::sinks::base_sink <std::mutex>
 {
    //LoggerAdapter();
 
@@ -94,9 +94,40 @@ protected:
    //virtual void appendEntry(LoggerEntryPtr&& entry) = 0;
 };
 
-using BaseMutexLogger = LoggerAdapter<std::mutex>;
-using BaseStaticLogger = LoggerAdapter<spdlog::details::null_mutex>;
+using LoggerAdapterPtr = std::shared_ptr<LoggerAdapter>;
 
-using BaseMutexLoggerPtr = std::shared_ptr<BaseMutexLogger>;
+//using BaseMutexLogger = LoggerAdapter/*<std::mutex>*/;
+//using BaseStaticLogger = LoggerAdapter<spdlog::details::null_mutex>;
+
+//using BaseMutexLoggerPtr = std::shared_ptr<BaseMutexLogger>;
+
+//auto msvc_sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
+//msvc_sink->set_pattern("[%M:%S.%e] [%t] [%l] %v ");
+//auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path.string());
+//file_sink->set_pattern("[%H:%M:%S.%e] [%t] [%l] %-64v [%!] [%@]");
+
+//struct StandardMSVCLoggerSink : public spdlog::sinks::msvc_sink_mt
+//{
+//   StandardMSVCLoggerSink()
+//   {
+//      set_pattern("[%M:%S.%e] [%t] [%l] %v ");
+//   }
+//};
+
+/////////////////////////////////////////////////////////////////////////////////
+
+struct Logger
+{
+   Logger();
+
+   static void appendLoggerSink(spdlog::sink_ptr loggerSink);
+   static void removeLoggerSink(spdlog::sink_ptr loggerSink);
+
+   static spdlog::sink_ptr createMsvcLoggerSink();
+   static spdlog::sink_ptr createFileLoggerSink(const std::string& fileName);
+
+//private:
+//   std::unordered_set<BaseMutexLoggerPtr> m_loggerSinks;
+};
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

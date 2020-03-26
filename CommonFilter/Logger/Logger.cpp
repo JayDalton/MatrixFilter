@@ -39,4 +39,36 @@ LoggerLevel LoggerEntry::getLevel(spdlog::level::level_enum level) const
    }
 }
 
+
+void Logger::appendLoggerSink(spdlog::sink_ptr loggerSink)
+{
+   // it's not thread-safe !!!
+   spdlog::default_logger()->sinks().push_back(loggerSink);
+}
+
+void Logger::removeLoggerSink(spdlog::sink_ptr loggerSink)
+{
+   // it's not thread-safe !!!
+   auto& sinks{ spdlog::default_logger()->sinks() };
+   auto found = std::find(sinks.cbegin(), sinks.cend(), loggerSink);
+   if (found != sinks.cend())
+   {
+      sinks.erase(found);
+   }
+}
+
+spdlog::sink_ptr Logger::createMsvcLoggerSink()
+{
+   auto msvc_sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
+   msvc_sink->set_pattern("[%M:%S.%e] [%t] [%l] %v ");
+   return msvc_sink;
+}
+
+spdlog::sink_ptr Logger::createFileLoggerSink(const std::string& fileName)
+{
+   auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(fileName);
+   file_sink->set_pattern("[%H:%M:%S.%e] [%t] [%l] %-64v [%!] [%@]");
+   return file_sink;
+}
+
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

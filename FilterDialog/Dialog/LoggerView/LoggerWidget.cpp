@@ -16,7 +16,7 @@ LoggerItem::LoggerItem(const LoggerEntry& entry)
       .arg(entry.m_srcLocation);
 }
 
-struct StandardWidgetLoggerSink : public BaseMutexLogger
+struct StandardWidgetLoggerSink : public LoggerAdapter
 {
    StandardWidgetLoggerSink(LoggerWidget* owner)
       : m_owner(owner)
@@ -26,9 +26,7 @@ struct StandardWidgetLoggerSink : public BaseMutexLogger
 protected:
    void appendEntry(const LoggerEntry& entry) override
    {
-      QMetaObject::invokeMethod(m_owner, 
-         [=]() { m_owner->logEvent(entry); }, 
-         Qt::QueuedConnection);
+      QMetaObject::invokeMethod(m_owner, [=]() { m_owner->logEvent(entry); });
    }
 
 private:
@@ -209,6 +207,15 @@ LoggerWidget::LoggerWidget(QWidget *parent)
 
    connect(m_model.get(), &QAbstractItemModel::rowsInserted,
       this, &LoggerWidget::handleRowsInserted);
+
+   m_loggerSink = std::make_shared<StandardWidgetLoggerSink>(this);
+   Logger::appendLoggerSink(m_loggerSink);
+}
+
+LoggerWidget::~LoggerWidget()
+{
+   Logger::removeLoggerSink(m_loggerSink);
+   m_loggerSink.reset();
 }
 
 void LoggerWidget::logEvent(const LoggerEntry& entry)
@@ -228,11 +235,6 @@ void LoggerWidget::setFreeze(bool freeze)
       m_updateTimer.start();
    }
    m_model->setFreezed(m_isFreezed && isVisible());
-}
-
-BaseMutexLoggerPtr LoggerWidget::createLoggerAdapter()
-{
-   return std::make_shared<StandardWidgetLoggerSink>(this);
 }
 
 void LoggerWidget::showEvent(QShowEvent* event)

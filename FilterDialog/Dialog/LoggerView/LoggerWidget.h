@@ -72,13 +72,11 @@ class LoggerWidget : public QTreeView
 
 public:
    LoggerWidget(QWidget *parent);
-   ~LoggerWidget() override = default;
+   ~LoggerWidget() override;
 
    void logEvent(const LoggerEntry& entry);
    void setFreeze(bool freeze);
    void clearModel();
-
-   BaseMutexLoggerPtr createLoggerAdapter();
 
 protected:
    void showEvent(QShowEvent* event) override;
@@ -90,6 +88,7 @@ protected:
 private:
    QTimer m_updateTimer;
    LoggerModelPtr m_model;
+   LoggerAdapterPtr m_loggerSink;
    bool m_autoScrolling{ true };
    bool m_isFreezed{ false };
 };

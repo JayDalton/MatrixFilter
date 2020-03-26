@@ -21,9 +21,7 @@ LoggerView::LoggerView(DataLayerSPtr data, QWidget* parent)
 {
    m->ui.setupUi(this);
 
-   auto adapter = m->ui.loggerWidget->createLoggerAdapter();
-   data->appendLoggerSink(adapter);
-
+   SPDLOG_DEBUG("CTOR LoggerView");
 }
 
 LoggerView::~LoggerView() = default;

@@ -9,7 +9,6 @@ namespace fs = std::filesystem;
 
 DataLayer::DataLayer()
 {
-   //m_loggerQueue = std::make_shared<BufferedLogger>(400);
 }
 
 QSettings DataLayer::settings()
@@ -17,26 +16,6 @@ QSettings DataLayer::settings()
    const auto orga{ QCoreApplication::organizationName() };
    const auto app{ QCoreApplication::applicationName() };
    return QSettings(orga, app);
-}
-
-//void DataLayer::appendLoggerEntry(LoggerEntryPtr&& entry)
-//{
-//   m_loggerQueue->append(std::move(entry));
-//}
-//
-//DataLayer::LoggerQueuePtr DataLayer::getLoggerQueue() const
-//{
-//   return m_loggerQueue;
-//}
-
-void DataLayer::appendLoggerSink(BaseMutexLoggerPtr loggerSink)
-{
-   m_logger->sinks().push_back(loggerSink);
-}
-
-void DataLayer::setDefaultLogger(std::shared_ptr<spdlog::logger> logger)
-{
-   m_logger = logger;
 }
 
 bool DataLayer::readMatrixFileInfo(const StringVector& pathList)
@@ -90,14 +69,5 @@ void DataLayer::applyImageViewerFilter(FilterSettings setting)
 
 //////////////////////////////////////////////////////////////////////
 
-//BasicSinkLogger::BasicSinkLogger(DataLayerSPtr data)
-//   : m_layer(data)
-//{
-//}
-//
-//void BasicSinkLogger::appendEntry(LoggerEntryPtr&& entry)
-//{
-//   //m_layer->appendLoggerEntry(std::move(entry));
-//}
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)
