@@ -85,6 +85,9 @@
     <ClCompile Include="Dialog\LoggerView\LoggerWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Basic\XTreeView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -93,7 +96,7 @@
     <ClInclude Include="Application\ApplicationConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Basic\TLatin1String.h">
+    <ClInclude Include="Basic\XLatin1String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -147,6 +150,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Dialog\LoggerView\LoggerWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Basic\XTreeView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

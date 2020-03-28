@@ -5,7 +5,7 @@
 #include <QDateTime>
 
 #include "Logger/Logger.h"
-#include "Basic/TLatin1String.h"
+#include "Basic/XLatin1String.h"
 #include "Application/DataLayer.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -94,7 +94,7 @@ private:
    bool m_autoScrolling{ true };
    bool m_isFreezed{ false };
 
-   static constexpr TLatin1String WIDGET_TAB_STATE{ "LoggerWidgetState" };
+   static constexpr XLatin1String WIDGET_TAB_STATE{ "LoggerWidgetState" };
 };
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

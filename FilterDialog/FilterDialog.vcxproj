@@ -78,7 +78,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;.\Dialog\LoggerView;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;.\Dialog\LoggerView;.\Basic;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -108,7 +108,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;.\Dialog\LoggerView;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;.\Dialog\LoggerView;.\Basic;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -129,6 +129,7 @@
     <ClCompile Include="Application\ApplicationConfig.cpp" />
     <ClCompile Include="Application\DataLayer.cpp" />
     <ClCompile Include="Basic\ProgressBar.cpp" />
+    <ClCompile Include="Basic\XTreeView.cpp" />
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationModel.cpp" />
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationEditor.cpp" />
     <ClCompile Include="Dialog\LoggerView\LoggerView.cpp" />
@@ -168,7 +169,8 @@
     <QtMoc Include="Basic\ProgressBar.h" />
     <QtMoc Include="Dialog\LoggerView\LoggerView.h" />
     <QtMoc Include="Dialog\LoggerView\LoggerWidget.h" />
-    <ClInclude Include="Basic\TLatin1String.h" />
+    <ClInclude Include="Basic\XLatin1String.h" />
+    <QtMoc Include="Basic\XTreeView.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

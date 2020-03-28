@@ -6,7 +6,7 @@
 
 #include "Config/Configuration.h"
 #include "Application/DataLayer.h"
-#include "Basic/TLatin1String.h"
+#include "Basic/XLatin1String.h"
 
 class FilterDialog : public QDialog
 {
@@ -27,7 +27,7 @@ private:
 private:
    struct Impl;
    std::unique_ptr<Impl> m;
-   static constexpr TLatin1String WIDGET_GEOMETRY{ "DialogGeometry" };
+   static constexpr XLatin1String WIDGET_GEOMETRY{ "DialogGeometry" };
 };
 
 using FilterDialogUPtr = std::unique_ptr<FilterDialog>;
