@@ -5,6 +5,7 @@
 #include <QDateTime>
 
 #include "Logger/Logger.h"
+#include "Basic/TLatin1String.h"
 #include "Application/DataLayer.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -74,12 +75,14 @@ public:
    ~LoggerWidget() override;
 
    void logEvent(const LoggerEntry& entry);
-   void setFreeze(bool freeze);
+   void setFreezed(bool freeze);
 
 protected:
    void showEvent(QShowEvent* event) override;
    void hideEvent(QHideEvent* event) override;
 
+private:
+   void setupModel(QAbstractItemModel* model);
    void handleRowsAboutToBeInserted();
    void handleRowsInserted();
    void handleUpdate();
@@ -90,6 +93,8 @@ private:
    LoggerAdapterPtr m_loggerSink;
    bool m_autoScrolling{ true };
    bool m_isFreezed{ false };
+
+   static constexpr TLatin1String WIDGET_TAB_STATE{ "LoggerWidgetState" };
 };
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

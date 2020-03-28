@@ -20,7 +20,7 @@ class DataLayer : public QObject
 public:
    explicit DataLayer();
 
-   QSettings settings();
+   static QSettings settings();
 
    using BufferedLogger = BufferedQueue<LoggerEntryPtr>;
    using LoggerQueuePtr = std::shared_ptr<BufferedLogger>;

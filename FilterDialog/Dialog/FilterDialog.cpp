@@ -39,20 +39,16 @@ FilterDialog::FilterDialog(DataLayerSPtr data)
    m->ui.setupUi(this);
 
    restoreSettings();
-   setupDataLayers();
    setupTabWidgets();
 
    installEventFilter(this);
 
-   spdlog::debug("CTOR 2 FilterDialog");
-
    setWindowTitle(tr("Matrix Filter Dialog"));
 }
 
-FilterDialog::~FilterDialog() = default;
-
-void FilterDialog::setConfig(const Configuration& config)
+FilterDialog::~FilterDialog()
 {
+   saveSettings();
 }
 
 bool FilterDialog::eventFilter(QObject* object, QEvent* event)
@@ -71,28 +67,6 @@ bool FilterDialog::eventFilter(QObject* object, QEvent* event)
    }
 
    return false;
-}
-
-void FilterDialog::closeEvent(QCloseEvent* event)
-{
-   auto config = m->data->settings();
-   config.setValue("geometry", saveGeometry());
-   QWidget::closeEvent(event);
-}
-
-void FilterDialog::restoreSettings()
-{
-   const auto settings = m->data->settings();
-   restoreGeometry(settings.value("geometry").toByteArray());
-}
-
-void FilterDialog::saveSettings()
-{
-}
-
-void FilterDialog::setupDataLayers()
-{
-   //m->data->loadConfiguration();
 }
 
 void FilterDialog::setupTabWidgets()
@@ -128,5 +102,17 @@ void FilterDialog::setupTabWidgets()
    );
 }
 
+void FilterDialog::restoreSettings()
+{
+   auto config = DataLayer::settings();
+   auto geometry = config.value(WIDGET_GEOMETRY);
+   restoreGeometry(geometry.toByteArray());
+}
+
+void FilterDialog::saveSettings()
+{
+   auto config = DataLayer::settings();
+   config.setValue(WIDGET_GEOMETRY, saveGeometry());
+}
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

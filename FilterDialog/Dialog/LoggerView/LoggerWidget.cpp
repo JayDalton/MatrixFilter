@@ -2,6 +2,7 @@
 #include "LoggerWidget.h"
 
 #include <QScrollBar>
+#include <QHeaderView>
 
 LoggerItem::LoggerItem(const LoggerEntry& entry)
    : m_message(QString::fromStdString(entry.m_payload))
@@ -194,16 +195,11 @@ LoggerWidget::LoggerWidget(QWidget *parent)
    setRootIsDecorated(false);
    setUniformRowHeights(true);
 
-   setModel(m_model.get());
+   setupModel(m_model.get());
+
    m_updateTimer.setSingleShot(false);
    m_updateTimer.setInterval(std::chrono::milliseconds(500));
    m_updateTimer.callOnTimeout(this, &LoggerWidget::handleUpdate);
-
-   connect(m_model.get(), &QAbstractItemModel::rowsAboutToBeInserted,
-      this, &LoggerWidget::handleRowsAboutToBeInserted);
-
-   connect(m_model.get(), &QAbstractItemModel::rowsInserted,
-      this, &LoggerWidget::handleRowsInserted);
 
    m_loggerSink = std::make_shared<StandardWidgetLoggerSink>(this);
    Logger::appendLoggerSink(m_loggerSink);
@@ -211,6 +207,7 @@ LoggerWidget::LoggerWidget(QWidget *parent)
 
 LoggerWidget::~LoggerWidget()
 {
+   DataLayer::settings().setValue(WIDGET_TAB_STATE, header()->saveState());
    Logger::removeLoggerSink(m_loggerSink);
    m_loggerSink.reset();
 }
@@ -220,7 +217,7 @@ void LoggerWidget::logEvent(const LoggerEntry& entry)
    m_model->appendLoggerEntry(entry);
 }
 
-void LoggerWidget::setFreeze(bool freeze)
+void LoggerWidget::setFreezed(bool freeze)
 {
    m_isFreezed = freeze;
    if (freeze)
@@ -235,14 +232,13 @@ void LoggerWidget::setFreeze(bool freeze)
 
 void LoggerWidget::showEvent(QShowEvent* event)
 {
-   setFreeze(false);
-   //setFreeze(m_isFreezed && isVisible());
+   setFreezed(false);//(m_isFreezed && isVisible());
    QTreeView::showEvent(event);
 }
 
 void LoggerWidget::hideEvent(QHideEvent* event)
 {
-   setFreeze(true);
+   setFreezed(true);
    QTreeView::hideEvent(event);
 }
 
@@ -251,6 +247,21 @@ void LoggerWidget::handleRowsAboutToBeInserted()
    const auto* scrollBar = verticalScrollBar();
    m_autoScrolling = !scrollBar->isEnabled() ||
       (scrollBar->value() == scrollBar->maximum());
+}
+
+void LoggerWidget::setupModel(QAbstractItemModel* model)
+{
+   setModel(model);
+
+   auto config = DataLayer::settings();
+   auto state = config.value(WIDGET_TAB_STATE);
+   header()->restoreState(state.toByteArray());
+
+   connect(model, &QAbstractItemModel::rowsAboutToBeInserted,
+      this, &LoggerWidget::handleRowsAboutToBeInserted);
+
+   connect(model, &QAbstractItemModel::rowsInserted,
+      this, &LoggerWidget::handleRowsInserted);
 }
 
 void LoggerWidget::handleRowsInserted()

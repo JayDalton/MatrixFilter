@@ -6,6 +6,7 @@
 
 #include "Config/Configuration.h"
 #include "Application/DataLayer.h"
+#include "Basic/TLatin1String.h"
 
 class FilterDialog : public QDialog
 {
@@ -15,14 +16,10 @@ public:
    explicit FilterDialog(DataLayerSPtr data);
    ~FilterDialog();
 
-   void setConfig(const Configuration& config);
-
 protected:
    bool eventFilter(QObject* object, QEvent* event) override;
-   void closeEvent(QCloseEvent* event) override;
 
 private:
-   void setupDataLayers();
    void setupTabWidgets();
    void restoreSettings();
    void saveSettings();
@@ -30,6 +27,7 @@ private:
 private:
    struct Impl;
    std::unique_ptr<Impl> m;
+   static constexpr TLatin1String WIDGET_GEOMETRY{ "DialogGeometry" };
 };
 
 using FilterDialogUPtr = std::unique_ptr<FilterDialog>;
