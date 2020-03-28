@@ -37,7 +37,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="ProgressBar" name="progressBar">
+      <widget class="XProgressBar" name="progressBar">
        <property name="textVisible">
         <bool>false</bool>
        </property>
@@ -53,9 +53,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>ProgressBar</class>
+   <class>XProgressBar</class>
    <extends>QProgressBar</extends>
-   <header location="global">Basic/ProgressBar.h</header>
+   <header location="global">Application/XProgressBar.h</header>
   </customwidget>
  </customwidgets>
  <resources>

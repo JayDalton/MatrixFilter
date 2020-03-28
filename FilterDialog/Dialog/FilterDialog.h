@@ -6,7 +6,6 @@
 
 #include "Config/Configuration.h"
 #include "Application/DataLayer.h"
-#include "Basic/XLatin1String.h"
 
 class FilterDialog : public QDialog
 {
@@ -14,7 +13,7 @@ class FilterDialog : public QDialog
 
 public:
    explicit FilterDialog(DataLayerSPtr data);
-   ~FilterDialog();
+   ~FilterDialog() override;
 
 protected:
    bool eventFilter(QObject* object, QEvent* event) override;

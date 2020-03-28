@@ -1,14 +1,14 @@
 ﻿#include "stdafx.h"
 
-#include "ProgressBar.h"
+#include "XProgressBar.h"
 
-ProgressBar::ProgressBar(QWidget* parent)
+XProgressBar::XProgressBar(QWidget* parent)
    : QProgressBar(parent)
 {
    setTextVisible(false);
 }
 
-void ProgressBar::setBusyIndicator(bool active)
+void XProgressBar::setBusyIndicator(bool active)
 {
    setMaximum(active ? 0 : 100);
    setMinimum(0);

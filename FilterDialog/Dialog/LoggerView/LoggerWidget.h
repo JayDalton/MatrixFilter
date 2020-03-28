@@ -5,7 +5,6 @@
 #include <QDateTime>
 
 #include "Logger/Logger.h"
-#include "Basic/XLatin1String.h"
 #include "Application/DataLayer.h"
 
 ///////////////////////////////////////////////////////////////////////////////

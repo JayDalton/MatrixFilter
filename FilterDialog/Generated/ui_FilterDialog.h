@@ -9,7 +9,7 @@
 #ifndef UI_FILTERDIALOG_H
 #define UI_FILTERDIALOG_H
 
-#include <Basic/ProgressBar.h>
+#include <Application/XProgressBar.h>
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
@@ -28,7 +28,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QLabel *statusLabel;
     QSpacerItem *horizontalSpacer;
-    ProgressBar *progressBar;
+    XProgressBar *progressBar;
     QTabWidget *tabWidget;
 
     void setupUi(QWidget *FilterDialogClass)
@@ -52,7 +52,7 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        progressBar = new ProgressBar(FilterDialogClass);
+        progressBar = new XProgressBar(FilterDialogClass);
         progressBar->setObjectName(QString::fromUtf8("progressBar"));
         progressBar->setTextVisible(false);
 

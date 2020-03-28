@@ -2,7 +2,7 @@
 
 #include <QTreeView>
 
-#include "Basic/XLatin1String.h"
+#include "Application/XLatin1String.h"
 
 class XTreeView : public QTreeView
 {

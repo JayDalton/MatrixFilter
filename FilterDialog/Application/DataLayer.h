@@ -12,6 +12,7 @@
 #include <Matrix\FilterManager.h>
 
 #include "Logger/Logger.h"
+#include "XLatin1String.h"
 
 class DataLayer : public QObject
 {

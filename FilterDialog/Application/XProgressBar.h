@@ -3,13 +3,13 @@
 #include <QProgressBar>
 #include <QTimer>
 
-class ProgressBar : public QProgressBar
+class XProgressBar : public QProgressBar
 {
    Q_OBJECT
 
 public:
-   ProgressBar(QWidget* parent = nullptr);
-   ~ProgressBar() override = default;
+   XProgressBar(QWidget* parent = nullptr);
+   ~XProgressBar() override = default;
 
    void setBusyIndicator(bool active);
 
