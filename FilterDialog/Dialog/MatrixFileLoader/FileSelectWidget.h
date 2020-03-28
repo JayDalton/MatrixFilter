@@ -1,9 +1,11 @@
-#pragma once
+Ôªø#pragma once
 
+#include <QFileSystemModel>
 #include <QAbstractItemModel>
 #include <QSortFilterProxyModel>
 
 #include "Matrix/MatrixFile.h"
+#include "Application/XTreeView.h"
 
 class FileSelectModel final : public QAbstractItemModel
 {
@@ -58,4 +60,37 @@ private:
 
 using FileSelectProxyPtr = std::unique_ptr<FileSelectProxy>;
 
-// Codepage: UTF-8 (‹¸÷ˆƒ‰ﬂ)
+//////////////////////////////////////////////////////////////////////////////////////////
+
+class FileSelectWidget : public XTreeView
+{
+   Q_OBJECT
+
+public:
+   FileSelectWidget(QWidget *parent);
+   ~FileSelectWidget() override = default;
+
+   void setRootDirectory(const QString& directory);
+
+protected:
+   //void showEvent(QShowEvent* event) override;
+   //void hideEvent(QHideEvent* event) override;
+
+private:
+   void setupModel(QAbstractItemModel* model);
+   void handleRowsAboutToBeInserted();
+   void handleRowsInserted();
+   void handleUpdate();
+
+private:
+   QFileSystemModel m_fileModel;
+
+   //QTimer m_updateTimer;
+   //LoggerModelPtr m_model;
+   //LoggerAdapterPtr m_loggerSink;
+   bool m_autoScrolling{ true };
+   bool m_isFreezed{ false };
+};
+
+
+// Codepage: UTF-8 (√ú√º√ñ√∂√Ñ√§·∫û√ü)

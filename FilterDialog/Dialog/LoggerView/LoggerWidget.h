@@ -6,6 +6,7 @@
 
 #include "Logger/Logger.h"
 #include "Application/DataLayer.h"
+#include "Application/XTreeView.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -65,16 +66,17 @@ using LoggerModelPtr = std::unique_ptr<LoggerModel>;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-class LoggerWidget : public QTreeView
+class LoggerWidget : public XTreeView
 {
    Q_OBJECT
 
 public:
-   LoggerWidget(QWidget *parent);
+   LoggerWidget(QWidget* parent);
    ~LoggerWidget() override;
 
    void logEvent(const LoggerEntry& entry);
    void setFreezed(bool freeze);
+   void clearModel();
 
 protected:
    void showEvent(QShowEvent* event) override;
@@ -92,8 +94,6 @@ private:
    LoggerAdapterPtr m_loggerSink;
    bool m_autoScrolling{ true };
    bool m_isFreezed{ false };
-
-   static constexpr XLatin1String WIDGET_TAB_STATE{ "LoggerWidgetState" };
 };
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

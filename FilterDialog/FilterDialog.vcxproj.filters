@@ -70,9 +70,6 @@
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Dialog\MatrixFileLoader\FileSelectModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Dialog\MatrixFileLoader\FileSelectTab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -86,6 +83,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Application\XTreeView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\MatrixFileLoader\FileSelectWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,9 +137,6 @@
     <QtMoc Include="Dialog\ConfigEditor\ConfigurationModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Dialog\MatrixFileLoader\FileSelectModel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Dialog\MatrixFileLoader\FileSelectTab.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -153,6 +150,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Application\XTreeView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialog\MatrixFileLoader\FileSelectWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

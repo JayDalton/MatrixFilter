@@ -135,7 +135,7 @@ void LoggerWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
 }
 
 QT_INIT_METAOBJECT const QMetaObject LoggerWidget::staticMetaObject = { {
-    QMetaObject::SuperData::link<QTreeView::staticMetaObject>(),
+    QMetaObject::SuperData::link<XTreeView::staticMetaObject>(),
     qt_meta_stringdata_LoggerWidget.data,
     qt_meta_data_LoggerWidget,
     qt_static_metacall,
@@ -154,12 +154,12 @@ void *LoggerWidget::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_LoggerWidget.stringdata0))
         return static_cast<void*>(this);
-    return QTreeView::qt_metacast(_clname);
+    return XTreeView::qt_metacast(_clname);
 }
 
 int LoggerWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QTreeView::qt_metacall(_c, _id, _a);
+    _id = XTreeView::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP

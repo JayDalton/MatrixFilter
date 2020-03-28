@@ -20,12 +20,9 @@ LoggerView::LoggerView(DataLayerSPtr data, QWidget* parent)
    : QWidget(parent), m(std::make_unique<Impl>(this, data))
 {
    m->ui.setupUi(this);
-
-   SPDLOG_DEBUG("CTOR LoggerView");
 }
 
 LoggerView::~LoggerView() = default;
-
 
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

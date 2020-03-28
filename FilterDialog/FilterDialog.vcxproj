@@ -134,7 +134,7 @@
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationEditor.cpp" />
     <ClCompile Include="Dialog\LoggerView\LoggerView.cpp" />
     <ClCompile Include="Dialog\LoggerView\LoggerWidget.cpp" />
-    <ClCompile Include="Dialog\MatrixFileLoader\FileSelectModel.cpp" />
+    <ClCompile Include="Dialog\MatrixFileLoader\FileSelectWidget.cpp" />
     <ClCompile Include="Dialog\MatrixFileLoader\FileSelectTab.cpp" />
     <ClCompile Include="Dialog\FilterDialog.cpp" />
     <ClCompile Include="Dialog\MatrixDataPlot\MatrixDataPlot.cpp" />
@@ -155,7 +155,7 @@
     <ClInclude Include="Application\ApplicationConfig.h" />
     <QtMoc Include="Application\DataLayer.h" />
     <QtMoc Include="Dialog\FilterDialog.h" />
-    <QtMoc Include="Dialog\MatrixFileLoader\FileSelectModel.h" />
+    <QtMoc Include="Dialog\MatrixFileLoader\FileSelectWidget.h" />
     <QtMoc Include="Dialog\MatrixFileLoader\FileSelectTab.h" />
     <QtMoc Include="Dialog\MatrixDataPlot\QCustomPlot\qcustomplot.h" />
     <QtMoc Include="Dialog\MatrixDataPlot\MatrixDataPlot.h" />

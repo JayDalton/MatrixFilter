@@ -39,11 +39,18 @@
     </layout>
    </item>
    <item>
-    <widget class="QTreeView" name="treeView"/>
+    <widget class="FileSelectWidget" name="treeView"/>
    </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>FileSelectWidget</class>
+   <extends>QTreeView</extends>
+   <header>FileSelectWidget.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>treeView</tabstop>
   <tabstop>openButton</tabstop>

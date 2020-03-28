@@ -15,9 +15,9 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QTreeView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "FileSelectWidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -28,7 +28,7 @@ public:
     QHBoxLayout *directoryLayout;
     QPushButton *openButton;
     QLineEdit *lineEditDirectory;
-    QTreeView *treeView;
+    FileSelectWidget *treeView;
 
     void setupUi(QWidget *FileSelectTab)
     {
@@ -58,7 +58,7 @@ public:
 
         verticalLayout->addLayout(directoryLayout);
 
-        treeView = new QTreeView(FileSelectTab);
+        treeView = new FileSelectWidget(FileSelectTab);
         treeView->setObjectName(QString::fromUtf8("treeView"));
 
         verticalLayout->addWidget(treeView);

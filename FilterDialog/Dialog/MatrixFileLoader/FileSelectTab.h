@@ -4,7 +4,7 @@
 #include <QFileSystemModel>
 
 #include "Application/DataLayer.h"
-#include "Dialog/MatrixFileLoader/FileSelectModel.h"
+#include "Dialog/MatrixFileLoader/FileSelectWidget.h"
 
 class FileSelectTab : public QWidget
 {
@@ -12,7 +12,7 @@ class FileSelectTab : public QWidget
 
 public:
    explicit FileSelectTab(DataLayerSPtr data, QWidget* parent);
-   ~FileSelectTab() = default;
+   ~FileSelectTab() override = default;
 
 signals:
    void startLoadingData();

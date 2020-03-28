@@ -2,13 +2,15 @@
 
 #include <QHeaderView>
 
-#include "XTreeView.h"
-
 #include "Application/DataLayer.h"
+#include "Application/XTreeView.h"
 
 XTreeView::XTreeView(QWidget* parent, std::string_view name)
    : QTreeView(parent), m_widgetName(name)
 {
+   setRootIsDecorated(false);
+   setUniformRowHeights(true);
+
    auto config = DataLayer::settings();
    auto state = config.value(m_widgetName);
    header()->restoreState(state.toByteArray());

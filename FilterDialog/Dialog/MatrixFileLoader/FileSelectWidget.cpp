@@ -2,7 +2,9 @@
 
 #include <iostream>
 
-#include "FileSelectModel.h"
+#include <QDir>
+
+#include "FileSelectWidget.h"
 
 struct FileInfoCompare
 {
@@ -222,6 +224,33 @@ bool FileSelectProxy::filterAcceptsRow(int row, const QModelIndex& parent) const
 bool FileSelectProxy::lessThan(const QModelIndex& left, const QModelIndex& right) const
 {
    return QSortFilterProxyModel::lessThan(left, right);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+FileSelectWidget::FileSelectWidget(QWidget* parent)
+   : XTreeView(parent, "SelectWidget")
+{
+   m_fileModel.setRootPath(QDir::currentPath());
+   m_fileModel.setFilter(QDir::AllDirs | QDir::AllEntries | QDir::NoDotAndDotDot);
+   m_fileModel.setNameFilterDisables(false);
+   m_fileModel.setNameFilters({"*.pgm"});
+   m_fileModel.setReadOnly(true);
+
+   setModel(&m_fileModel);
+   setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
+   setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
+   setSortingEnabled(true);
+   setAnimated(false);
+   //setIndentation(20);
+   //setColumnWidth(0, 200); // geschätzt
+}
+
+
+void FileSelectWidget::setRootDirectory(const QString& directory)
+{
+   //auto index = m->fileModel.index(path);
+   //m->ui.treeView->setRootIndex(index);
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

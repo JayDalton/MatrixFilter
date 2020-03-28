@@ -31,10 +31,11 @@ struct FileSelectTab::Impl
       Qt::Key_Return, Qt::Key_Space
    };
 
-   QFileSystemModel fileModel;
+   //QFileSystemModel fileModel;
    DataLayerSPtr data{ nullptr };
 
    QFutureWatcher<void> openWatcher;
+   QFileSystemWatcher fileWatcher;
 
    Ui::FileSelectTab ui;
 
@@ -55,19 +56,19 @@ FileSelectTab::FileSelectTab(DataLayerSPtr data, QWidget* parent)
 
 void FileSelectTab::setupUIElements()
 {
-   m->fileModel.setRootPath(QDir::currentPath());
-   m->fileModel.setFilter(QDir::AllDirs | QDir::AllEntries | QDir::NoDotAndDotDot);
-   m->fileModel.setNameFilterDisables(false);
-   m->fileModel.setNameFilters({"*.pgm"});
-   m->fileModel.setReadOnly(true);
+   //m->fileModel.setRootPath(QDir::currentPath());
+   //m->fileModel.setFilter(QDir::AllDirs | QDir::AllEntries | QDir::NoDotAndDotDot);
+   //m->fileModel.setNameFilterDisables(false);
+   //m->fileModel.setNameFilters({"*.pgm"});
+   //m->fileModel.setReadOnly(true);
 
-   m->ui.treeView->setModel(&m->fileModel);
-   m->ui.treeView->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
-   m->ui.treeView->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
-   m->ui.treeView->setSortingEnabled(true);
-   m->ui.treeView->setAnimated(false);
-   m->ui.treeView->setIndentation(20);
-   m->ui.treeView->setColumnWidth(0, 200); // geschätzt
+   //m->ui.treeView->setModel(&m->fileModel);
+   //m->ui.treeView->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
+   //m->ui.treeView->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
+   //m->ui.treeView->setSortingEnabled(true);
+   //m->ui.treeView->setAnimated(false);
+   //m->ui.treeView->setIndentation(20);
+   //m->ui.treeView->setColumnWidth(0, 200); // geschätzt
 
    setCurrentDir("c:/develop/dicom/raster/"); // save in config
 }
@@ -121,10 +122,10 @@ void FileSelectTab::openFile(const QModelIndex& index)
 
    auto openTask = [=]() 
    {
-      auto fileInfo = m->fileModel.fileInfo(index);
-      auto filePath = m->fileModel.filePath(index);
-      const auto matrixFile = filePath.toStdString();
-      m->data->loadMatrixFile(MatrixFileInfo{ matrixFile });
+      //auto fileInfo = m->fileModel.fileInfo(index);
+      //auto filePath = m->fileModel.filePath(index);
+      //const auto matrixFile = filePath.toStdString();
+      //m->data->loadMatrixFile(MatrixFileInfo{ matrixFile });
    };
 
    emit startLoadingData();
@@ -133,8 +134,7 @@ void FileSelectTab::openFile(const QModelIndex& index)
 
 void FileSelectTab::setCurrentDir(const QString& path)
 {
-   auto index = m->fileModel.index(path);
-   m->ui.treeView->setRootIndex(index);
+   m->ui.treeView->setRootDirectory(path);
    m->ui.lineEditDirectory->setText(path);
 }
 

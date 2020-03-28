@@ -190,11 +190,9 @@ QVariant LoggerModel::getPriorityInfo(LoggerLevel level) const
 ///////////////////////////////////////////////////////////////////////////////
 
 LoggerWidget::LoggerWidget(QWidget *parent)
-   : QTreeView(parent), m_model(std::make_unique<LoggerModel>())
+   : XTreeView(parent, "LoggerWidget")
+   , m_model(std::make_unique<LoggerModel>())
 {
-   setRootIsDecorated(false);
-   setUniformRowHeights(true);
-
    setupModel(m_model.get());
 
    m_updateTimer.setSingleShot(false);
@@ -207,7 +205,7 @@ LoggerWidget::LoggerWidget(QWidget *parent)
 
 LoggerWidget::~LoggerWidget()
 {
-   DataLayer::settings().setValue(WIDGET_TAB_STATE, header()->saveState());
+   //DataLayer::settings().setValue(WIDGET_TAB_STATE, header()->saveState());
    Logger::removeLoggerSink(m_loggerSink);
    m_loggerSink.reset();
 }
@@ -253,9 +251,9 @@ void LoggerWidget::setupModel(QAbstractItemModel* model)
 {
    setModel(model);
 
-   auto config = DataLayer::settings();
-   auto state = config.value(WIDGET_TAB_STATE);
-   header()->restoreState(state.toByteArray());
+   //auto config = DataLayer::settings();
+   //auto state = config.value(WIDGET_TAB_STATE);
+   //header()->restoreState(state.toByteArray());
 
    connect(model, &QAbstractItemModel::rowsAboutToBeInserted,
       this, &LoggerWidget::handleRowsAboutToBeInserted);
