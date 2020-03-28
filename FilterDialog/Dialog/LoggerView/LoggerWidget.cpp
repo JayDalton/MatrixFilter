@@ -53,6 +53,7 @@ void LoggerModel::applyBufferedContent()
    {
       const auto rows = m_queue.getStoredItemSize();
       beginInsertRows(QModelIndex(), rows, rows + tailSize - 1);
+      m_queue.appendBufferedTail();
       endInsertRows();
    }
 }
@@ -60,10 +61,6 @@ void LoggerModel::applyBufferedContent()
 void LoggerModel::appendLoggerEntry(const LoggerEntry& entry)
 {
    m_queue.append(std::make_unique<LoggerItem>(entry));
-}
-
-void LoggerModel::setFreezed(bool freeze)
-{
 }
 
 QModelIndex LoggerModel::index(int row, int column, const QModelIndex& parent) const
@@ -198,9 +195,9 @@ LoggerWidget::LoggerWidget(QWidget *parent)
    setUniformRowHeights(true);
 
    setModel(m_model.get());
-   m_updateTimer.setSingleShot(true);
-   m_updateTimer.setInterval(std::chrono::milliseconds(200));
-   m_updateTimer.callOnTimeout(this, [&]() { m_model->applyBufferedContent(); });
+   m_updateTimer.setSingleShot(false);
+   m_updateTimer.setInterval(std::chrono::milliseconds(500));
+   m_updateTimer.callOnTimeout(this, &LoggerWidget::handleUpdate);
 
    connect(m_model.get(), &QAbstractItemModel::rowsAboutToBeInserted,
       this, &LoggerWidget::handleRowsAboutToBeInserted);
@@ -234,18 +231,18 @@ void LoggerWidget::setFreeze(bool freeze)
    {
       m_updateTimer.start();
    }
-   m_model->setFreezed(m_isFreezed && isVisible());
 }
 
 void LoggerWidget::showEvent(QShowEvent* event)
 {
-   m_model->setFreezed(m_isFreezed);
+   setFreeze(false);
+   //setFreeze(m_isFreezed && isVisible());
    QTreeView::showEvent(event);
 }
 
 void LoggerWidget::hideEvent(QHideEvent* event)
 {
-   m_model->setFreezed(true);
+   setFreeze(true);
    QTreeView::hideEvent(event);
 }
 
@@ -265,6 +262,11 @@ void LoggerWidget::handleRowsInserted()
          Qt::QueuedConnection
       );
    }
+}
+
+void LoggerWidget::handleUpdate()
+{
+   m_model->applyBufferedContent();
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

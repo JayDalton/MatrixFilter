@@ -38,15 +38,13 @@ FilterDialog::FilterDialog(DataLayerSPtr data)
 {
    m->ui.setupUi(this);
 
-   SPDLOG_DEBUG("CTOR 1 FilterDialog");
-
    restoreSettings();
    setupDataLayers();
    setupTabWidgets();
 
    installEventFilter(this);
 
-   SPDLOG_DEBUG("CTOR 2 FilterDialog");
+   spdlog::debug("CTOR 2 FilterDialog");
 
    setWindowTitle(tr("Matrix Filter Dialog"));
 }
@@ -99,8 +97,6 @@ void FilterDialog::setupDataLayers()
 
 void FilterDialog::setupTabWidgets()
 {
-   SPDLOG_DEBUG("Start Dialog Tab Loading");
-   spdlog::debug("Start Dialog Tab Loading");
    m->tabFileSelect = new FileSelectTab{ m->data, this };
    m->ui.tabWidget->addTab(m->tabFileSelect, tr("File Select"));
 
@@ -116,8 +112,9 @@ void FilterDialog::setupTabWidgets()
    m->tabLoggerView = new LoggerView{ m->data, this };
    m->ui.tabWidget->addTab(m->tabLoggerView, tr("Logger View"));
 
-   SPDLOG_DEBUG("Finish Dialog Tab Loading");
-   spdlog::debug("Finish Dialog Tab Loading");
+   auto con0 = connect(m->ui.tabWidget, &QTabWidget::currentChanged,
+      this, [=](int index) { spdlog::info("Current TabWidget: {}", 
+         m->ui.tabWidget->tabText(index).toStdString()); });
 
    auto con1 = connect(m->tabFileSelect, &FileSelectTab::startLoadingData, 
       this, [=]() { m->ui.progressBar->setBusyIndicator(true); }

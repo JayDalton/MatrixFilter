@@ -42,7 +42,6 @@ public:
 
    static constexpr std::size_t MAX_ROW_COUNT{ 200 };
 
-   void setFreezed(bool freeze);
    void applyBufferedContent();
    void appendLoggerEntry(const LoggerEntry& entry);
 
@@ -76,7 +75,6 @@ public:
 
    void logEvent(const LoggerEntry& entry);
    void setFreeze(bool freeze);
-   void clearModel();
 
 protected:
    void showEvent(QShowEvent* event) override;
@@ -84,6 +82,7 @@ protected:
 
    void handleRowsAboutToBeInserted();
    void handleRowsInserted();
+   void handleUpdate();
 
 private:
    QTimer m_updateTimer;
