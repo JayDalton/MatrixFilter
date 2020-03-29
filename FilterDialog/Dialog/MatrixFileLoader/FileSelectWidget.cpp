@@ -3,6 +3,8 @@
 #include <iostream>
 
 #include <QDir>
+#include <QEvent>
+#include <QKeyEvent>
 
 #include "FileSelectWidget.h"
 
@@ -229,9 +231,8 @@ bool FileSelectProxy::lessThan(const QModelIndex& left, const QModelIndex& right
 //////////////////////////////////////////////////////////////////////////////////////////
 
 FileSelectWidget::FileSelectWidget(QWidget* parent)
-   : XTreeView(parent, "SelectWidget")
+   : XTreeView(parent, "SelectWidget"), m_fileModel(this)
 {
-   m_fileModel.setRootPath(QDir::currentPath());
    m_fileModel.setFilter(QDir::AllDirs | QDir::AllEntries | QDir::NoDotAndDotDot);
    m_fileModel.setNameFilterDisables(false);
    m_fileModel.setNameFilters({"*.pgm"});
@@ -243,14 +244,49 @@ FileSelectWidget::FileSelectWidget(QWidget* parent)
    setSortingEnabled(true);
    setAnimated(false);
    //setIndentation(20);
-   //setColumnWidth(0, 200); // geschätzt
-}
 
+   installEventFilter(this);
+}
 
 void FileSelectWidget::setRootDirectory(const QString& directory)
 {
-   //auto index = m->fileModel.index(path);
-   //m->ui.treeView->setRootIndex(index);
+   setRootIndex(m_fileModel.setRootPath(directory));
+}
+
+bool FileSelectWidget::eventFilter(QObject* object, QEvent* event)
+{
+   if (event->type() != QEvent::KeyPress) 
+   {
+      return false;
+   }
+
+   const auto keyEvent{static_cast<QKeyEvent*>(event)};
+   const auto keyValue{ keyEvent->key() };
+
+   if (!m_validKeys.contains(keyValue))
+   {
+      return false;
+   }
+
+   if (object == this)
+   {
+      auto selection = selectionModel();
+      auto currentIndex = selection->currentIndex();
+      fileSelected(m_fileModel.fileInfo(currentIndex));
+      return true;
+   }
+
+   return false;
+}
+
+void FileSelectWidget::showEvent(QShowEvent* event)
+{
+   QTreeView::showEvent(event);
+}
+
+void FileSelectWidget::hideEvent(QHideEvent* event)
+{
+   QTreeView::hideEvent(event);
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

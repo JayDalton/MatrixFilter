@@ -27,15 +27,12 @@ struct FileSelectTab::Impl
    std::unique_ptr<QAction> m_openFile{nullptr};
    std::unique_ptr<QAction> m_saveFile{nullptr};
 
-   std::unordered_set<int> m_validKeys{
+   const std::unordered_set<int> m_validKeys{
       Qt::Key_Return, Qt::Key_Space
    };
 
-   //QFileSystemModel fileModel;
    DataLayerSPtr data{ nullptr };
-
    QFutureWatcher<void> openWatcher;
-   QFileSystemWatcher fileWatcher;
 
    Ui::FileSelectTab ui;
 
@@ -49,26 +46,9 @@ FileSelectTab::FileSelectTab(DataLayerSPtr data, QWidget* parent)
    : QWidget(parent), m(std::make_unique<Impl>(this, data))
 {
    m->ui.setupUi(this);
-   setupUIElements();
+
    setupUIInteractions();
    setupContextActions();
-}
-
-void FileSelectTab::setupUIElements()
-{
-   //m->fileModel.setRootPath(QDir::currentPath());
-   //m->fileModel.setFilter(QDir::AllDirs | QDir::AllEntries | QDir::NoDotAndDotDot);
-   //m->fileModel.setNameFilterDisables(false);
-   //m->fileModel.setNameFilters({"*.pgm"});
-   //m->fileModel.setReadOnly(true);
-
-   //m->ui.treeView->setModel(&m->fileModel);
-   //m->ui.treeView->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
-   //m->ui.treeView->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
-   //m->ui.treeView->setSortingEnabled(true);
-   //m->ui.treeView->setAnimated(false);
-   //m->ui.treeView->setIndentation(20);
-   //m->ui.treeView->setColumnWidth(0, 200); // geschätzt
 
    setCurrentDir("c:/develop/dicom/raster/"); // save in config
 }
@@ -80,8 +60,11 @@ void FileSelectTab::setupUIInteractions()
    auto con1 = connect(m->ui.openButton, &QPushButton::clicked, 
       this, [&]() { selectDirectory(); });
    
-   auto con2 = connect(m->ui.treeView, &QTreeView::doubleClicked, 
-      this, [&](const QModelIndex& index) { openFile(index); });
+   //auto con2 = connect(m->ui.treeView, &QTreeView::doubleClicked, 
+   //   this, [&](const QModelIndex& index) { openFile(index); });
+
+   auto con2 = connect(m->ui.treeView, &FileSelectWidget::fileSelected, 
+      this, [&](const QFileInfo& fileInfo) { openFile(fileInfo); });
 
    auto con3 = connect(&m->openWatcher, &QFutureWatcher<void>::finished, 
       this, &FileSelectTab::finishedOpenFile);
@@ -113,7 +96,7 @@ void FileSelectTab::finishedOpenFile()
    emit displayMatrixData();
 }
 
-void FileSelectTab::openFile(const QModelIndex& index)
+void FileSelectTab::openFile(const QFileInfo& fileInfo)
 {
    if (m->openWatcher.isRunning())
    {
@@ -122,10 +105,9 @@ void FileSelectTab::openFile(const QModelIndex& index)
 
    auto openTask = [=]() 
    {
-      //auto fileInfo = m->fileModel.fileInfo(index);
-      //auto filePath = m->fileModel.filePath(index);
-      //const auto matrixFile = filePath.toStdString();
-      //m->data->loadMatrixFile(MatrixFileInfo{ matrixFile });
+      auto filePath = fileInfo.absoluteFilePath();
+      const auto matrixFile = filePath.toStdString();
+      m->data->loadMatrixFile(MatrixFileInfo{ matrixFile });
    };
 
    emit startLoadingData();
@@ -153,12 +135,12 @@ bool FileSelectTab::eventFilter(QObject* object, QEvent* event)
       return false;
    }
 
-   if (object == m->ui.treeView)
-   {
-      auto selection = m->ui.treeView->selectionModel();
-      openFile(selection->currentIndex());
-      return true;
-   }
+   //if (object == m->ui.treeView)
+   //{
+   //   auto selection = m->ui.treeView->selectionModel();
+   //   openFile(selection->currentIndex());
+   //   return true;
+   //}
 
    return false;
 }
@@ -169,6 +151,12 @@ void FileSelectTab::contextMenuEvent(QContextMenuEvent* event)
    menu.addAction(m->m_openFile.get());
    menu.addAction(m->m_saveFile.get());
    menu.exec(event->globalPos());
+}
+
+void FileSelectTab::showEvent(QShowEvent* event)
+{
+   // set focus to treeView
+   m->ui.treeView->setFocus();
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

@@ -21,13 +21,13 @@ signals:
 protected:
    bool eventFilter(QObject* object, QEvent* event) override;
    void contextMenuEvent(QContextMenuEvent* event) override;
+   void showEvent(QShowEvent* event) override;
 
 private:
-   void setupUIElements();
    void setupUIInteractions();
    void setupContextActions();
 
-   void openFile(const QModelIndex& index);
+   void openFile(const QFileInfo& fileInfo);
    void setCurrentDir(const QString& path);
    void selectDirectory();
    void finishedOpenFile();

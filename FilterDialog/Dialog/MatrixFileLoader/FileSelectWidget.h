@@ -1,6 +1,10 @@
 ﻿#pragma once
 
+#include <unordered_set>
+
+#include <QKeyEvent>
 #include <QFileSystemModel>
+#include <QFileSystemWatcher>
 #include <QAbstractItemModel>
 #include <QSortFilterProxyModel>
 
@@ -72,9 +76,14 @@ public:
 
    void setRootDirectory(const QString& directory);
 
+signals:
+   void fileSelected(const QFileInfo& fileInfo);
+   void fileChoosen(const QFileInfo& fileInfo);
+
 protected:
-   //void showEvent(QShowEvent* event) override;
-   //void hideEvent(QHideEvent* event) override;
+   bool eventFilter(QObject* object, QEvent* event) override;
+   void showEvent(QShowEvent* event) override;
+   void hideEvent(QHideEvent* event) override;
 
 private:
    void setupModel(QAbstractItemModel* model);
@@ -84,10 +93,11 @@ private:
 
 private:
    QFileSystemModel m_fileModel;
+   //QFileSystemWatcher m_fileWatcher; // ???
+   const std::unordered_set<int> m_validKeys{
+      Qt::Key_Return, Qt::Key_Space
+   };
 
-   //QTimer m_updateTimer;
-   //LoggerModelPtr m_model;
-   //LoggerAdapterPtr m_loggerSink;
    bool m_autoScrolling{ true };
    bool m_isFreezed{ false };
 };
