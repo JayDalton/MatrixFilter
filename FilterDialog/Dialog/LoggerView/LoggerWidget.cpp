@@ -205,7 +205,6 @@ LoggerWidget::LoggerWidget(QWidget *parent)
 
 LoggerWidget::~LoggerWidget()
 {
-   //DataLayer::settings().setValue(WIDGET_TAB_STATE, header()->saveState());
    Logger::removeLoggerSink(m_loggerSink);
    m_loggerSink.reset();
 }
@@ -250,10 +249,6 @@ void LoggerWidget::handleRowsAboutToBeInserted()
 void LoggerWidget::setupModel(QAbstractItemModel* model)
 {
    setModel(model);
-
-   //auto config = DataLayer::settings();
-   //auto state = config.value(WIDGET_TAB_STATE);
-   //header()->restoreState(state.toByteArray());
 
    connect(model, &QAbstractItemModel::rowsAboutToBeInserted,
       this, &LoggerWidget::handleRowsAboutToBeInserted);
