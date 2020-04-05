@@ -41,8 +41,6 @@ FilterDialog::FilterDialog(DataLayerSPtr data)
    restoreSettings();
    setupTabWidgets();
 
-   SPDLOG_INFO("Hier steht ein Text vom Macro.");
-
    installEventFilter(this);
 
    setWindowTitle(tr("Matrix Filter Dialog"));
@@ -87,10 +85,6 @@ void FilterDialog::setupTabWidgets()
 
    m->tabLoggerView = new LoggerView{ m->data, this };
    m->ui.tabWidget->addTab(m->tabLoggerView, tr("Logger View"));
-
-   auto con0 = connect(m->ui.tabWidget, &QTabWidget::currentChanged,
-      this, [=](int index) { spdlog::info("Current TabWidget: {}", 
-         m->ui.tabWidget->tabText(index).toStdString()); });
 
    auto con1 = connect(m->tabFileSelect, &FileSelectTab::startLoadingData, 
       this, [=]() { m->ui.progressBar->setBusyIndicator(true); }
