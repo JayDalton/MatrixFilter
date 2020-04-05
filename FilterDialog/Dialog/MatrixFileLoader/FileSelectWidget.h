@@ -91,6 +91,8 @@ private:
    void handleRowsInserted();
    void handleUpdate();
 
+   void emitFileSelection(const QModelIndex& index);
+
 private:
    QFileSystemModel m_fileModel;
    //QFileSystemWatcher m_fileWatcher; // ???

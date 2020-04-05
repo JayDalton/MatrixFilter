@@ -245,6 +245,10 @@ FileSelectWidget::FileSelectWidget(QWidget* parent)
    setAnimated(false);
    //setIndentation(20);
 
+   auto con2 = connect(this, &QTreeView::doubleClicked, 
+      this, [&](const QModelIndex& index) { emitFileSelection(index); });
+
+
    installEventFilter(this);
 }
 
@@ -270,9 +274,7 @@ bool FileSelectWidget::eventFilter(QObject* object, QEvent* event)
 
    if (object == this)
    {
-      auto selection = selectionModel();
-      auto currentIndex = selection->currentIndex();
-      fileSelected(m_fileModel.fileInfo(currentIndex));
+      emitFileSelection(selectionModel()->currentIndex());
       return true;
    }
 
@@ -287,6 +289,11 @@ void FileSelectWidget::showEvent(QShowEvent* event)
 void FileSelectWidget::hideEvent(QHideEvent* event)
 {
    QTreeView::hideEvent(event);
+}
+
+void FileSelectWidget::emitFileSelection(const QModelIndex& index)
+{
+   fileSelected(m_fileModel.fileInfo(index));
 }
 
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

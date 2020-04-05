@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QAbstractItemModel>
 #include <QSortFilterProxyModel>
@@ -56,3 +56,5 @@ private:
 };
 
 using MatrixPropertyProxyPtr = std::unique_ptr<MatrixPropertyProxy>;
+
+// Codepage: UTF-8 (ÜüÖöÄäẞß)

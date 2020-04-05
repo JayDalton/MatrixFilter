@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QWidget>
 
@@ -25,3 +25,5 @@ private:
    struct Impl;
    std::unique_ptr<Impl> m;
 };
+
+// Codepage: UTF-8 (ÜüÖöÄäẞß)

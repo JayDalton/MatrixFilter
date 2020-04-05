@@ -88,7 +88,7 @@ bool Configuration::readFile(const fs::path& filePath)
 {
    if (!fs::exists(filePath))
    {
-      logger::info("config json file not existing");
+      SPDLOG_INFO("config json file not existing");
       return false;
    }
 

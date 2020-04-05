@@ -41,6 +41,8 @@ FilterDialog::FilterDialog(DataLayerSPtr data)
    restoreSettings();
    setupTabWidgets();
 
+   SPDLOG_INFO("Hier steht ein Text vom Macro.");
+
    installEventFilter(this);
 
    setWindowTitle(tr("Matrix Filter Dialog"));

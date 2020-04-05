@@ -5,6 +5,7 @@
 #include <string_view>
 
 // Logger
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
 #include <spdlog/spdlog.h>
 #include <spdlog/logger.h>
 #include <spdlog/sinks/base_sink.h>

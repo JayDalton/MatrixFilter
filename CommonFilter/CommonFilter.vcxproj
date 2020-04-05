@@ -72,7 +72,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <PreprocessorDefinitions>COMMONFILTER_LIB;BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -94,7 +94,7 @@
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <PreprocessorDefinitions>COMMONFILTER_LIB;BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -108,10 +108,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CommonFilter.cpp" />
     <ClCompile Include="Config\Parameter\BaseParameter.cpp" />
     <ClCompile Include="Config\Parameter\BinaryParameter.cpp" />
     <ClCompile Include="Config\Parameter\BooleanParameter.cpp" />
-    <ClCompile Include="CommonFilter.cpp" />
     <ClCompile Include="Config\Configuration.cpp" />
     <ClCompile Include="Config\Parameter.cpp" />
     <ClCompile Include="Config\Visitor.cpp" />
@@ -129,17 +129,13 @@
     <ClCompile Include="Matrix\MatrixFile.cpp" />
     <ClCompile Include="Matrix\MatrixImage.cpp" />
     <ClCompile Include="Matrix\MatrixManager.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="Config\Parameter\StringParameter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommonFilter.h" />
     <ClInclude Include="Config\Parameter\BaseParameter.h" />
     <ClInclude Include="Config\Parameter\BinaryParameter.h" />
     <ClInclude Include="Config\Parameter\BooleanParameter.h" />
-    <ClInclude Include="CommonFilter.h" />
     <ClInclude Include="commonfilter_global.h" />
     <ClInclude Include="Config\Configuration.h" />
     <ClInclude Include="Config\Parameter.h" />
