@@ -15,29 +15,20 @@ void FilterManager::setFilterSettings(FilterSettings setting)
 void FilterManager::applyFilter(const cv::Mat& source, cv::Mat& target)
 {
    target = source;
-   if (m_setting.m_histoEqualize)
-   {
-      applyHisto(source, target);
-   }
-
    if (m_setting.m_claheEnabled)
    {
       applyCLAHE(source, target);
+   }
+
+   if (m_setting.m_histoEqualize)
+   {
+      applyHisto(source, target);
    }
 
    if (m_setting.m_suaceEnabled)
    {
       applySUACE(source, target);
    }
-}
-
-void FilterManager::applyHisto(const cv::Mat& source, cv::Mat& target)
-{
-   auto depth = source.depth();
-   auto chans = source.channels();
-   spdlog::debug("applying histogram equalize filter...{}", source.type());
-   assert(source.type() == CV_8UC1);
-   cv::equalizeHist(source, target);
 }
 
 void FilterManager::applyCLAHE(const cv::Mat& source, cv::Mat& target)
@@ -51,6 +42,15 @@ void FilterManager::applyCLAHE(const cv::Mat& source, cv::Mat& target)
    clahe->setClipLimit(clip);
    clahe->setTilesGridSize(area);
    clahe->apply(source, target); // inplace
+}
+
+void FilterManager::applyHisto(const cv::Mat& source, cv::Mat& target)
+{
+   auto depth = source.depth();
+   auto chans = source.channels();
+   spdlog::debug("applying histogram equalize filter...{}", source.type());
+   assert(source.type() == CV_8UC1);
+   cv::equalizeHist(source, target);
 }
 
 void FilterManager::applySUACE(const cv::Mat& source, cv::Mat& target)

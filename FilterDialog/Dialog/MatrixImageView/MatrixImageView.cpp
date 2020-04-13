@@ -43,6 +43,7 @@ MatrixImageView::MatrixImageView(DataLayerSPtr data, QWidget* parent)
    m->ui.setupUi(this);
 
    setupUIElements();
+   setupUISettings();
 
    installEventFilter(this);
 
@@ -121,15 +122,60 @@ void MatrixImageView::setupUIElements()
    connect(m->ui.checkHistoEqualize, &QCheckBox::toggled, 
       this, [&](bool) { applyFilterSetting(); });
 
+   m->ui.claheSpinBoxSize->setRange(
+      FilterSettings::CLAHE_SIZE_MINIMUM, FilterSettings::CLAHE_SIZE_MAXIMUM);
+   m->ui.claheSpinBoxSize->setValue(FilterSettings::CLAHE_SIZE_DEFAULT);
+   m->ui.claheSpinBoxSize->setSingleStep(1);
+   connect(m->ui.claheSpinBoxSize, QOverload<int>::of(&QSpinBox::valueChanged), 
+      this, [&](auto) { applyFilterSetting(); });
+
+   m->ui.claheSpinBoxClip->setRange(
+      FilterSettings::CLAHE_CLIP_MINIMUM, FilterSettings::CLAHE_CLIP_MAXIMUM);
+   m->ui.claheSpinBoxClip->setValue(FilterSettings::CLAHE_CLIP_DEFAULT);
+   m->ui.claheSpinBoxClip->setSingleStep(0.1);
+   connect(m->ui.claheSpinBoxClip, QOverload<double>::of(&QDoubleSpinBox::valueChanged), 
+      this, [&](auto) { applyFilterSetting(); });
+
    connect(m->ui.claheGroupBox, &QGroupBox::toggled, 
       this, [&](bool) { applyFilterSetting(); });
 
-   connect(m->ui.suaceGroupBox, &QGroupBox::toggled, 
-      this, [&](bool) { applyFilterSetting(); });
+   //connect(m->ui.suaceGroupBox, &QGroupBox::toggled, 
+   //   this, [&](bool) { applyFilterSetting(); });
+}
+
+void MatrixImageView::setupUISettings()
+{
+   connect(m->ui.contrastGroupBox, &QGroupBox::toggled, 
+      this, [&](auto) { applyFilterSetting(); });
+
+   m->ui.contrastSpinBoxIntensity->setRange(1, 25);
+   m->ui.contrastSpinBoxIntensity->setValue(3);
+   m->ui.contrastSpinBoxIntensity->setSingleStep(1);
+
+   connect(m->ui.contrastSpinBoxIntensity, QOverload<int>::of(&QSpinBox::valueChanged), 
+      this, [&](auto) { applyFilterSetting(); });
+
+   connect(m->ui.structureGroupBox, &QGroupBox::toggled, 
+      this, [&](auto) { applyFilterSetting(); });
+
+   m->ui.structureSpinBoxDistance->setRange(1, 255);
+   m->ui.structureSpinBoxDistance->setValue(128);
+   m->ui.structureSpinBoxDistance->setSingleStep(1);
+
+   connect(m->ui.structureSpinBoxDistance, QOverload<int>::of(&QSpinBox::valueChanged), 
+      this, [&](auto) { applyFilterSetting(); });
+
+   m->ui.structureSpinBoxSigma->setRange(1, 255);
+   m->ui.structureSpinBoxSigma->setValue(128);
+   m->ui.structureSpinBoxSigma->setSingleStep(1);
+
+   connect(m->ui.structureSpinBoxSigma, QOverload<int>::of(&QSpinBox::valueChanged), 
+      this, [&](auto) { applyFilterSetting(); });
 }
 
 void MatrixImageView::applyFilterSetting()
 {
+   SPDLOG_INFO("apply filter settings");
    const auto filter = readFilterSettings();
    m->data->applyImageViewerFilter(filter);
 }
@@ -140,7 +186,7 @@ void MatrixImageView::loadFilterSettings()
 
    m->ui.checkHistoEqualize->setChecked(filter.m_histoEqualize);
    m->ui.claheGroupBox->setChecked(filter.m_claheEnabled);
-   m->ui.suaceGroupBox->setChecked(filter.m_suaceEnabled);
+   //m->ui.suaceGroupBox->setChecked(filter.m_suaceEnabled);
 }
 
 void MatrixImageView::saveFilterSettings() const
@@ -149,7 +195,7 @@ void MatrixImageView::saveFilterSettings() const
 
    filter.m_histoEqualize = m->ui.checkHistoEqualize->isChecked();
    filter.m_claheEnabled = m->ui.claheGroupBox->isChecked();
-   filter.m_suaceEnabled = m->ui.suaceGroupBox->isChecked();
+   //filter.m_suaceEnabled = m->ui.suaceGroupBox->isChecked();
 
    m->data->saveImageViewSettings(filter);
 }
@@ -159,8 +205,19 @@ FilterSettings MatrixImageView::readFilterSettings() const
    FilterSettings filter;
 
    filter.m_histoEqualize = m->ui.checkHistoEqualize->isChecked();
+
    filter.m_claheEnabled = m->ui.claheGroupBox->isChecked();
-   filter.m_suaceEnabled = m->ui.suaceGroupBox->isChecked();
+   filter.m_claheSize = m->ui.claheSpinBoxSize->value();
+   filter.m_claheClip = m->ui.claheSpinBoxClip->value();
+
+   filter.m_contrastEnhancement = m->ui.contrastGroupBox->isChecked();
+   filter.m_contrastIntensity = m->ui.contrastSpinBoxIntensity->value();
+
+   filter.m_structureEnhancement = m->ui.structureGroupBox->isChecked();
+   filter.m_structureDistance = m->ui.structureSpinBoxDistance->value();
+   filter.m_structureSigma = m->ui.structureSpinBoxSigma->value();
+
+   //filter.m_suaceEnabled = m->ui.suaceGroupBox->isChecked();
 
    return filter;
 }
