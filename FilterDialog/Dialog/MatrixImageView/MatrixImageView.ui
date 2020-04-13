@@ -14,10 +14,10 @@
    <string>MatrixImageView</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="9" column="1">
+   <item row="8" column="1">
     <widget class="QGroupBox" name="contrastGroupBox">
      <property name="title">
-      <string>Kontrast</string>
+      <string>Beleuchtung</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -27,15 +27,32 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QSpinBox" name="contrastSpinBoxIntensity"/>
+       <widget class="QLabel" name="contrastLabel">
+        <property name="text">
+         <string>Kontrast</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="contrastSpinBox"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="brightnessLabel">
+        <property name="text">
+         <string>Helligkeit</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="brightnessSpinBox"/>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="10" column="1">
+   <item row="9" column="1">
     <widget class="QGroupBox" name="structureGroupBox">
      <property name="title">
-      <string>Struktur</string>
+      <string>Strukturen</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -74,7 +91,7 @@
      </property>
     </widget>
    </item>
-   <item row="12" column="1">
+   <item row="11" column="1">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -87,50 +104,8 @@
      </property>
     </spacer>
    </item>
-   <item row="5" column="1">
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="title">
-      <string>Schärfen</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Sigma</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Stärke</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Schwellenwert</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
-      </item>
-     </layout>
-    </widget>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="comboBox"/>
    </item>
    <item row="3" column="1">
     <widget class="QGroupBox" name="claheGroupBox">
@@ -145,16 +120,6 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="claheLabelClipBox">
-        <property name="text">
-         <string>Größe (Size)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSpinBox" name="claheSpinBoxSize"/>
-      </item>
-      <item>
        <widget class="QLabel" name="claheLabelSizeBox">
         <property name="text">
          <string>Stärke (Clip)</string>
@@ -164,10 +129,20 @@
       <item>
        <widget class="QDoubleSpinBox" name="claheSpinBoxClip"/>
       </item>
+      <item>
+       <widget class="QLabel" name="claheLabelClipBox">
+        <property name="text">
+         <string>Größe (Size)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="claheSpinBoxSize"/>
+      </item>
      </layout>
     </widget>
    </item>
-   <item row="0" column="0" rowspan="13">
+   <item row="0" column="0" rowspan="12">
     <widget class="MatrixFrameView" name="frameView">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -182,9 +157,6 @@
       <enum>QFrame::Raised</enum>
      </property>
     </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QComboBox" name="comboBox"/>
    </item>
   </layout>
  </widget>

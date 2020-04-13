@@ -22,45 +22,55 @@ void FilterManager::applyFilter(const cv::Mat& source, cv::Mat& target)
 
    if (m_setting.m_histoEqualize)
    {
-      applyHisto(source, target);
+      applyHistogramEqualization(source, target);
    }
 
-   if (m_setting.m_suaceEnabled)
+   if (m_setting.m_structureEnhancement)
    {
-      applySUACE(source, target);
+      applyStructureEnhancement(source, target);
+   }
+
+   if (m_setting.m_contrastEnhancement)
+   {
+      applyContrastEnhancement(source, target);
    }
 }
 
 void FilterManager::applyCLAHE(const cv::Mat& source, cv::Mat& target)
 {
-   spdlog::debug("applying CLAHE filter...");
-   auto clahe {cv::createCLAHE()};
-   auto clip {m_setting.m_claheClip};
-   auto size {m_setting.m_claheSize};
-   auto area {cv::Size(size, size)};
+   const auto clip {m_setting.m_claheClip};
+   const auto size {m_setting.m_claheSize};
+   const auto area {cv::Size(size, size)};
+   SPDLOG_DEBUG("apply CLAHE clip {} size {}", clip, size);
 
-   clahe->setClipLimit(clip);
-   clahe->setTilesGridSize(area);
+   auto clahe{ cv::createCLAHE(clip, area) };
    clahe->apply(source, target); // inplace
 }
 
-void FilterManager::applyHisto(const cv::Mat& source, cv::Mat& target)
+void FilterManager::applyHistogramEqualization(const cv::Mat& source, cv::Mat& target)
 {
-   auto depth = source.depth();
-   auto chans = source.channels();
-   spdlog::debug("applying histogram equalize filter...{}", source.type());
+   SPDLOG_DEBUG("apply histogram...{}", source.type());
    assert(source.type() == CV_8UC1);
    cv::equalizeHist(source, target);
 }
 
-void FilterManager::applySUACE(const cv::Mat& source, cv::Mat& target)
+void FilterManager::applyContrastEnhancement(const cv::Mat& source, cv::Mat& target)
 {
-   spdlog::debug("applying structure enhancement filter...");
-   auto distance {m_setting.m_suaceDistance};
-   auto sigma {m_setting.m_suaceSigma};
+   const auto contrast {m_setting.m_contrastIntensity};
+   const auto bright {m_setting.m_brightnessIntensity};
+   SPDLOG_DEBUG("apply contrast {} brightness {}", contrast, bright);
+
+   source.convertTo(target, -1, contrast, bright);
+}
+
+void FilterManager::applyStructureEnhancement(const cv::Mat& source, cv::Mat& target)
+{
+   const auto distance {m_setting.m_structureDistance};
+   const auto sigma {m_setting.m_structureSigma};
+   SPDLOG_DEBUG("apply distance {} sima {}", distance, sigma);
 
    cv::Mat output;
-   performSUACE(source, output, distance, (sigma + 1) / 8.0);
+   performSUACE(source, output, distance, (sigma + 1.0) / 8.0);
    target = output;
 }
 
@@ -70,7 +80,7 @@ void FilterManager::performSUACE(const cv::Mat& source, cv::Mat& target, int dis
    assert(source.type() == CV_8UC1);
    if (!(distance > 0 && sigma > 0))
    {
-      spdlog::warn("distance and sigma must be greater 0");
+      SPDLOG_WARN("distance and sigma must be greater 0");
       //CV_Error(CV_StsBadArg, "distance and sigma must be greater 0");
    }
 
@@ -107,6 +117,37 @@ void FilterManager::performSUACE(const cv::Mat& source, cv::Mat& target, int dis
          else if (val > b) {
             target.at<uchar>(y, x) = 255;
          }
+      }
+   }
+}
+
+// Sigmoidal Contrast: angepasst an Verfahren mit ImageMagick (digipaX 1)
+
+#define Sigmoidal(a,b,x) ( 1.0/(1.0+exp((a)*((b)-(x)))) )
+
+#define ScaledSigmoidal(a,b,x) (                    \
+  (Sigmoidal((a),(b),(x))-Sigmoidal((a),(b),0.0)) / \
+  (Sigmoidal((a),(b),1.0)-Sigmoidal((a),(b),0.0)) )
+
+void FilterManager::performSigmoidalContrast(const cv::Mat& _input, cv::Mat& _output, double _contrast)
+{
+   assert(_input.type() == CV_8UC1);
+   _output = cv::Mat(_input.size(), CV_8UC1);
+   auto midpoint = 128;
+   uchar sigmoidMap[255];
+   for (int i = 0; i < 256; i++)
+   {
+      sigmoidMap[i] = static_cast<uchar>(std::round(255.0*ScaledSigmoidal(_contrast,midpoint/255.0,i/255.0)));
+   }
+
+   for (int x = 0; x < _input.cols; x++)
+   {
+      for (int y = 0; y < _input.rows; y++)
+      {
+         int valIn = _input.at<uchar>(y, x);
+         auto valOut = sigmoidMap[valIn];
+         assert(valOut>=0.0 && valOut<=255.0);
+         _output.at<uchar>(y, x) = valOut;
       }
    }
 }

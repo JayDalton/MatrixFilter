@@ -148,11 +148,18 @@ void MatrixImageView::setupUISettings()
    connect(m->ui.contrastGroupBox, &QGroupBox::toggled, 
       this, [&](auto) { applyFilterSetting(); });
 
-   m->ui.contrastSpinBoxIntensity->setRange(1, 25);
-   m->ui.contrastSpinBoxIntensity->setValue(3);
-   m->ui.contrastSpinBoxIntensity->setSingleStep(1);
+   m->ui.contrastSpinBox->setRange(1, 5);
+   m->ui.contrastSpinBox->setValue(1);
+   m->ui.contrastSpinBox->setSingleStep(0.1);
 
-   connect(m->ui.contrastSpinBoxIntensity, QOverload<int>::of(&QSpinBox::valueChanged), 
+   connect(m->ui.contrastSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), 
+      this, [&](auto) { applyFilterSetting(); });
+
+   m->ui.brightnessSpinBox->setRange(0, 100);
+   m->ui.brightnessSpinBox->setValue(0);
+   m->ui.brightnessSpinBox->setSingleStep(1);
+
+   connect(m->ui.brightnessSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), 
       this, [&](auto) { applyFilterSetting(); });
 
    connect(m->ui.structureGroupBox, &QGroupBox::toggled, 
@@ -195,7 +202,6 @@ void MatrixImageView::saveFilterSettings() const
 
    filter.m_histoEqualize = m->ui.checkHistoEqualize->isChecked();
    filter.m_claheEnabled = m->ui.claheGroupBox->isChecked();
-   //filter.m_suaceEnabled = m->ui.suaceGroupBox->isChecked();
 
    m->data->saveImageViewSettings(filter);
 }
@@ -211,13 +217,12 @@ FilterSettings MatrixImageView::readFilterSettings() const
    filter.m_claheClip = m->ui.claheSpinBoxClip->value();
 
    filter.m_contrastEnhancement = m->ui.contrastGroupBox->isChecked();
-   filter.m_contrastIntensity = m->ui.contrastSpinBoxIntensity->value();
+   filter.m_brightnessIntensity = m->ui.brightnessSpinBox->value();
+   filter.m_contrastIntensity = m->ui.contrastSpinBox->value();
 
    filter.m_structureEnhancement = m->ui.structureGroupBox->isChecked();
    filter.m_structureDistance = m->ui.structureSpinBoxDistance->value();
    filter.m_structureSigma = m->ui.structureSpinBoxSigma->value();
-
-   //filter.m_suaceEnabled = m->ui.suaceGroupBox->isChecked();
 
    return filter;
 }

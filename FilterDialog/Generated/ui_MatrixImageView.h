@@ -31,7 +31,10 @@ public:
     QGridLayout *gridLayout;
     QGroupBox *contrastGroupBox;
     QVBoxLayout *verticalLayout_3;
-    QSpinBox *contrastSpinBoxIntensity;
+    QLabel *contrastLabel;
+    QDoubleSpinBox *contrastSpinBox;
+    QLabel *brightnessLabel;
+    QSpinBox *brightnessSpinBox;
     QGroupBox *structureGroupBox;
     QVBoxLayout *verticalLayout_4;
     QLabel *label_5;
@@ -40,22 +43,14 @@ public:
     QSpinBox *structureSpinBoxSigma;
     QCheckBox *checkHistoEqualize;
     QSpacerItem *verticalSpacer;
-    QGroupBox *groupBox_2;
-    QVBoxLayout *verticalLayout_2;
-    QLabel *label;
-    QDoubleSpinBox *doubleSpinBox;
-    QLabel *label_3;
-    QDoubleSpinBox *doubleSpinBox_2;
-    QLabel *label_2;
-    QDoubleSpinBox *doubleSpinBox_3;
+    QComboBox *comboBox;
     QGroupBox *claheGroupBox;
     QVBoxLayout *verticalLayout;
-    QLabel *claheLabelClipBox;
-    QSpinBox *claheSpinBoxSize;
     QLabel *claheLabelSizeBox;
     QDoubleSpinBox *claheSpinBoxClip;
+    QLabel *claheLabelClipBox;
+    QSpinBox *claheSpinBoxSize;
     MatrixFrameView *frameView;
-    QComboBox *comboBox;
 
     void setupUi(QWidget *MatrixImageView)
     {
@@ -74,13 +69,28 @@ public:
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        contrastSpinBoxIntensity = new QSpinBox(contrastGroupBox);
-        contrastSpinBoxIntensity->setObjectName(QString::fromUtf8("contrastSpinBoxIntensity"));
+        contrastLabel = new QLabel(contrastGroupBox);
+        contrastLabel->setObjectName(QString::fromUtf8("contrastLabel"));
 
-        verticalLayout_3->addWidget(contrastSpinBoxIntensity);
+        verticalLayout_3->addWidget(contrastLabel);
+
+        contrastSpinBox = new QDoubleSpinBox(contrastGroupBox);
+        contrastSpinBox->setObjectName(QString::fromUtf8("contrastSpinBox"));
+
+        verticalLayout_3->addWidget(contrastSpinBox);
+
+        brightnessLabel = new QLabel(contrastGroupBox);
+        brightnessLabel->setObjectName(QString::fromUtf8("brightnessLabel"));
+
+        verticalLayout_3->addWidget(brightnessLabel);
+
+        brightnessSpinBox = new QSpinBox(contrastGroupBox);
+        brightnessSpinBox->setObjectName(QString::fromUtf8("brightnessSpinBox"));
+
+        verticalLayout_3->addWidget(brightnessSpinBox);
 
 
-        gridLayout->addWidget(contrastGroupBox, 9, 1, 1, 1);
+        gridLayout->addWidget(contrastGroupBox, 8, 1, 1, 1);
 
         structureGroupBox = new QGroupBox(MatrixImageView);
         structureGroupBox->setObjectName(QString::fromUtf8("structureGroupBox"));
@@ -111,7 +121,7 @@ public:
         verticalLayout_4->addWidget(structureSpinBoxSigma);
 
 
-        gridLayout->addWidget(structureGroupBox, 10, 1, 1, 1);
+        gridLayout->addWidget(structureGroupBox, 9, 1, 1, 1);
 
         checkHistoEqualize = new QCheckBox(MatrixImageView);
         checkHistoEqualize->setObjectName(QString::fromUtf8("checkHistoEqualize"));
@@ -120,48 +130,12 @@ public:
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout->addItem(verticalSpacer, 12, 1, 1, 1);
+        gridLayout->addItem(verticalSpacer, 11, 1, 1, 1);
 
-        groupBox_2 = new QGroupBox(MatrixImageView);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setCheckable(true);
-        groupBox_2->setChecked(false);
-        verticalLayout_2 = new QVBoxLayout(groupBox_2);
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        label = new QLabel(groupBox_2);
-        label->setObjectName(QString::fromUtf8("label"));
+        comboBox = new QComboBox(MatrixImageView);
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
 
-        verticalLayout_2->addWidget(label);
-
-        doubleSpinBox = new QDoubleSpinBox(groupBox_2);
-        doubleSpinBox->setObjectName(QString::fromUtf8("doubleSpinBox"));
-
-        verticalLayout_2->addWidget(doubleSpinBox);
-
-        label_3 = new QLabel(groupBox_2);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        verticalLayout_2->addWidget(label_3);
-
-        doubleSpinBox_2 = new QDoubleSpinBox(groupBox_2);
-        doubleSpinBox_2->setObjectName(QString::fromUtf8("doubleSpinBox_2"));
-
-        verticalLayout_2->addWidget(doubleSpinBox_2);
-
-        label_2 = new QLabel(groupBox_2);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        verticalLayout_2->addWidget(label_2);
-
-        doubleSpinBox_3 = new QDoubleSpinBox(groupBox_2);
-        doubleSpinBox_3->setObjectName(QString::fromUtf8("doubleSpinBox_3"));
-
-        verticalLayout_2->addWidget(doubleSpinBox_3);
-
-
-        gridLayout->addWidget(groupBox_2, 5, 1, 1, 1);
+        gridLayout->addWidget(comboBox, 1, 1, 1, 1);
 
         claheGroupBox = new QGroupBox(MatrixImageView);
         claheGroupBox->setObjectName(QString::fromUtf8("claheGroupBox"));
@@ -171,16 +145,6 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        claheLabelClipBox = new QLabel(claheGroupBox);
-        claheLabelClipBox->setObjectName(QString::fromUtf8("claheLabelClipBox"));
-
-        verticalLayout->addWidget(claheLabelClipBox);
-
-        claheSpinBoxSize = new QSpinBox(claheGroupBox);
-        claheSpinBoxSize->setObjectName(QString::fromUtf8("claheSpinBoxSize"));
-
-        verticalLayout->addWidget(claheSpinBoxSize);
-
         claheLabelSizeBox = new QLabel(claheGroupBox);
         claheLabelSizeBox->setObjectName(QString::fromUtf8("claheLabelSizeBox"));
 
@@ -190,6 +154,16 @@ public:
         claheSpinBoxClip->setObjectName(QString::fromUtf8("claheSpinBoxClip"));
 
         verticalLayout->addWidget(claheSpinBoxClip);
+
+        claheLabelClipBox = new QLabel(claheGroupBox);
+        claheLabelClipBox->setObjectName(QString::fromUtf8("claheLabelClipBox"));
+
+        verticalLayout->addWidget(claheLabelClipBox);
+
+        claheSpinBoxSize = new QSpinBox(claheGroupBox);
+        claheSpinBoxSize->setObjectName(QString::fromUtf8("claheSpinBoxSize"));
+
+        verticalLayout->addWidget(claheSpinBoxSize);
 
 
         gridLayout->addWidget(claheGroupBox, 3, 1, 1, 1);
@@ -204,12 +178,7 @@ public:
         frameView->setFrameShape(QFrame::StyledPanel);
         frameView->setFrameShadow(QFrame::Raised);
 
-        gridLayout->addWidget(frameView, 0, 0, 13, 1);
-
-        comboBox = new QComboBox(MatrixImageView);
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
-
-        gridLayout->addWidget(comboBox, 1, 1, 1, 1);
+        gridLayout->addWidget(frameView, 0, 0, 12, 1);
 
 
         retranslateUi(MatrixImageView);
@@ -220,18 +189,16 @@ public:
     void retranslateUi(QWidget *MatrixImageView)
     {
         MatrixImageView->setWindowTitle(QCoreApplication::translate("MatrixImageView", "MatrixImageView", nullptr));
-        contrastGroupBox->setTitle(QCoreApplication::translate("MatrixImageView", "Kontrast", nullptr));
-        structureGroupBox->setTitle(QCoreApplication::translate("MatrixImageView", "Struktur", nullptr));
+        contrastGroupBox->setTitle(QCoreApplication::translate("MatrixImageView", "Beleuchtung", nullptr));
+        contrastLabel->setText(QCoreApplication::translate("MatrixImageView", "Kontrast", nullptr));
+        brightnessLabel->setText(QCoreApplication::translate("MatrixImageView", "Helligkeit", nullptr));
+        structureGroupBox->setTitle(QCoreApplication::translate("MatrixImageView", "Strukturen", nullptr));
         label_5->setText(QCoreApplication::translate("MatrixImageView", "Distanz", nullptr));
         label_4->setText(QCoreApplication::translate("MatrixImageView", "Sigma", nullptr));
         checkHistoEqualize->setText(QCoreApplication::translate("MatrixImageView", "Histo Equalize", nullptr));
-        groupBox_2->setTitle(QCoreApplication::translate("MatrixImageView", "Sch\303\244rfen", nullptr));
-        label->setText(QCoreApplication::translate("MatrixImageView", "Sigma", nullptr));
-        label_3->setText(QCoreApplication::translate("MatrixImageView", "St\303\244rke", nullptr));
-        label_2->setText(QCoreApplication::translate("MatrixImageView", "Schwellenwert", nullptr));
         claheGroupBox->setTitle(QCoreApplication::translate("MatrixImageView", "CLAHE", nullptr));
-        claheLabelClipBox->setText(QCoreApplication::translate("MatrixImageView", "Gr\303\266\303\237e (Size)", nullptr));
         claheLabelSizeBox->setText(QCoreApplication::translate("MatrixImageView", "St\303\244rke (Clip)", nullptr));
+        claheLabelClipBox->setText(QCoreApplication::translate("MatrixImageView", "Gr\303\266\303\237e (Size)", nullptr));
     } // retranslateUi
 
 };
