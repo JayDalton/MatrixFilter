@@ -5,7 +5,6 @@
 
 import Context;
 
-
 int main(int argc, const char* const argv[])
 {
    const cv::String keys =
@@ -31,18 +30,16 @@ int main(int argc, const char* const argv[])
       return 0;
    }
 
-   auto N = parser.get<int>("N");
-   auto fps = parser.get<double>("fps");
+   //auto N = parser.get<int>("N");
+   //auto fps = parser.get<double>("fps");
    auto image = parser.get<cv::String>("@image");
    auto result = parser.get<cv::String>("result");
 
-   namespace fs = std::filesystem;
-   if (!fs::exists(image))
+   if (!std::filesystem::exists(image))
    {
       std::cout << "file not found" << std::endl;
       return 0;
    }
-
 
    Context context;
    std::cout << image << std::endl;
