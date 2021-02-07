@@ -60,9 +60,6 @@ void FileSelectTab::setupUIInteractions()
    auto con1 = connect(m->ui.openButton, &QPushButton::clicked, 
       this, [&]() { selectDirectory(); });
    
-   //auto con2 = connect(m->ui.treeView, &QTreeView::doubleClicked, 
-   //   this, [&](const QModelIndex& index) { openFile(index); });
-
    auto con2 = connect(m->ui.treeView, &FileSelectWidget::fileSelected, 
       this, [&](const QFileInfo& fileInfo) { openFile(fileInfo); });
 

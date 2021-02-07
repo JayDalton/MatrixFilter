@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QWidget>
 
@@ -30,3 +30,5 @@ private:
    MatrixPropertyModelPtr m_matrixPropertyModel{ nullptr };
    MatrixPropertyProxyPtr m_matrixPropertyProxy{ nullptr };
 };
+
+// Codepage: UTF-8 (ÜüÖöÄäẞß)

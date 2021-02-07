@@ -88,6 +88,9 @@
     <ClCompile Include="Dialog\MatrixFileLoader\FileSelectWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Application\XSpinBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -153,6 +156,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Dialog\MatrixFileLoader\FileSelectWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Application\XSpinBox.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

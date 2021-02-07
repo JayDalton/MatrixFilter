@@ -34,7 +34,7 @@ LoggerLevel LoggerEntry::getLevel(spdlog::level::level_enum level) const
       return LoggerLevel::Error;
    case spdlog::level::critical:
       return LoggerLevel::Critical;
-   case spdlog::level::off:
+   default:
       return LoggerLevel::None;
    }
 }

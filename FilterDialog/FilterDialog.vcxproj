@@ -78,7 +78,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;.\Dialog\LoggerView;.\Basic;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;.\Dialog\LoggerView;.\Basic;.\Application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -108,7 +108,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;.\Dialog\LoggerView;.\Basic;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonFilter;$(SolutionDir)FilterDialog;$(Qt_INCLUDEPATH_);.\Dialog\ConfigEditor;.\Dialog\BasicWidget;.\Dialog\LoggerView;.\Basic;.\Application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -129,6 +129,7 @@
     <ClCompile Include="Application\ApplicationConfig.cpp" />
     <ClCompile Include="Application\DataLayer.cpp" />
     <ClCompile Include="Application\XProgressBar.cpp" />
+    <ClCompile Include="Application\XSpinBox.cpp" />
     <ClCompile Include="Application\XTreeView.cpp" />
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationModel.cpp" />
     <ClCompile Include="Dialog\ConfigEditor\ConfigurationEditor.cpp" />
@@ -171,6 +172,7 @@
     <QtMoc Include="Dialog\LoggerView\LoggerWidget.h" />
     <ClInclude Include="Application\XLatin1String.h" />
     <QtMoc Include="Application\XTreeView.h" />
+    <QtMoc Include="Application\XSpinBox.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

@@ -6,18 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>588</width>
-    <height>400</height>
+    <width>746</width>
+    <height>703</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MatrixImageView</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="1">
-    <widget class="QGroupBox" name="claheGroupBox">
+   <item row="8" column="1">
+    <widget class="QGroupBox" name="contrastGroupBox">
      <property name="title">
-      <string>CLAHE</string>
+      <string>Beleuchtung</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -25,29 +25,73 @@
      <property name="checked">
       <bool>false</bool>
      </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QLabel" name="contrastLabel">
+        <property name="text">
+         <string>Kontrast</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="contrastSpinBox"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="brightnessLabel">
+        <property name="text">
+         <string>Helligkeit</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="brightnessSpinBox"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QGroupBox" name="structureGroupBox">
+     <property name="title">
+      <string>Strukturen</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Distanz</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="structureSpinBoxDistance"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Sigma</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="structureSpinBoxSigma"/>
+      </item>
+     </layout>
     </widget>
    </item>
    <item row="2" column="1">
-    <widget class="QGroupBox" name="suaceGroupBox">
-     <property name="title">
-      <string>SUACE</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
     <widget class="QCheckBox" name="checkHistoEqualize">
      <property name="text">
       <string>Histo Equalize</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="1">
+   <item row="11" column="1">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -60,7 +104,45 @@
      </property>
     </spacer>
    </item>
-   <item row="0" column="0" rowspan="5">
+   <item row="1" column="1">
+    <widget class="QComboBox" name="comboBox"/>
+   </item>
+   <item row="3" column="1">
+    <widget class="QGroupBox" name="claheGroupBox">
+     <property name="title">
+      <string>CLAHE</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="claheLabelSizeBox">
+        <property name="text">
+         <string>Stärke (Clip)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="claheSpinBoxClip"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="claheLabelClipBox">
+        <property name="text">
+         <string>Größe (Size)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="claheSpinBoxSize"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0" rowspan="12">
     <widget class="MatrixFrameView" name="frameView">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -75,9 +157,6 @@
       <enum>QFrame::Raised</enum>
      </property>
     </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QComboBox" name="comboBox"/>
    </item>
   </layout>
  </widget>

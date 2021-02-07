@@ -12,8 +12,8 @@ LoggerItem::LoggerItem(const LoggerEntry& entry)
    auto msec = std::chrono::duration_cast<std::chrono::milliseconds>(time);
    m_timestamp.setMSecsSinceEpoch(msec.count());
 
-   m_place = QString("%1:%2")
-      .arg(entry.m_srcFileName.data())
+   m_place = QString("%1::%2")
+      .arg(entry.m_srcFuncName.data())
       .arg(entry.m_srcLocation);
 }
 
@@ -150,7 +150,7 @@ QVariant LoggerModel::getDisplayData(int column, const LoggerItemPtr& item) cons
    switch (static_cast<Column>(column))
    {
    case Column::Timestamp:
-      return item->m_timestamp;
+      return item->m_timestamp.toString("hh:mm:ss");
    case Column::Priority:
       return getPriorityInfo(item->m_priority);
    case Column::Message:
@@ -201,6 +201,8 @@ LoggerWidget::LoggerWidget(QWidget *parent)
 
    m_loggerSink = std::make_shared<StandardWidgetLoggerSink>(this);
    Logger::appendLoggerSink(m_loggerSink);
+
+   SPDLOG_DEBUG("Very first log entry?");
 }
 
 LoggerWidget::~LoggerWidget()

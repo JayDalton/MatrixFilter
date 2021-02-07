@@ -18,6 +18,7 @@ protected:
 
 private:
    void setupUIElements();
+   void setupUISettings();
    void applyFilterSetting();
    void loadFilterSettings();
    void saveFilterSettings() const;
