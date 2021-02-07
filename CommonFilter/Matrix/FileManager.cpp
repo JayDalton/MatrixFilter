@@ -39,4 +39,9 @@ const MatrixFileList& FileManager::getFileList() const
    return m_fileList;
 }
 
+MatrixFileInfo FileManager::createFileInfo(std::string_view file)
+{
+   return MatrixFileInfo { file };
+}
+
 // Codepage: UTF-8 (ÜüÖöÄäẞß)

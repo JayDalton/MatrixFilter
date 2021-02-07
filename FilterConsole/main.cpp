@@ -10,7 +10,7 @@ int main(int argc, const char* const argv[])
    const cv::String keys =
       "{help h usage ? |      | print this message   }"
       "{@image         |<none>| image for conversion }"
-      "{result         |.     | path to file         }"
+      "{result         |.     | path to result file  }"
       "{fps            | -1.0 | fps for output video }"
       "{N count        |100   | count of objects     }"
       "{ts timestamp   |      | use time stamp       }"
@@ -42,7 +42,6 @@ int main(int argc, const char* const argv[])
    }
 
    Context context;
-   std::cout << image << std::endl;
-   std::cout << result << std::endl;
+   return context.convert(image);
 }
 

@@ -4,11 +4,10 @@ module; //begins global module fragment
 #include <iostream>
 #include <filesystem>
 
-//#include <Matrix/FileManager.h>
-//#include <Matrix/FilterManager.h>
-//#include <Matrix/MatrixManager.h>
-
 #include <Logger/Logger.h>
+#include <Matrix/FileManager.h>
+#include <Matrix/FilterManager.h>
+#include <Matrix/MatrixManager.h>
 
 //import std.core;
 //import std.regex;
@@ -23,19 +22,14 @@ export class Context
 public:
    Context();
 
-   std::string getString() const
-   {
-      return "Hello World!";
-   }
-
-   int test();
+   int convert(const std::string& filePath);
 
 private:
 
 private:
-   //FileManager m_fileManger;
-   //MatrixManager m_matrixManager;
-   //FilterManager m_filterManager;
+   FileManager m_fileManger;
+   MatrixManager m_matrixManager;
+   FilterManager m_filterManager;
 };
 
 module :private; // Everything beyond this point is not available to importers of 'm'.
@@ -53,7 +47,9 @@ Context::Context()
    spdlog::info("===============================================");
 }
 
-int Context::test()
+int Context::convert(const std::string& filePath)
 {
-   return 42;
+   auto fileInfo{ FileManager::createFileInfo(filePath) };
+   m_matrixManager.loadMatrixFromFile(fileInfo);
+   return 0;
 }

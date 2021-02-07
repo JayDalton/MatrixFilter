@@ -19,6 +19,8 @@ struct FileManager
 
    const MatrixFileList& getFileList() const;
 
+   static MatrixFileInfo createFileInfo(std::string_view file);
+
 private:
    MatrixFileList m_fileList;
 };
