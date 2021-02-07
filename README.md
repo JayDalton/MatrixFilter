@@ -15,8 +15,9 @@ Two given interfaces allowing Commandline and GUI based analyzing and manipulati
 
 ### Known Dependencies
 
-+ Qt 5.14+
++ Qt 5.15+
 + OpenCV 4
 + rapidjson
 + sdplog
 + boost
++ fmt
