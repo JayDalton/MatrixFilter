@@ -5,7 +5,7 @@
 ListParameter::ListParameter(
    std::string_view ident, 
    std::string_view label, 
-   std::vector<VariantValue>&& default,
+   std::vector<VariantValue>&& defaultValue,
    unsigned maximum,
    unsigned minimum
 )

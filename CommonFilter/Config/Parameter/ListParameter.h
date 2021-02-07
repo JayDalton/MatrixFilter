@@ -7,7 +7,7 @@ struct ListParameter
    ListParameter(
       std::string_view ident,
       std::string_view label,
-      std::vector<VariantValue>&& default,
+      std::vector<VariantValue>&& value,
       unsigned maximun = 500,
       unsigned minimun = 0
    );

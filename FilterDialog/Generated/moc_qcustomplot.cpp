@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qcustomplot.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -17,7 +17,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'qcustomplot.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.14.1. It"
+#error "This file was generated using the moc from 5.15.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -301,7 +301,7 @@ static const uint qt_meta_data_QCPPainter[] = {
 };
 
 QT_INIT_METAOBJECT const QMetaObject QCPPainter::staticMetaObject = { {
-    QMetaObject::SuperData::link<QPainter::staticMetaObject>(),
+    QtPrivate::MetaObjectForType<QPainter>::value(),
     qt_meta_stringdata_QCPPainter.data,
     qt_meta_data_QCPPainter,
     nullptr,
@@ -1584,7 +1584,7 @@ static const uint qt_meta_data_QCPAxisTickerTime[] = {
 };
 
 QT_INIT_METAOBJECT const QMetaObject QCPAxisTickerTime::staticMetaObject = { {
-    QMetaObject::SuperData::link<QCPAxisTicker::staticMetaObject>(),
+    QtPrivate::MetaObjectForType<QCPAxisTicker>::value(),
     qt_meta_stringdata_QCPAxisTickerTime.data,
     qt_meta_data_QCPAxisTickerTime,
     nullptr,
@@ -1640,7 +1640,7 @@ static const uint qt_meta_data_QCPAxisTickerFixed[] = {
 };
 
 QT_INIT_METAOBJECT const QMetaObject QCPAxisTickerFixed::staticMetaObject = { {
-    QMetaObject::SuperData::link<QCPAxisTicker::staticMetaObject>(),
+    QtPrivate::MetaObjectForType<QCPAxisTicker>::value(),
     qt_meta_stringdata_QCPAxisTickerFixed.data,
     qt_meta_data_QCPAxisTickerFixed,
     nullptr,
@@ -1697,7 +1697,7 @@ static const uint qt_meta_data_QCPAxisTickerPi[] = {
 };
 
 QT_INIT_METAOBJECT const QMetaObject QCPAxisTickerPi::staticMetaObject = { {
-    QMetaObject::SuperData::link<QCPAxisTicker::staticMetaObject>(),
+    QtPrivate::MetaObjectForType<QCPAxisTicker>::value(),
     qt_meta_stringdata_QCPAxisTickerPi.data,
     qt_meta_data_QCPAxisTickerPi,
     nullptr,
@@ -2971,7 +2971,7 @@ static const uint qt_meta_data_QCPItemPosition[] = {
 };
 
 QT_INIT_METAOBJECT const QMetaObject QCPItemPosition::staticMetaObject = { {
-    QMetaObject::SuperData::link<QCPItemAnchor::staticMetaObject>(),
+    QtPrivate::MetaObjectForType<QCPItemAnchor>::value(),
     qt_meta_stringdata_QCPItemPosition.data,
     qt_meta_data_QCPItemPosition,
     nullptr,
@@ -3958,7 +3958,7 @@ static const uint qt_meta_data_QCPSelectionDecoratorBracket[] = {
 };
 
 QT_INIT_METAOBJECT const QMetaObject QCPSelectionDecoratorBracket::staticMetaObject = { {
-    QMetaObject::SuperData::link<QCPSelectionDecorator::staticMetaObject>(),
+    QtPrivate::MetaObjectForType<QCPSelectionDecorator>::value(),
     qt_meta_stringdata_QCPSelectionDecoratorBracket.data,
     qt_meta_data_QCPSelectionDecoratorBracket,
     nullptr,

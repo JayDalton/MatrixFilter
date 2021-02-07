@@ -5,7 +5,7 @@
 DoubleParameter::DoubleParameter(
    std::string_view ident,
    std::string_view label,
-   double default,
+   double defaultValue,
    double maximum,
    double minimum
 )
@@ -13,8 +13,8 @@ DoubleParameter::DoubleParameter(
 {
    m->m_ident = ident.data();
    m->m_label = label.data();
-   m->m_default = default;
-   m->m_current = default;
+   m->m_default = defaultValue;
+   m->m_current = defaultValue;
    m->m_maximum = maximum;
    m->m_minimum = minimum;
 }

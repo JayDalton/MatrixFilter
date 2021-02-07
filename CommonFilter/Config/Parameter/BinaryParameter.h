@@ -9,7 +9,7 @@ struct BinaryParameter
    BinaryParameter(
       std::string_view ident,
       std::string_view label,
-      bool default
+      bool defaultValue
    );
 
    ~BinaryParameter();

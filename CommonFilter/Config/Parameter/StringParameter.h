@@ -7,7 +7,7 @@ struct StringParameter
    StringParameter(
       std::string_view ident,
       std::string_view label,
-      std::string_view default,
+      std::string_view value,
       unsigned maximun = 4096,
       unsigned minimun = 0
    );

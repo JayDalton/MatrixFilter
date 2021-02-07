@@ -10,7 +10,7 @@ struct IntegerParameter
    IntegerParameter(
       std::string_view ident,
       std::string_view label,
-      signed default,
+      signed defaultValue,
       signed maximum = std::numeric_limits<signed>::max(),
       signed minimum = std::numeric_limits<signed>::min()
    );

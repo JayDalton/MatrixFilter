@@ -5,7 +5,7 @@
 IntegerParameter::IntegerParameter(
    std::string_view ident,
    std::string_view label,
-   signed default,
+   signed defaultValue,
    signed maximum,
    signed minimum
 )
@@ -13,8 +13,8 @@ IntegerParameter::IntegerParameter(
 {
    m->m_ident = ident.data();
    m->m_label = label.data();
-   m->m_default = default;
-   m->m_current = default;
+   m->m_default = defaultValue;
+   m->m_current = defaultValue;
    m->m_maximum = maximum;
    m->m_minimum = minimum;
 }

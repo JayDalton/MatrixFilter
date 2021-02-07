@@ -5,7 +5,7 @@
 StringParameter::StringParameter(
    std::string_view ident, 
    std::string_view label, 
-   std::string_view default,
+   std::string_view defaultValue,
    unsigned maximum,
    unsigned minimum
 )
@@ -13,8 +13,8 @@ StringParameter::StringParameter(
 {
    m->m_ident = ident.data();
    m->m_label = label.data();
-   m->m_default = std::string(default.data());
-   m->m_current = std::string(default.data());
+   m->m_default = std::string(defaultValue.data());
+   m->m_current = std::string(defaultValue.data());
    m->m_maximum = maximum;
    m->m_minimum = minimum;
 }

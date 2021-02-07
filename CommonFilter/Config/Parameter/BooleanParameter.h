@@ -7,7 +7,7 @@ struct BooleanParameter
    BooleanParameter(
       std::string_view ident,
       std::string_view label,
-      bool default
+      bool defaultValue
    );
 
    ~BooleanParameter();

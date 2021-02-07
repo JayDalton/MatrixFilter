@@ -5,14 +5,14 @@
 BinaryParameter::BinaryParameter(
    std::string_view ident,
    std::string_view label,
-   bool default
+   bool defaultValue
 )
    : m(std::make_unique<ParameterBase>())
 {
    m->m_ident = ident.data();
    m->m_label = label.data();
-   m->m_default = default;
-   m->m_current = default;
+   m->m_default = defaultValue;
+   m->m_current = defaultValue;
 }
 
 BinaryParameter::~BinaryParameter() = default;
