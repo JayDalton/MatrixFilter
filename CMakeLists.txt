@@ -5,14 +5,14 @@ message(STATUS "Using CMake ${CMAKE_VERSION}")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # set up project
-project(BoardGame)
+project(MatrixFilter)
 message(STATUS ${PROJECT_NAME})
 
 enable_testing()
-
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -29,5 +29,5 @@ message(STATUS "Unity builds are ${CMAKE_UNITY_BUILD}")
 
 # Prepare the build
 add_subdirectory(source/common)
-add_subdirectory(source/console)
-add_subdirectory(source/cuteapp)
+#add_subdirectory(source/console)
+#add_subdirectory(source/cuteapp)

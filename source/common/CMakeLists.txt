@@ -1,22 +1,38 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.20)
 
-project(DontWorry CXX)
+project(common CXX)
 message(STATUS ${PROJECT_NAME})
 
-# find_package(fmt CONFIG REQUIRED)
-find_package(OpenGL REQUIRED)
-find_package(glm CONFIG REQUIRED)
-# find_package(glfw3 CONFIG REQUIRED)
-find_package(SFML COMPONENTS system window network graphics audio main CONFIG REQUIRED)
+find_package(fmt CONFIG REQUIRED)
 
-add_executable(${PROJECT_NAME})
+add_library(${PROJECT_NAME})
 
-# target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
-target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL)
-target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
-# target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
-target_link_libraries(${PROJECT_NAME} PRIVATE sfml-system sfml-window sfml-network sfml-graphics sfml-audio)
+# target_compile_options()
+target_compile_definitions(${PROJECT_NAME} PUBLIC UNICODE)
+
+# target_precompile_headers(${PROJECT_NAME} PRIVATE precompheader.h)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
 
 target_sources(${PROJECT_NAME} PRIVATE
-"main.cpp"
+"config/Configuration.cpp"
+"config/Configuration.h"
+"config/Parameter.cpp"
+"config/Parameter.h"
+"config/Visitor.cpp"
+"config/Visitor.h"
+"config/parameter/BaseParameter.cpp"
+"config/parameter/BaseParameter.h"
+"config/parameter/BinaryParameter.cpp"
+"config/parameter/BinaryParameter.h"
+"config/parameter/BooleanParameter.cpp"
+"config/parameter/BooleanParameter.h"
+"config/parameter/DoubleParameter.cpp"
+"config/parameter/DoubleParameter.h"
+"config/parameter/IntegerParameter.cpp"
+"config/parameter/IntegerParameter.h"
+"config/parameter/ListParameter.cpp"
+"config/parameter/ListParameter.h"
+"config/parameter/StringParameter.cpp"
+"config/parameter/StringParameter.h"
 )

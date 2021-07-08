@@ -63,8 +63,9 @@
       }
     ],
     "vendor": {
-      "example.com/ExampleIDE/1.0": {
-        "autoFormat": false
+      "microsoft.com/VisualStudioSettings/CMake/3.20": {
+        "autoFormat": false,
+        "intelliSenseMode": "windows-msvc-x86"
       }
     }
   }
