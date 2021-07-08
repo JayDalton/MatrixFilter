@@ -1,13 +1,15 @@
 ﻿#pragma once
 
-#include "Config/Parameter/BaseParameter.h"
+#include <unordered_map>
 
-#include "Config/Parameter/BinaryParameter.h"
-#include "Config/Parameter/StringParameter.h"
-#include "Config/Parameter/IntegerParameter.h"
-#include "Config/Parameter/BooleanParameter.h"
-#include "Config/Parameter/DoubleParameter.h"
-#include "Config/Parameter/ListParameter.h"
+#include "config/parameter/BaseParameter.h"
+
+#include "config/parameter/BinaryParameter.h"
+#include "config/parameter/StringParameter.h"
+#include "config/parameter/IntegerParameter.h"
+#include "config/parameter/BooleanParameter.h"
+#include "config/parameter/DoubleParameter.h"
+#include "config/parameter/ListParameter.h"
 
 using VariantParameter = std::variant<
    StringParameter, IntegerParameter, 

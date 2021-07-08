@@ -1,8 +1,6 @@
-﻿#include "stdafx.h"
+﻿#include "Configuration.h"
 
-#include "Configuration.h"
 #include <Config\Visitor.h>
-
 
 Configuration::Configuration(std::string_view ident, std::string_view label)
    : m_ident(ident), m_label(label)
@@ -88,7 +86,7 @@ bool Configuration::readFile(const fs::path& filePath)
 {
    if (!fs::exists(filePath))
    {
-      SPDLOG_INFO("config json file not existing");
+      //SPDLOG_INFO("config json file not existing");
       return false;
    }
 
@@ -135,7 +133,7 @@ bool Configuration::readFrom(JsonReader& reader)
 {
    if (!reader.writeTo(m_map))
    {
-      SPDLOG_WARN("config json file parse error");
+      //SPDLOG_WARN("config json file parse error");
       return false;
    }
 

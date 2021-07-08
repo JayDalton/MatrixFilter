@@ -1,5 +1,4 @@
-﻿#include "stdafx.h"
-
+﻿
 #include "ListParameter.h"
 
 ListParameter::ListParameter(

@@ -1,6 +1,4 @@
-﻿#include "stdafx.h"
-
-#include "StringParameter.h"
+﻿#include "StringParameter.h"
 
 StringParameter::StringParameter(
    std::string_view ident, 

@@ -1,6 +1,4 @@
-﻿#include "stdafx.h"
-
-#include "IntegerParameter.h"
+﻿#include "IntegerParameter.h"
 
 IntegerParameter::IntegerParameter(
    std::string_view ident,

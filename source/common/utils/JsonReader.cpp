@@ -1,7 +1,6 @@
-﻿#include "stdafx.h"
+﻿#include "JsonReader.h"
 
-#include "JsonReader.h"
-#include <CommonFilter\Config\Visitor.h>
+#include <config\Visitor.h>
 
 using Buffer = json::IStreamWrapper;
 using Writer = json::PrettyWriter<Buffer>;

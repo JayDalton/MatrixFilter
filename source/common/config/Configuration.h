@@ -4,12 +4,12 @@
 #include <string_view>
 #include <unordered_map>
 
-#include "Serialize/JsonStream.h"
-#include "Serialize/JsonReader.h"
-#include "Serialize/JsonWriter.h"
+#include "utils/JsonStream.h"
+#include "utils/JsonReader.h"
+#include "utils/JsonWriter.h"
 
-#include "Config/Parameter.h"
-#include "Config/Visitor.h"
+#include "config/Parameter.h"
+#include "config/Visitor.h"
 
 /////////////////////////////////////////////////////////////////////////////
 

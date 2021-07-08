@@ -1,5 +1,4 @@
-﻿#include "stdafx.h"
-
+﻿
 #include "DoubleParameter.h"
 
 DoubleParameter::DoubleParameter(

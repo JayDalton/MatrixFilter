@@ -1,6 +1,4 @@
-﻿#include "stdafx.h"
-
-#include "Config/Parameter.h"
+﻿#include "Config/Parameter.h"
 
 #include "Config/Visitor.h"
 

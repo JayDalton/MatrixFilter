@@ -23,10 +23,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/Release)
 set(ROOT_DIR ${CMAKE_SOURCE_DIR})
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/source)
 
-set(ALLOW_UNITY_BUILD OFF)
-cmake_dependent_option(CMAKE_UNITY_BUILD "Use Unity Build" ON "ALLOW_UNITY_BUILD" OFF)
-message(STATUS "Unity builds are ${CMAKE_UNITY_BUILD}")
-
 # Prepare the build
 add_subdirectory(source/common)
 #add_subdirectory(source/console)

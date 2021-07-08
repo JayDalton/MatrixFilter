@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Config/Parameter/BaseParameter.h"
+#include "config/parameter/BaseParameter.h"
 
 struct BooleanParameter
 {

@@ -3,7 +3,7 @@
 #include <limits>
 #include <numeric>
 
-#include "Config/Parameter/BaseParameter.h"
+#include "config/parameter/BaseParameter.h"
 
 struct IntegerParameter
 {

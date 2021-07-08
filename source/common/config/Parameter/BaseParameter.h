@@ -1,9 +1,11 @@
 ﻿#pragma once
 
+#include <memory>
 #include <string>
 #include <variant>
+#include <vector>
 
-#include "Serialize/JsonStream.h"
+//#include "Serialize/JsonStream.h"
 
 using VariantValue = std::variant<
    bool, signed, unsigned, 

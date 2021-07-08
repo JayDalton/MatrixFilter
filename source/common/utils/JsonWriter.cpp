@@ -1,5 +1,4 @@
-﻿#include "stdafx.h"
-
+﻿
 #include "JsonWriter.h"
 
 using Buffer = json::OStreamWrapper;

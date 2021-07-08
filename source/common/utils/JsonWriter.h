@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Serialize/JsonStream.h"
+#include "utils/JsonStream.h"
 
 struct JsonWriter
 {

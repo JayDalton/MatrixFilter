@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-#include "Config/Parameter/BaseParameter.h"
+#include "config/parameter/BaseParameter.h"
 
 struct BinaryParameter
 {

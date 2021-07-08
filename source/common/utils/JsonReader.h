@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "Serialize/JsonStream.h"
-#include "Config/Parameter.h"
+#include "utils/JsonStream.h"
+#include "config/Parameter.h"
 
 struct JsonReader
 {
