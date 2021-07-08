@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConfigurationEditor</class>
+ <widget class="QWidget" name="ConfigurationEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>442</width>
+    <height>307</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ConfigurationEditor</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QTreeView" name="treeView"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="pushButtonCancle">
+     <property name="text">
+      <string>Abbrechen</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButtonSave">
+     <property name="text">
+      <string>Sichern</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>treeView</tabstop>
+  <tabstop>pushButtonSave</tabstop>
+  <tabstop>pushButtonCancle</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
