@@ -4,6 +4,7 @@ project(common CXX)
 message(STATUS ${PROJECT_NAME})
 
 # find_package(fmt CONFIG REQUIRED)
+# find_package(RapidJSON CONFIG REQUIRED)
 
 add_library(${PROJECT_NAME})
 
@@ -14,6 +15,7 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC UNICODE)
 
 # target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
 # target_link_libraries(main PRIVATE fmt::fmt-header-only)
+# target_include_directories(main PRIVATE ${RAPIDJSON_INCLUDE_DIRS})
 
 target_sources(${PROJECT_NAME} PRIVATE
 "config/Configuration.cpp"
